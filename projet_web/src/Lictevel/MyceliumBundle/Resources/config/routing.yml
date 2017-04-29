@@ -1,0 +1,22 @@
+# app/config/routing.yml
+
+lictevel_mycelium_home:
+    path: /
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:index }
+
+lictevel_mycelium_view:
+    path: /mycelium/{id}
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:view }
+
+lictevel_mycelium_view_slug:
+    path: /{year}/{slug}.{format}
+    defaults:
+      _controller: LictevelMyceliumBundle:Mycelium:viewSlug
+      format: html
+    requirements:
+      year: \d{4}
+      format: html|xml
+
+lictevel_mycelium_add:
+    path: /add
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:add }

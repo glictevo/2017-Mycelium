@@ -1,3 +1,3 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+lictevel_mycelium:
+    resource: "@LictevelMyceliumBundle/Resources/config/routing.yml"
+    prefix: /mycelium

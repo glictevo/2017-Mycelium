@@ -35,5 +35,10 @@
 
 
 
-  Notes :
+Notes :
     -Le joueur peut changer à tout instant de personnage
+
+Idées :
+  -Ajouter la possibilité d'avoir un compte admin, créable seulement à partir de la console
+   pour un tel compte, on n'a pas de temps à attendre, ni de limite (permet de tester vite tout)
+   Il suffit d'une option dans la base de données, qu'on mettrait à 'false' pour la création d'un compte depuis le site
