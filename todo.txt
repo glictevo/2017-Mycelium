@@ -1,0 +1,39 @@
+1) Authentification
+  Page d'authentification
+    -soit s'inscrire avec pseudo et mdp
+    -s'authentifier avec un pseudo déjà créé
+
+2) Personnages
+  -Créer un nouveau personnage
+  -Jouer avec un personnage préexistant
+
+3) Ressources persistantes
+
+4) Points d'action
+  -Ressource(s) qui augmentent avec le temps
+
+11) Avatars
+
+------pas obligatoire--------
+(en faire au moins 3)
+
+5)Affichage des personnages
+
+6) Statistiques
+
+7) Messages privés
+
+8) Section multijoueur
+
+9) Evenements globaux
+
+10) Calendrier des evenements
+
+
+
+
+
+
+
+  Notes :
+    -Le joueur peut changer à tout instant de personnage
