@@ -26,13 +26,13 @@ Mécaniques :
 		potentiels...).
 
 	3/ Les mutations : le joueur a la possibilité de choisir de nouveaux traits
-		caractéristiques pour son champignon, angmentant ses statistiques ou lui
+		caractéristiques pour son champignon, augmentant ses statistiques ou lui
 		conférant de nouvelles aptitudes (poison, effet psychotrope, couleur
 		attrayante/repoussante etc...). Au début de la partie, le joueur ne peut
 		choisir ses mutations que parmi un choix limité. Au fur et à mesure de sa
 		progression, il pourra débloquer de nouvelles mutations en remplissant
 		certaines conditions. On peut trier ces mutations par palier : une mutation
-		de palier 0 ne requiert aucune condition, une matutation de palier 1
+		de palier 0 ne requiert aucune condition, une mutation de palier 1
 		nécessite de satisfaire une condition, palier 2 -> 2 conditions, etc...
 
 	4/ L'environnement : l'environnement est divisé en "cases". Chaque case est
@@ -78,11 +78,11 @@ De plus, chaque champignon possède des attributs obtenus grâce à des mutation
 	une capacité spéciale.
 
 	8/ Ressources : un champignon possède des ressources permettant de grandir et
-		d'obtenir des mutations. Les ressources disponibles sonr les suivantes :
+		d'obtenir des mutations. Les ressources disponibles sont les suivantes :
 		- Les points d'actions : il faut en utiliser un pour agrandir le mycélium.
 		- Les spores : les spores permettent d'engendrer un nouveau sporophore
 			au-delà des limites du mycélium. Atteindre une quantité critique de spore
-			permet de créer un nouveau sporopore, qui possède les même
+			permet de créer un nouveau sporophore, qui possède les mêmes
 			caractéristiques que le sporophore d'origine.
 		- Les nutriments : c'est la ressource qui permet au champignon de devenir le
 			plus beau mycète de la forêt. Ces nutriments permettent d'acheter des
