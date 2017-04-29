@@ -1,39 +1,116 @@
-Principe : le joueur incarne un champignon et doit le faire grandir et muter pour se développer et devenir le plus beau champignon de la forêt. Le joueur doit permettre à son champignon de trouver efficacement des nutriments, de se défendre contre d'éventuels prédateurs (animaux, plantes, autres champignon, hippies, maladies) ou au contraire d'adopter un comportement symbiotique, voire parasitaire viable. Pour ce faire, le joueur a accès à un vaste choix de mutations à découvrir et à combiner. Il peut choisir également d'échanger des mutations avec d'autres joueurs. Certaines mutations ne sont disponibles que sous certaines conditions (autres mutations, taille du champi, etc...). 
+Principe :
+le joueur incarne un champignon et doit le faire grandir et muter pour se
+développer et devenir le plus beau champignon de la forêt.
+Le joueur doit permettre à son champignon de trouver efficacement des nutriments,
+de se défendre contre d'éventuels prédateurs (animaux, plantes, autres
+champignon, hippies, maladies) ou au contraire d'adopter un comportement
+symbiotique, voire parasitaire viable. Pour ce faire, le joueur a accès à un
+vaste choix de mutations à découvrir et à combiner. Il peut choisir également
+d'échanger des mutations avec d'autres joueurs. Certaines mutations ne sont
+disponibles que sous certaines conditions (autres mutations, taille du champi,
+etc...).
 
 Mécaniques :
 
-	1/Le sporophore (la partie visible) : le joueur peut choisir, au gré du choix des mutations, de modifier son apparence, sa taille, ses fonctionnalités de défense etc... 
+	1/Le sporophore (la partie visible) : le joueur peut choisir, au gré du choix
+		des mutations, de modifier son apparence, sa taille, ses fonctionnalités de
+		défense etc...
 
-	2/ Le mycélium (les filaments) : le joueur doit développer le mycélium pour aller chercher des nutriments plus loin et de façon plus efficace. Il peut également choisir les environnements de prédilection de son mycélium : terre (par défaut), plantes, terriers, sable... Le mycélium doit toujours grandir, ainsi le choix du joueur consiste le plus souvent à déterminer la direction vers laquelle son champignon doit croître (liste des zones de croissance possibles, avec les gains et les pertes possibles (nutriments, eau, ennemis potentiels...).
+	2/ Le mycélium (les filaments) : le joueur doit développer le mycélium pour
+		aller chercher des nutriments plus loin et de façon plus efficace. Il peut
+		également choisir les environnements de prédilection de son mycélium : terre
+		(par défaut), plantes, terriers, sable... Le mycélium doit toujours grandir,
+		ainsi le choix du joueur consiste le plus souvent à déterminer la direction
+		vers laquelle son champignon doit croître (liste des zones de croissance
+		possibles, avec les gains et les pertes possibles (nutriments, eau, ennemis
+		potentiels...).
 
-	3/ Les mutations : le joueur a la possibilité de choisir de nouveaux traits caractéristiques pour son champignon, angmentant ses statistiques ou lui conférant de nouvelles aptitudes (poison, effet psychotrope, couleur attrayante/repoussante etc...). Au début de la partie, le joueur ne peut choisir ses mutations que parmi un choix limité. Au fur et à mesure de sa progression, il pourra débloquer de nouvelles mutations en remplissant certaines conditions. On peut trier ces mutations par palier : une mutation de palier 0 ne requiert aucune condition, une matutation de palier 1 nécessite de satisfaire une condition, palier 2 -> 2 conditions, etc...
+	3/ Les mutations : le joueur a la possibilité de choisir de nouveaux traits
+		caractéristiques pour son champignon, angmentant ses statistiques ou lui
+		conférant de nouvelles aptitudes (poison, effet psychotrope, couleur
+		attrayante/repoussante etc...). Au début de la partie, le joueur ne peut
+		choisir ses mutations que parmi un choix limité. Au fur et à mesure de sa
+		progression, il pourra débloquer de nouvelles mutations en remplissant
+		certaines conditions. On peut trier ces mutations par palier : une mutation
+		de palier 0 ne requiert aucune condition, une matutation de palier 1
+		nécessite de satisfaire une condition, palier 2 -> 2 conditions, etc...
 
-	4/ L'environnement : l'environnement est divisé en "cases". Chaque case est adjacente à 4 autres cases. Chaque case possède des caractéristiques déterminées au hasard (avec des valeurs minimum et maximum). Le joueur ne "voit" que les cases auxquelles il a directement accès. Le joueur peut choisir d'étendre son champignon sur une case de son choix : cette action est limitée par le nombre de points d'action que le joueur possède. Au bout d'un certain temps de jeu, le joueur peut rencontrer de nouveaux environnements, comme un arbre, par exemple. Ces nouveaux environnements sont situés à une distance minimale, afin de laisser au joueur la place de développer son champignon sans rencontrer d'environnement hostile trop tôt.
+	4/ L'environnement : l'environnement est divisé en "cases". Chaque case est
+		adjacente à 4 autres cases. Chaque case possède des caractéristiques
+		déterminées au hasard (avec des valeurs minimum et maximum). Le joueur ne
+		"voit" que les cases auxquelles il a directement accès. Le joueur peut choisir
+		d'étendre son champignon sur une case de son choix : cette action est limitée
+		par le nombre de points d'action que le joueur possède. Au bout d'un certain
+		temps de jeu, le joueur peut rencontrer de nouveaux environnements, comme un
+		arbre, par exemple. Ces nouveaux environnements sont situés à une distance
+		minimale, afin de laisser au joueur la place de développer son champignon
+		sans rencontrer d'environnement hostile trop tôt.
 
 
-	5/ Le parasitisme : le joueur peut rencontrer d'autres organismes vivants, et choisir de les parasiter (il a besoin pour cela de la ou les bonne(s), mutation(s)). Ces organismes vivants peuvent s'étendre sur une ou plusieurs cases. Si le champignon parasite un être vivant, la case concernée fournira plus de ressources/bonus que la valeur de base, mais seulement pendant une certaine période : ensuite, l'organisme (ou la partie de l'organisme) présent sur la case mourra, ne laissant qu'une case "normale" avec des valeurs de ressources minimales. Le parasitisme est une bonne stratégie en cas d'un important besoin temporaire de ressources.
+	5/ Le parasitisme : le joueur peut rencontrer d'autres organismes vivants, et
+		choisir de les parasiter (il a besoin pour cela de la ou les bonne(s),
+		mutation(s)). Ces organismes vivants peuvent s'étendre sur une ou plusieurs
+		cases. Si le champignon parasite un être vivant, la case concernée fournira
+		plus de ressources/bonus que la valeur de base, mais seulement pendant une
+		certaine période : ensuite, l'organisme (ou la partie de l'organisme) présent
+		sur la case mourra, ne laissant qu'une case "normale" avec des valeurs de
+		ressources minimales. Le parasitisme est une bonne stratégie en cas d'un
+		important besoin temporaire de ressources.
 
-	6/ La symbiose : la symbiose fonctionne comme le parasitisme, à ceci près que le champignon choisit de sacrifier une ressource ou un bonus présent sur la case (possédant un organisme, évidemment) pour augmenter la valeur d'une autre ressource/bonus de cette même case. Contrairement au parasitisme, la symbiose n'est pas finie dans le temps (mais les bonus apportés sont donc moins importants, au début).
+	6/ La symbiose : la symbiose fonctionne comme le parasitisme, à ceci près que
+		le champignon choisit de sacrifier une ressource ou un bonus présent sur la
+		case (possédant un organisme, évidemment) pour augmenter la valeur d'une autre
+		ressource/bonus de cette même case. Contrairement au parasitisme, la symbiose
+		n'est pas finie dans le temps (mais les bonus apportés sont donc moins
+		importants, au début).
 
-	7/ Statistiques du champignon : chaque champignon possède une feuille de caractéristiques. Chaque champignon commence la partie avec les mêmes caractéristiques. Ces caractéristiques augmentent avec les mutations choisies.
+	7/ Statistiques du champignon : chaque champignon possède une feuille de
+		caractéristiques. Chaque champignon commence la partie avec les mêmes
+		caractéristiques. Ces caractéristiques augmentent avec les mutations choisies.
 	Les caractéristiques sont les suivantes :
 		- Nombre max de points d'action
 		- Temps de production d'un point d'action
 		- Taille du mycélium
 		- Production de ressources
 		- (d'autres ?)
-De plus, chaque champignon possède des attributs obtenus grâce à des mutations ou des bonus de cases. Chaque attribut accorde un bonus de caractéristique ou une capacité spéciale.
+De plus, chaque champignon possède des attributs obtenus grâce à des mutations
+	ou des bonus de cases. Chaque attribut accorde un bonus de caractéristique ou
+	une capacité spéciale.
 
-	8/ Ressources : un champignon possède des ressources permettant de grandir et d'obtenir des mutations. Les ressources disponibles sonr les suivantes :
+	8/ Ressources : un champignon possède des ressources permettant de grandir et
+		d'obtenir des mutations. Les ressources disponibles sonr les suivantes :
 		- Les points d'actions : il faut en utiliser un pour agrandir le mycélium.
-		- Les spores : les spores permettent d'engendrer un nouveau sporophore au-delà des limites du mycélium. Atteindre une quantité critique de spore permet de créer un nouveau sporopore, qui possède les même caractéristiques que le sporophore d'origine.
-		- Les nutriments : c'est la ressource qui permet au champignon de devenir le plus beau mycète de la forêt. Ces nutriments permettent d'acheter des mutations et de faire grandir le mycélium (en achetant une nouvelle case, ce qui nécessite un point d'action ET des nutriments).
-		
-		* Il existe également des ressources spéciales, qui permettent d'utiliser certaines compétences obtenues via des mutations. En voici quelques unes :
+		- Les spores : les spores permettent d'engendrer un nouveau sporophore
+			au-delà des limites du mycélium. Atteindre une quantité critique de spore
+			permet de créer un nouveau sporopore, qui possède les même
+			caractéristiques que le sporophore d'origine.
+		- Les nutriments : c'est la ressource qui permet au champignon de devenir le
+			plus beau mycète de la forêt. Ces nutriments permettent d'acheter des
+			mutations et de faire grandir le mycélium (en achetant une nouvelle case,
+			ce qui nécessite un point d'action ET des nutriments).
+
+		* Il existe également des ressources spéciales, qui permettent d'utiliser
+			certaines compétences obtenues via des mutations. En voici quelques unes :
 		- Le pwazon, qui permet de neutraliser d'éventuels prédateurs
 		- Les enzymes, qui permettent de digérer des aliments particuliers.
 		- Des filaments parasitiques, qui permettent de parasiter un organisme
-		- Des filaments symbiotiques, qui permettent de créer une relation symbiotique avec un organisme.
+		- Des filaments symbiotiques, qui permettent de créer une relation
+			symbiotique avec un organisme.
 		- et plein d'autres, peut-être..
 
-	9/ Défense : le champignon doit pouvoir se défendre contre les agressions auxquelles il fera face : animaux, maladies, catastrophes naturelles etc.. Pour cela, certaines mutations prémunissent le champi contre certains types de menaces, de façon automatique : une couleur vive dissuade certains mycophages, des épines en repousse d'autres, une structure plus souple permet de résister aux grands vents etc... D'autres mécanismes de défense nécessitent certaines ressources, comme le poison, qui permet de neutraliser les prédateurs les plus redoutables. Cependant, une fois le poison secrété, il faudra reconstituer les réserves. Si le champignon est blessé parce qu'il n'a pas pu se défendre, il devra utiliser un point d'action et des nutriments pour reconstituer son sporophore (s'il a été confronté à une menace hors-sol). Si la menace vient du sol, elle détruit le mycélium présent sur la case où elle est apparue, privant le champignon des ressources de cette case, jusqu'à ce qu'il reprenne le contrôle de la case et qu'il gagne contre la menace. Tant que le champignon n'a pas reconstruit son sporophore, il subit un malus de production de ressources.
+	9/ Défense : le champignon doit pouvoir se défendre contre les agressions
+		auxquelles il fera face : animaux, maladies, catastrophes naturelles etc..
+		Pour cela, certaines mutations prémunissent le champi contre certains types
+		de menaces, de façon automatique : une couleur vive dissuade certains
+		mycophages, des épines en repousse d'autres, une structure plus souple
+		permet de résister aux grands vents etc... D'autres mécanismes de défense
+		nécessitent certaines ressources, comme le poison, qui permet de neutraliser
+		les prédateurs les plus redoutables. Cependant, une fois le poison secrété,
+		il faudra reconstituer les réserves. Si le champignon est blessé parce qu'il
+		n'a pas pu se défendre, il devra utiliser un point d'action et des
+		nutriments pour reconstituer son sporophore (s'il a été confronté à une
+		menace hors-sol). Si la menace vient du sol, elle détruit le mycélium
+		présent sur la case où elle est apparue, privant le champignon des
+		ressources de cette case, jusqu'à ce qu'il reprenne le contrôle de la case
+		et qu'il gagne contre la menace. Tant que le champignon n'a pas reconstruit
+		son sporophore, il subit un malus de production de ressources.
