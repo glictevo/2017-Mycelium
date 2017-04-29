@@ -1,0 +1,19 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}OC Plateforme{% endblock %}</title>
+  </head>
+  <body>
+
+    <div id="menu">
+      {{ render(controller("LictevelMyceliumBundle:Mycelium:menu")) }}
+    </div>
+
+    {% block body %}
+    {% endblock %}
+
+  </body>
+</html>

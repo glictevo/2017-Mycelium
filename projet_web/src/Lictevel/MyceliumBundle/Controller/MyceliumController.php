@@ -13,13 +13,9 @@ class MyceliumController extends Controller
     public function indexAction()
     {
       // On veut avoir l'URL de l'annonce d'id 5.
-      $url = $this->get('router')->generate(
-          'lictevel_mycelium_view', // 1er argument : le nom de la route
-          array('id' => 5)    // 2e argument : les valeurs des paramètres
-      );
-      // $url vaut « /platform/advert/5 »
+      return $this->render('LictevelMyceliumBundle:Mycelium:index.html.twig');
 
-      return new Response("L'URL de l'annonce d'id 5 est : ".$url);
+
     }
 
     public function viewAction($id, Request $request)
@@ -42,6 +38,23 @@ class MyceliumController extends Controller
             slug '".$slug."', créée en ".$year." et au format ".$format."."
         );
     }
+
+    public function menuAction()
+  {
+    // On fixe en dur une liste ici, bien entendu par la suite
+    // on la récupérera depuis la BDD !
+    $listAdverts = array(
+      array('id' => 2, 'title' => 'Recherche développeur Symfony'),
+      array('id' => 5, 'title' => 'Mission de webmaster'),
+      array('id' => 9, 'title' => 'Offre de stage webdesigner')
+    );
+
+    return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
+      // Tout l'intérêt est ici : le contrôleur passe
+      // les variables nécessaires au template !
+      'listAdverts' => $listAdverts
+    ));
+  }
 
 }
 
