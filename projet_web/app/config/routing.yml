@@ -1,3 +1,14 @@
 lictevel_mycelium:
     resource: "@LictevelMyceliumBundle/Resources/config/routing.yml"
     prefix: /mycelium
+
+login:
+    path: /login
+    defaults:
+      _controller: LictevelUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
