@@ -5,7 +5,7 @@ lictevel_mycelium:
 login:
     path: /login
     defaults:
-      _controller: LictevelUserBundle:Security:login
+      _controller: LictevelMyceliumBundle:Security:login
 
 login_check:
     path: /login_check

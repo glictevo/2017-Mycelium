@@ -56,6 +56,11 @@ class MyceliumController extends Controller
     ));
   }
 
+  public function adminAction()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
+
 }
 
 

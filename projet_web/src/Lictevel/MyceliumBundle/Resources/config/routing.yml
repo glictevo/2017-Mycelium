@@ -20,3 +20,7 @@ lictevel_mycelium_view_slug:
 lictevel_mycelium_add:
     path: /add
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:add }
+
+lictevel_mycelium_admin:
+  path: /admin
+  defaults: { _controller: LictevelMyceliumBundle:Mycelium:admin}

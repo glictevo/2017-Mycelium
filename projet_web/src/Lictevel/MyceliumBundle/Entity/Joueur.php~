@@ -35,6 +35,13 @@ class Joueur
     private $image;
 
     /**
+      * @var string
+      *
+      * @ORM\Column(name="motdepasse", type="string", length=255, unique=false)
+      */
+    private $motdepasse;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Lictevel\MyceliumBundle\Entity\Joueur", mappedBy="mesAmis")
      */
     private $amisAvecMoi;

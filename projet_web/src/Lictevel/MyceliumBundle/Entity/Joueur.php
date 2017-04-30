@@ -35,6 +35,13 @@ class Joueur
     private $image;
 
     /**
+      * @var string
+      *
+      * @ORM\Column(name="motdepasse", type="string", length=255, unique=false)
+      */
+    private $motdepasse;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Lictevel\MyceliumBundle\Entity\Joueur", mappedBy="mesAmis")
      */
     private $amisAvecMoi;
@@ -181,5 +188,29 @@ class Joueur
     public function getMesAmis()
     {
         return $this->mesAmis;
+    }
+
+    /**
+     * Set motdepasse
+     *
+     * @param string $motdepasse
+     *
+     * @return Joueur
+     */
+    public function setMotdepasse($motdepasse)
+    {
+        $this->motdepasse = $motdepasse;
+
+        return $this;
+    }
+
+    /**
+     * Get motdepasse
+     *
+     * @return string
+     */
+    public function getMotdepasse()
+    {
+        return $this->motdepasse;
     }
 }
