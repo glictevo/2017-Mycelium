@@ -30,7 +30,9 @@
 10) Calendrier des evenements
 
 
-
+-Ajouter un champ mot de passe à Joueur
+  -Protéger ce mot de passe
+-ajouter date inscription à Joueur
 
 
 
