@@ -3,11 +3,12 @@
 namespace Lictevel\MyceliumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Casejeu
  *
- * @ORM\Table(name="casejeu")
+ * @ORM\Table(name="casejeu", uniqueConstraints={@UniqueConstraint(name="case_unique", columns={"abscisse", "ordonnee", "joueur"})})
  * @ORM\Entity(repositoryClass="Lictevel\MyceliumBundle\Repository\CasejeuRepository")
  */
 class Casejeu
