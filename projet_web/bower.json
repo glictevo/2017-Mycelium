@@ -1,0 +1,13 @@
+{
+  "name": "projet_web",
+  "homepage": "https://github.com/NeoDereshi/projet_web",
+  "authors": [
+    "(DE MOREL Timon et LICTEVOUT Guillaume)"
+  ],
+  "description": "",
+  "main": "",
+  "license": "P7",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
