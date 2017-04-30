@@ -4,9 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}OC Plateforme{% endblock %}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>{% block title %} Mycelium {% endblock %}</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
   </head>
   <body>
+
+    <div id="nav">
+      {{ render(controller("LictevelMyceliumBundle:Mycelium:navigation")) }}
+    </div>
 
     <div id="menu">
       {{ render(controller("LictevelMyceliumBundle:Mycelium:menu")) }}
@@ -14,6 +22,10 @@
 
     {% block body %}
     {% endblock %}
+
+    <div id="footer">
+      {{ render(controller("LictevelMyceliumBundle:Mycelium:footer")) }}
+    </div>
 
   </body>
 </html>

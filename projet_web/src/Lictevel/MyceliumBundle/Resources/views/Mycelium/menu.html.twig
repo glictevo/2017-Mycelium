@@ -1,14 +1,18 @@
-{# src/OC/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+<p> {{ message }} </p>
 
-{# Ce template n'hérite de personne,
-   tout comme le template inclus avec {{ include() }}. #}
+---------------
 
-<ul class="nav nav-pills nav-stacked">
-  {% for advert in listAdverts %}
-    <li>
-      <a href="{{ path('lictevel_mycelium_view', {'id': advert.id}) }}">
-        {{ advert.title }}
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+Si le joueur est deconnecté
+  On n'affiche rien
+
+Si le joueur est connecté
+Ici on aura le champignon courant en image
+Ici on aura le menu avec ces liens :
+  - Mes champignons
+  - Mes mutations
+  - Mon mycelium
+  - Production (de ressource)
+  - Mes défenses
+  - Statistiques
+---------------
+(C'est dans le controleur qu'on fait tout ça)

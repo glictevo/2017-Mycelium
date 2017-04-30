@@ -4,6 +4,24 @@ lictevel_mycelium_home:
     path: /
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:index }
 
+lictevel_mycelium_a_propos:
+    path: /a-propos
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:aPropos }
+
+lictevel_mycelium_connexion:
+    path: /connexion
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:connexion }
+
+lictevel_mycelium_inscription:
+    path: /inscription
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:inscription }
+
+
+
+
+
+
+
 lictevel_mycelium_view:
     path: /mycelium/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:view }

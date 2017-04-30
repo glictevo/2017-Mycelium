@@ -18,6 +18,50 @@ class MyceliumController extends Controller
 
     }
 
+    public function menuAction()
+    {
+      // On fixe en dur une liste ici, bien entendu par la suite
+      // on la récupérera depuis la BDD !
+      $message = "LOL !";
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
+        'message' => $message
+      ));
+    }
+
+    public function navigationAction()
+    {
+      return $this->render('LictevelMyceliumBundle:Mycelium:navigation.html.twig');
+    }
+
+    public function connexionAction()
+    {
+      //Générer la page pour la connexion (qui propose un lien pour l'inscription)
+      return $this->render('LictevelMyceliumBundle:Mycelium:connexion.html.twig');
+    }
+
+    public function inscriptionAction()
+    {
+      //Générer la page pour l'inscription (formulaire)
+      return $this->render('LictevelMyceliumBundle:Mycelium:inscription.html.twig');
+    }
+
+    public function footerAction()
+    {
+      return $this->render('LictevelMyceliumBundle:Mycelium:footer.html.twig');
+    }
+
+    public function aProposAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:aPropos.html.twig');
+    }
+
+
+
+
+
+
     public function viewAction($id, Request $request)
     {
       $tag = $request
@@ -39,22 +83,6 @@ class MyceliumController extends Controller
         );
     }
 
-    public function menuAction()
-  {
-    // On fixe en dur une liste ici, bien entendu par la suite
-    // on la récupérera depuis la BDD !
-    $listAdverts = array(
-      array('id' => 2, 'title' => 'Recherche développeur Symfony'),
-      array('id' => 5, 'title' => 'Mission de webmaster'),
-      array('id' => 9, 'title' => 'Offre de stage webdesigner')
-    );
-
-    return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
-      // Tout l'intérêt est ici : le contrôleur passe
-      // les variables nécessaires au template !
-      'listAdverts' => $listAdverts
-    ));
-  }
 
   public function adminAction()
     {
