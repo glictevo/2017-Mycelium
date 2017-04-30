@@ -114,3 +114,5 @@ De plus, chaque champignon possède des attributs obtenus grâce à des mutation
 		ressources de cette case, jusqu'à ce qu'il reprenne le contrôle de la case
 		et qu'il gagne contre la menace. Tant que le champignon n'a pas reconstruit
 		son sporophore, il subit un malus de production de ressources.
+
+	10/ Les spores : lorsqu'un champignon atteint une quantité critique de spores, il peut choisir de les disséminer pour créer un nouveau champignon. Ce champignon possède les même caractéristiques de bases que le champignon dont il est issu, les mêmes mutations, mais ne partage pas les mêmes ressources. Il pourra ainsi évoluer indépendament du champignon d'origine.
