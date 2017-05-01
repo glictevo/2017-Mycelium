@@ -11,17 +11,22 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        {% if app.session.get('pseudo') is defined %}
+        {% if app.session.has('pseudo') %}
           <li><a class="active" href="{{ path('lictevel_mycelium_mon_compte') }}">{{ app.session.get('pseudo') }}</a></li>
+          <li><a href="{{ path('lictevel_mycelium_mes_amis') }}">Mes amis</a></li>
+        {% else %}
+          <li><a href="#">Un lien quelconque si on veut en mettre un</a></li>
         {% endif %}
-        <li><a href="#">Un</a></li>
-        <li><a href="#">Deux</a></li>
-        <li><a href="#">Trois</a></li>
+
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('lictevel_mycelium_inscription') }}"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
-        <li><a href="{{ path('lictevel_mycelium_connexion') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+        {% if app.session.has('pseudo') %}
+          <li><a href="{{ path('lictevel_mycelium_deconnexion') }}"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
+        {% else %}
+          <li><a href="{{ path('lictevel_mycelium_inscription') }}"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
+          <li><a href="{{ path('lictevel_mycelium_connexion') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+        {% endif %}
       </ul>
     </div>
 

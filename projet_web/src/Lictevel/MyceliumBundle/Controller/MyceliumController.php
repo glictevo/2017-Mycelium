@@ -146,44 +146,48 @@ class MyceliumController extends Controller
 
     public function mesChampignonsAction()
     {
-      //Générer la page A Propos
+      //Générer la page mesChampignons
       return $this->render('LictevelMyceliumBundle:Mycelium:mesChampignons.html.twig');
     }
 
     public function mesMutationsAction()
     {
-      //Générer la page A Propos
+      //Générer la page mesMutations
       return $this->render('LictevelMyceliumBundle:Mycelium:mesMutations.html.twig');
     }
 
     public function monMyceliumAction()
     {
-      //Générer la page A Propos
+      //Générer la page monMycelium
       return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig');
     }
 
     public function productionAction()
     {
-      //Générer la page A Propos
+      //Générer la page production
       return $this->render('LictevelMyceliumBundle:Mycelium:production.html.twig');
     }
 
     public function mesDefensesAction()
     {
-      //Générer la page A Propos
+      //Générer la page mesDefenses
       return $this->render('LictevelMyceliumBundle:Mycelium:mesDefenses.html.twig');
     }
 
     public function statistiquesAction()
     {
-      //Générer la page A Propos
+      //Générer la page statistiques
       return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig');
     }
 
     public function monCompteAction(){
       //Générer la page monCompte
       return $this->render('LictevelMyceliumBundle:Mycelium:monCompte.html.twig');
+    }
 
+    public function mesAmisAction(){
+      //Générer la page mesAmis
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesAmis.html.twig');
     }
 
 

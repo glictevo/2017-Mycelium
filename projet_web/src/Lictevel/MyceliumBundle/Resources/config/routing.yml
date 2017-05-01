@@ -48,6 +48,10 @@ lictevel_mycelium_mon_compte:
     path: /mon-compte
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:monCompte }
 
+lictevel_mycelium_mes_amis:
+    path: /mes-champignons
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesAmis }
+
 
 
 lictevel_mycelium_view:
