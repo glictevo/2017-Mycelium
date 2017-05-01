@@ -9,6 +9,10 @@
 
 {% block body %}
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
   ----------------------
   Index :
   Ici on aura le logo de Mycelium

@@ -70,7 +70,6 @@ class MyceliumController extends Controller
         }
 
         $request->getSession()->getFlashBag()->add('notice', "Vous êtes connecté !");
-
         $session->set('user_id', $joueur->getId());
 
         return $this->redirectToRoute('lictevel_mycelium_connexion');
@@ -82,8 +81,32 @@ class MyceliumController extends Controller
       ));
     }
 
+    public function deconnexionAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $repository = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Joueur');
+      ;
+
+      $joueur = $repository->findOneById($user_id);
+      $session->set('user_id', null);
+      $request->getSession()->getFlashBag()->add('notice', "Vous êtes maintenant deconnecté !");
+
+      return $this->redirectToroute('lictevel_mycelium_home');
+    }
+
     public function inscriptionAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id != null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
       $joueur = new Joueur();
       $form = $this->get('form.factory')->create(JoueurType::class, $joueur);
 

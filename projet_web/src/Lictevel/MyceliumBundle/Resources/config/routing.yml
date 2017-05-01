@@ -12,6 +12,10 @@ lictevel_mycelium_connexion:
     path: /connexion
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:connexion }
 
+lictevel_mycelium_deconnexion:
+    path: /deconnexion
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:deconnexion }
+
 lictevel_mycelium_inscription:
     path: /inscription
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:inscription }
