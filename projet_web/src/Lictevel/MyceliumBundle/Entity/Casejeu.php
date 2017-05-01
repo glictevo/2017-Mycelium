@@ -23,6 +23,12 @@ class Casejeu
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Joueur", cascade={"persist"})
+     * @ORM\JoinColumn(name="joueur", nullable=false)
+     */
+    private $joueur;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="abscisse", type="integer")
@@ -111,13 +117,6 @@ class Casejeu
      * @ORM\JoinColumn(nullable=false)
      */
     private $champignon;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Joueur", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $joueur;
-
 
     /**
      * Get id
