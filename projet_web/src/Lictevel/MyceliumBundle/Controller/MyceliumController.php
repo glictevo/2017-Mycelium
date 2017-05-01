@@ -7,6 +7,8 @@ namespace Lictevel\MyceliumBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Lictevel\MyceliumBundle\Entity\Joueur;
+use Lictevel\MyceliumBundle\Form\JoueurType;
 
 class MyceliumController extends Controller
 {
@@ -37,16 +39,33 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:navigation.html.twig');
     }
 
-    public function connexionAction()
+    public function connexionAction(Request $request)
     {
+
+
       //Générer la page pour la connexion (qui propose un lien pour l'inscription)
       return $this->render('LictevelMyceliumBundle:Mycelium:connexion.html.twig');
     }
 
-    public function inscriptionAction()
+    public function inscriptionAction(Request $request)
     {
+      $joueur = new Joueur();
+      $form = $this->get('form.factory')->create(JoueurType::class, $joueur);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($joueur);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Vous êtes maintenant inscrit, vous pouvez vous connecter');
+
+        return $this->redirectToRoute('lictevel_mycelium_connexion');
+      }
+
       //Générer la page pour l'inscription (formulaire)
-      return $this->render('LictevelMyceliumBundle:Mycelium:inscription.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:inscription.html.twig', array(
+        'form' => $form->createView(),
+      ));
     }
 
     public function footerAction()
