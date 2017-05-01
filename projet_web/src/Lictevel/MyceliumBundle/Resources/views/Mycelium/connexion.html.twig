@@ -9,6 +9,12 @@
 
 {% block body %}
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p>Info : {{ message }} </p>
+  {% endfor %}
+
+  {{ form(form) }}
+
   -----------------
   Ici ce sera la page pour se connecter
   Vérifier que le joueur n'est pas déjà connecté

@@ -9,6 +9,10 @@
 
 {% block body %}
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p>Erreur : {{ message }} </p>
+  {% endfor %}
+
   {{ form(form) }}
 
   -----------------

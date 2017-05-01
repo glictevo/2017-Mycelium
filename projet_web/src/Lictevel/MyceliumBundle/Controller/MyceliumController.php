@@ -41,10 +41,45 @@ class MyceliumController extends Controller
 
     public function connexionAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id != null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
 
+
+      $joueur = new Joueur();
+      $form = $this->get('form.factory')->create(JoueurType::class, $joueur);
+      $repository = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Joueur')
+      ;
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+        $data = $form->getData();
+
+        $joueur = $repository->findOneByPseudo($data->getPseudo());
+
+        if ($joueur === null){
+          $request->getSession()->getFlashBag()->add('notice', "Ce pseudo n'existe pas.");
+          return $this->redirectToRoute('lictevel_mycelium_connexion');
+        }
+
+        if ($joueur->getMotdepasse() != $data->getMotdepasse()){
+          $request->getSession()->getFlashBag()->add('notice', "Mauvais mot de passe.");
+          return $this->redirectToRoute('lictevel_mycelium_connexion');
+        }
+
+        $request->getSession()->getFlashBag()->add('notice', "Vous êtes connecté !");
+
+        $session->set('user_id', $joueur->getId());
+
+        return $this->redirectToRoute('lictevel_mycelium_connexion');
+      }
 
       //Générer la page pour la connexion (qui propose un lien pour l'inscription)
-      return $this->render('LictevelMyceliumBundle:Mycelium:connexion.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:connexion.html.twig', array(
+        'form' => $form->createview(),
+      ));
     }
 
     public function inscriptionAction(Request $request)
@@ -55,11 +90,17 @@ class MyceliumController extends Controller
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         $em = $this->getDoctrine()->getManager();
         $em->persist($joueur);
-        $em->flush();
+        try {
+          $em->flush();
 
-        $request->getSession()->getFlashBag()->add('notice', 'Vous êtes maintenant inscrit, vous pouvez vous connecter');
+          $request->getSession()->getFlashBag()->add('notice', 'Vous êtes maintenant inscrit, vous pouvez vous connecter');
 
-        return $this->redirectToRoute('lictevel_mycelium_connexion');
+          return $this->redirectToRoute('lictevel_mycelium_connexion');
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+          $request->getSession()->getFlashBag()->add('notice', 'Ce pseudo est déjà utilisé.');
+
+          return $this->redirectToRoute('lictevel_mycelium_inscription');
+        }
       }
 
       //Générer la page pour l'inscription (formulaire)
