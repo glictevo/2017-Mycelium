@@ -1,38 +1,15 @@
 <p> {{ message }} </p>
 
- {% if app.session.has('pseudo') %}
-   <div class="list-group">
-     <a href=""><img src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)"></a>
-     <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
-     <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
-     <a href="{{ path('lictevel_mycelium_mon_mycelium') }}" class="list-group-item">Mon mycélium</a>
-     <a href="{{ path('lictevel_mycelium_production') }}" class="list-group-item">Production</a>
-     <a href="{{ path('lictevel_mycelium_mes_defenses') }}" class="list-group-item">Mes défenses</a>
-     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
-   </div>
- {% else %}
+{% if app.session.has('pseudo') %}
+  <div class="list-group">
+    <a href=""><img src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)"></a>
+    <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
+    <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
+    <a href="{{ path('lictevel_mycelium_mon_mycelium') }}" class="list-group-item">Mon mycélium</a>
+    <a href="{{ path('lictevel_mycelium_production') }}" class="list-group-item">Production</a>
+    <a href="{{ path('lictevel_mycelium_mes_defenses') }}" class="list-group-item">Mes défenses</a>
+    <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
+  </div>
+{% else %}
 
-
-
- {% endif %}
-
-<!--
-
-Si le joueur est deconnecté
-  On n'affiche rien
-
-Si le joueur est connecté
-Ici on aura le champignon courant en image
-Ici on aura le menu avec ces liens :
-  - Mes champignons
-  - Mes mutations
-  - Mon mycelium
-  - Production (de ressource)
-  - Mes défenses
-  - Statistiques
-
-(C'est dans le controleur qu'on fait tout ça)
-
-
-
--->
+{% endif %}
