@@ -99,6 +99,7 @@ class Joueur
      */
     public function __construct()
     {
+        $this->dateInscription = new \Datetime();
         $this->amisAvecMoi = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mesAmis = new \Doctrine\Common\Collections\ArrayCollection();
     }

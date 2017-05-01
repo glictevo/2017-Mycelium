@@ -99,6 +99,7 @@ class Joueur
      */
     public function __construct()
     {
+        $this->date = new \Datetime();
         $this->amisAvecMoi = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mesAmis = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -217,5 +218,29 @@ class Joueur
     public function getMotdepasse()
     {
         return $this->motdepasse;
+    }
+
+    /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     *
+     * @return Joueur
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
     }
 }
