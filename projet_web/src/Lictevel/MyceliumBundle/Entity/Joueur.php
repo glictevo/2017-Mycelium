@@ -55,6 +55,11 @@ class Joueur
      */
     private $mesAmis;
 
+    /**
+      * @ORM\Column(name="dateInscription", type="datetime", unique=false)
+      */
+    private $dateInscription;
+
 
     /**
      * Get id
@@ -212,5 +217,29 @@ class Joueur
     public function getMotdepasse()
     {
         return $this->motdepasse;
+    }
+
+    /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     *
+     * @return Joueur
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
     }
 }
