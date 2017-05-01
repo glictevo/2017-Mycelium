@@ -1,20 +1,33 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse ">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Mycelium</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-targer="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('lictevel_mycelium_home') }}">Mycelium</a>
     </div>
 
-    <ul class="nav navbar-nav">
-      <li><a href="#">Un</a></li>
-      <li><a href="#">Deux</a></li>
-      <li><a href="#">Trois</a></li>
-    </ul>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Un</a></li>
+        <li><a href="#">Deux</a></li>
+        <li><a href="#">Trois</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ path('lictevel_mycelium_inscription') }}"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
+        <li><a href="{{ path('lictevel_mycelium_connexion') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+      </ul>
+    </div>
 
   </div>
 </nav>
 
 
----------------
+<!--
 
 Si deconnecté :
 Ici on aura la barre de navigation avec :
@@ -28,5 +41,7 @@ Ici on aura la barre de navigation avec :
   - Deconnexion
 
 - Afficher l'avatar du joueur ?
----------------
+
 (C'est dans le controleur qu'on fait tout ça)
+
+-->

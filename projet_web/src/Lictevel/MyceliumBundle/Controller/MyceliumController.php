@@ -22,7 +22,10 @@ class MyceliumController extends Controller
     {
       // On fixe en dur une liste ici, bien entendu par la suite
       // on la récupérera depuis la BDD !
-      $message = "LOL !";
+
+      //J'garde ce message juste pour l'exemple
+      //A supprimer ou améliorer
+      $message = "";
 
       return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
         'message' => $message
