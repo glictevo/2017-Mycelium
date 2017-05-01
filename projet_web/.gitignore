@@ -1,4 +1,3 @@
-/app/config/parameters.yml
 /build/
 /phpunit.xml
 /var/*
@@ -12,5 +11,4 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-/vendor/
 /web/bundles/
