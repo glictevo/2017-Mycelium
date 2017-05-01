@@ -16,9 +16,29 @@ lictevel_mycelium_inscription:
     path: /inscription
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:inscription }
 
+lictevel_mycelium_mes_champignons:
+    path: /mes-champignons
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesChampignons }
 
+lictevel_mycelium_mes_mutations:
+    path: /mes-mutations
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesMutations }
 
+lictevel_mycelium_mon_mycelium:
+    path: /mon-mycelium
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:monMycelium }
 
+lictevel_mycelium_production:
+    path: /production
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:production }
+
+lictevel_mycelium_mes_defenses:
+    path: /mes-defenses
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesDefenses }
+
+lictevel_mycelium_statistiques:
+    path: /statistiques
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:statistiques }
 
 
 

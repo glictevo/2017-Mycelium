@@ -60,6 +60,41 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:aPropos.html.twig');
     }
 
+    public function mesChampignonsAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesChampignons.html.twig');
+    }
+
+    public function mesMutationsAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesMutations.html.twig');
+    }
+
+    public function monMyceliumAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig');
+    }
+
+    public function productionAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:production.html.twig');
+    }
+
+    public function mesDefensesAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesDefenses.html.twig');
+    }
+
+    public function statistiquesAction()
+    {
+      //Générer la page A Propos
+      return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig');
+    }
 
 
 
