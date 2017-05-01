@@ -44,6 +44,10 @@ lictevel_mycelium_statistiques:
     path: /statistiques
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:statistiques }
 
+lictevel_mycelium_mon_compte:
+    path: /mon-compte
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:monCompte }
+
 
 
 lictevel_mycelium_view:

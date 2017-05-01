@@ -71,6 +71,7 @@ class MyceliumController extends Controller
 
         $request->getSession()->getFlashBag()->add('notice', "Vous êtes connecté !");
         $session->set('user_id', $joueur->getId());
+        $session->set('pseudo', $joueur->getPseudo());
 
         return $this->redirectToRoute('lictevel_mycelium_connexion');
       }
@@ -93,7 +94,7 @@ class MyceliumController extends Controller
       ;
 
       $joueur = $repository->findOneById($user_id);
-      $session->set('user_id', null);
+      $session->clear();
       $request->getSession()->getFlashBag()->add('notice', "Vous êtes maintenant deconnecté !");
 
       return $this->redirectToroute('lictevel_mycelium_home');
@@ -177,6 +178,12 @@ class MyceliumController extends Controller
     {
       //Générer la page A Propos
       return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig');
+    }
+
+    public function monCompteAction(){
+      //Générer la page monCompte
+      return $this->render('LictevelMyceliumBundle:Mycelium:monCompte.html.twig');
+
     }
 
 

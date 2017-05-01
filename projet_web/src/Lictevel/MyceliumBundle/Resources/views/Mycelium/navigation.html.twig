@@ -11,7 +11,9 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        {% if app.session.get('pseudo') is defined %}
+          <li><a class="active" href="{{ path('lictevel_mycelium_mon_compte') }}">{{ app.session.get('pseudo') }}</a></li>
+        {% endif %}
         <li><a href="#">Un</a></li>
         <li><a href="#">Deux</a></li>
         <li><a href="#">Trois</a></li>
