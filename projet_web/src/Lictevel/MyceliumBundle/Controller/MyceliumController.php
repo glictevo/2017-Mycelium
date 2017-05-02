@@ -85,6 +85,10 @@ class MyceliumController extends Controller
         ;
         $session->set('champignon', $champignon);
 
+        if ($session->get('champignon') == null){
+          return $this->redirectToroute('lictevel_mycelium_mon_premier_champignon');
+        }
+
         return $this->redirectToRoute('lictevel_mycelium_connexion');
       }
 
@@ -174,22 +178,19 @@ class MyceliumController extends Controller
         ->findBy(array('joueur' => $joueur))
       ;
 
+      $coutNouveauChampi = pow(2, count($listChampignons))*10000;
+
       $champignon = new Champignon();
       $form = $this->get('form.factory')->create(ChampignonType::class, $champignon);
 
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         $champignon->setJoueur($joueur);
           $case = new Casejeu();
-          $case->setPalier(0);
           $case->setOrdonnee(0);
           $case->setAbscisse(0);
           $case->setType("test");
           $case->setOccupee(true);
           $case->setJoueur($joueur);
-          $case->setProdNutriments(10);
-          $case->setProdSpores(1);
-          $case->setProdFilamentsPara(1);
-          $case->setProdFilamentsSym(1);
           $case->setChampignon($champignon);
         $champignon->setCaseSporophore($case);
 
@@ -207,7 +208,54 @@ class MyceliumController extends Controller
       //Générer la page mesChampignons
       return $this->render('LictevelMyceliumBundle:Mycelium:mesChampignons.html.twig', array(
         'form' => $form->createView(),
+        'cout' => $coutNouveauChampi,
         'listChampignons' => $listChampignons,
+      ));
+    }
+
+    public function monPremierChampignonAction(Request $request)
+    {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em
+        ->getRepository('LictevelMyceliumBundle:Joueur');
+      ;
+      $joueur = $repository->findOneById($user_id);
+
+      $champignon = new Champignon();
+      $form = $this->get('form.factory')->create(ChampignonType::class, $champignon);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $champignon->setStockNutriments(1300);
+        $champignon->setJoueur($joueur);
+          $case = new Casejeu();
+          $case->setOrdonnee(0);
+          $case->setAbscisse(0);
+          $case->setType("test");
+          $case->setOccupee(true);
+          $case->setJoueur($joueur);
+          $case->setChampignon($champignon);
+        $champignon->setCaseSporophore($case);
+
+        $em->persist($case);
+        $em->persist($champignon);
+
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Votre champignon a bien été créé !');
+
+        $session->set('champignon', $champignon);
+
+        return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
+
+      }
+      //Générer la page mesChampignons
+      return $this->render('LictevelMyceliumBundle:Mycelium:monPremierChampignon.html.twig', array(
+        'form' => $form->createView(),
       ));
     }
 

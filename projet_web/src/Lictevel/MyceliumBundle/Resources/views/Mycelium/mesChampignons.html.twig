@@ -9,6 +9,8 @@
 
 {% block body %}
 
+  <h1>Mes champignons</h1>
+
   {% if listChampignons != null %}
 
     {% for message in app.session.flashbag.get('notice') %}
@@ -16,16 +18,23 @@
     {% endfor %}
 
     {% for champignon in listChampignons %}
-      <p>Champignon : {{ champignon.name }}</p> <button type="button" name="button"><a href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Choisir ce champignon pour jouer</a></button>
+      <div class="col-xs-3">
+        <p>Champignon : {{ champignon.name }}</p>
+        <a class="btn btn-default" href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Choisir ce champignon pour jouer</a>
+      </div>
     {% endfor %}
+
+    <div class="col-xs-8 col-sm-10">
+      <br>
+      <p>Cout d'un nouveau champignon : {{ cout }} </p>
+      {{ form(form) }}
+    </div>
 
   {% else %}
     <p>Vous n'avez pas de champignons !</p>
+    <p>Choisissez un nom pour votre premier champignon :</p>
+    {{ form(form) }}
   {% endif %}
 
-  {{ form(form) }}
-  ----------------------
-  Mes champignons
-  ----------------------
 
 {% endblock %}

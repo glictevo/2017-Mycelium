@@ -20,6 +20,10 @@ lictevel_mycelium_inscription:
     path: /inscription
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:inscription }
 
+lictevel_mycelium_mon_premier_champignon:
+    path: /mon-premier-champignon
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:monPremierChampignon }
+
 lictevel_mycelium_mes_champignons:
     path: /mes-champignons
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesChampignons }

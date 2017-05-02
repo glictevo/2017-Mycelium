@@ -320,29 +320,6 @@ class Champignon
         return $this->tailleMycelium;
     }
 
-    /**
-     * Set stockPA
-     *
-     * @param integer $stockPA
-     *
-     * @return Champignon
-     */
-    public function setStockPA($stockPA)
-    {
-        $this->stockPA = $stockPA;
-
-        return $this;
-    }
-
-    /**
-     * Get stockPA
-     *
-     * @return int
-     */
-    public function getStockPA()
-    {
-        return $this->stockPA;
-    }
 
     /**
      * Set stockNutriments
@@ -511,22 +488,21 @@ class Champignon
     {
         return $this->joueur;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prodNutriments = 1;
-        $this->prodSpores = 1;
+        $this->prodNutriments = 20;
+        $this->prodSpores = 2;
         $this->prodPoison = 0;
         $this->prodEnzymes = 0;
         $this->prodFilamentsSym = 0;
         $this->prodFilamentsPara = 0;
-        $this->nbPAMax = 100;
-        $this->prodPA = 10;
-        $this->tailleMycelium = 10;
-        $this->stockNutriments = 0;
+        $this->tailleMycelium = 1;
+        $this->stockNutriments = 100;
         $this->stockSpores = 0;
         $this->stockPoison = 0;
         $this->stockEnzymes = 0;

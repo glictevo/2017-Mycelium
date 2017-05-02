@@ -8,6 +8,9 @@
       <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
         <img class="img-responsive" src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
       </a>
+    {% else %}
+      <p class="bg-warning" >Vous n'avez pas encore de champignon</p>
+      <a class="bg-warning" href="{{ path('lictevel_mycelium_mon_premier_champignon') }}">Créer votre premier champignon</a>
     {% endif %}
     <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
     <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
@@ -17,9 +20,11 @@
     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
   </div>
 
-  Ressources par 'temps' au total de tous les champis :
+  Ressources par 'temps' au total du champi actuel :
 
     Ici afficher les quantités de ressources persistantes
+
+  Afficher la production totale du champi actuellement
 {% else %}
 
 {% endif %}

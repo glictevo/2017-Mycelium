@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Lictevel\MyceliumBundle\Entity\Joueur;
 use Lictevel\MyceliumBundle\Entity\Champignon;
+use Lictevel\MyceliumBundle\Entity\Casejeu;
 use Lictevel\MyceliumBundle\EventListener;
 
 class RessourcesUpdateListener
@@ -55,6 +56,21 @@ class RessourcesUpdateListener
               $stockEnzymes = $champignon->getStockEnzymes() + ($champignon->getProdEnzymes() * $minutes);
               $stockFilamentsPara = $champignon->getStockFilamentsPara() + ($champignon->getProdFilamentsPara() * $minutes);
               $stockFilamentsSym = $champignon->getStockFilamentsSym() + ($champignon->getProdFilamentsSym() * $minutes);
+
+              //On charge la liste des cases reliées au champignon
+              //TODO : faire les conditions par rapport aux mutations
+                //Genre que ça n'augmente pas le poison alors qu'il n'y a pas la mutation sur le champi
+              $cases = $this->em->getRepository('LictevelMyceliumBundle:Casejeu')->findByChampignon($champignon);
+              if ($cases != null){
+                foreach ($cases as $case){
+                  $stockNutriments += $case->getProdNutriments();
+                  $stockSpores += $case->getProdSpores();
+                  $stockPoison += $case->getProdPoison();
+                  $stockEnzymes += $case->getProdEnzymes();
+                  $stockFilamentsPara += $case->getProdFilamentsPara();
+                  $stockFilamentsSym += $case->getProdFilamentsSym();
+                }
+              }
 
               $champignon->setStockNutriments($stockNutriments);
               $champignon->setStockSpores($stockSpores);

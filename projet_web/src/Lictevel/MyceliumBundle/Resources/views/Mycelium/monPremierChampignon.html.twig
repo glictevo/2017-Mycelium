@@ -1,0 +1,21 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/monPremierChampignon.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Mon premier champignon{% endblock %}
+
+
+{% block body %}
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  <p>Bienvenue !</p>
+  <p>Veuillez choisir un nom pour votre premier champignon !</p>
+
+  {{ form(form) }}
+
+{% endblock %}

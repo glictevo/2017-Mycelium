@@ -494,4 +494,25 @@ class Casejeu
     {
         return $this->palier;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->palier = 1;
+        $this->abscisse = 0;
+        $this->ordonnee = 0;
+        $this->type = 'normal';
+        $this->prodNutriments = random_int(1,3);
+        $this->prodSpores = random_int(1,2);
+        $this->prodEnzymes = random_int(1,2);
+        $this->prodPoison = random_int(1,2);
+        $this->prodFilamentsPara = random_int(1,2);
+        $this->prodFilamentsSym = random_int(1,2);
+        $this->occupee = false;
+        $this->bonusProdSpores = 0;
+        $this->bonusProdNutriments = 0;
+    }
+
 }

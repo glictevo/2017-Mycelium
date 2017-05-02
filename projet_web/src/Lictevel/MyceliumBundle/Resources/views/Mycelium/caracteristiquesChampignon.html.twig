@@ -35,9 +35,16 @@
       Production de filaments parasytiques : {{ champignon.prodFilamentsPara }} <br>
       Production de filaments symbiotiques : {{ champignon.prodFilamentsSym }} <br>
 
-      Ligne juste en dessous à retirer (ou mettre visible seulement par le joueur qui le possède) <br>
-      Stock de nutriments : {{ champignon.stockNutriments }} <br>
-      Stock de Spores : {{ champignon.stockSpores }} <br>
+      {% if champignon.joueur.id == app.session.get('user_id') %}
+        <br>
+        Stock de nutriments : {{ champignon.stockNutriments }} <br>
+        Stock de spores : {{ champignon.stockSpores }} <br>
+        Stock de poison : {{ champignon.stockPoison }} <br>
+        Stock d'enzymes : {{ champignon.stockEnzymes }} <br>
+        Stock de filaments parasitiques : {{ champignon.stockFilamentsPara }} <br>
+        Stock de filaments symbiotiques : {{ champignon.stockFilamentsSym }} <br>
+        <br>
+      {% endif %}
 
       Liste des mutations : affichage à venir
     </p>
