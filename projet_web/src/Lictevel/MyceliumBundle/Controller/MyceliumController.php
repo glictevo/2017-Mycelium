@@ -180,6 +180,7 @@ class MyceliumController extends Controller
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         $champignon->setJoueur($joueur);
           $case = new Casejeu();
+          $case->setPalier(0);
           $case->setOrdonnee(0);
           $case->setAbscisse(0);
           $case->setType("test");

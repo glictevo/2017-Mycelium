@@ -29,6 +29,13 @@ class Mutation
     private $nom;
 
     /**
+      * @var int
+      *
+      * @ORM\Column(name="palier", type="integer")
+      */
+    private $palier;
+
+    /**
      * @ORM\OneToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
