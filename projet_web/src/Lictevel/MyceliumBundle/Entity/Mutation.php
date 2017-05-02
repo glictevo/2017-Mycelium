@@ -29,6 +29,13 @@ class Mutation
     private $nom;
 
     /**
+      * @var int
+      *
+      * @ORM\Column(name="palier", type="integer")
+      */
+    private $palier;
+
+    /**
      * @ORM\OneToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -137,5 +144,29 @@ class Mutation
     public function getEffets()
     {
         return $this->effets;
+    }
+
+    /**
+     * Set palier
+     *
+     * @param integer $palier
+     *
+     * @return Mutation
+     */
+    public function setPalier($palier)
+    {
+        $this->palier = $palier;
+
+        return $this;
+    }
+
+    /**
+     * Get palier
+     *
+     * @return integer
+     */
+    public function getPalier()
+    {
+        return $this->palier;
     }
 }

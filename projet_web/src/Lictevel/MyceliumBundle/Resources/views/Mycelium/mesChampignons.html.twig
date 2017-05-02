@@ -11,8 +11,12 @@
 
   {% if listChampignons != null %}
 
+    {% for message in app.session.flashbag.get('notice') %}
+      <p> {{ message }} </p>
+    {% endfor %}
+
     {% for champignon in listChampignons %}
-      <p>Champignon : {{ champignon.name }}</p>
+      <p>Champignon : {{ champignon.name }}</p> <button type="button" name="button"><a href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Choisir ce champignon pour jouer</a></button>
     {% endfor %}
 
   {% else %}
