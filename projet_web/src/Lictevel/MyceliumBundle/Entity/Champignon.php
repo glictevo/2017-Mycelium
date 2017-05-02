@@ -22,6 +22,13 @@ class Champignon
     private $id;
 
     /**
+      * @var string
+      *
+      * @ORM\Column(name="pseudo", type="string", length=255, unique=false)
+      */
+    private $name;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="prod_nutriments", type="integer")
