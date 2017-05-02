@@ -236,7 +236,6 @@ class MyceliumController extends Controller
           $case = new Casejeu();
           $case->setOrdonnee(0);
           $case->setAbscisse(0);
-          $case->setType("test");
           $case->setOccupee(true);
           $case->setJoueur($joueur);
           $case->setChampignon($champignon);
@@ -249,6 +248,7 @@ class MyceliumController extends Controller
         $request->getSession()->getFlashBag()->add('notice', 'Votre champignon a bien été créé !');
 
         $session->set('champignon', $champignon);
+        $case->createAround($em);
 
         return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
 
