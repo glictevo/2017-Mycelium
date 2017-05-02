@@ -2,7 +2,13 @@
 
 {% if app.session.has('pseudo') %}
   <div class="list-group">
-    <a href=""><img src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)"></a>
+    {% if app.session.has('champignon') %}
+      <p> Champignon actuel : </p>
+      <p> {{ app.session.get('champignon').name }}</p>
+      <a href="#">
+        <img src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
+      </a>
+    {% endif %}
     <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
     <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
     <a href="{{ path('lictevel_mycelium_mon_mycelium') }}" class="list-group-item">Mon mycélium</a>
@@ -10,6 +16,8 @@
     <a href="{{ path('lictevel_mycelium_mes_defenses') }}" class="list-group-item">Mes défenses</a>
     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
   </div>
+
+  Ressources par 'temps' de tout les champis :
 
   Ici afficher les quantités de ressources persistantes
 {% else %}

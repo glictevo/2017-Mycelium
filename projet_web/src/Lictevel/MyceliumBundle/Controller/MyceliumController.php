@@ -79,6 +79,11 @@ class MyceliumController extends Controller
         $request->getSession()->getFlashBag()->add('notice', "Vous êtes connecté !");
         $session->set('user_id', $joueur->getId());
         $session->set('pseudo', $joueur->getPseudo());
+        $champignon = $this->getDoctrine()->getManager()
+          ->getRepository('LictevelMyceliumBundle:Champignon')
+          ->findOneByJoueur($joueur)
+        ;
+        $session->set('champignon', $champignon);
 
         return $this->redirectToRoute('lictevel_mycelium_connexion');
       }
