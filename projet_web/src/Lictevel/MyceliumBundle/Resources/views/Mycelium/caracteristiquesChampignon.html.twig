@@ -17,7 +17,7 @@
   caracteristiquesChampignon
   ----------------------
 
-  {% if champignon is defined %}
+  {% if champignon != null %}
     <p>
       {% if champignon.image != null %}
         <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">
