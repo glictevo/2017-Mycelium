@@ -183,12 +183,12 @@ class MyceliumController extends Controller
       $champignon = new Champignon();
       $form = $this->get('form.factory')->create(ChampignonType::class, $champignon);
 
+      //TODO : TOUT EST A REFAIRE ICI POUR LES CASES ET TOUT
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         $champignon->setJoueur($joueur);
           $case = new Casejeu();
           $case->setOrdonnee(0);
           $case->setAbscisse(0);
-          $case->setType("test");
           $case->setOccupee(true);
           $case->setJoueur($joueur);
           $case->setChampignon($champignon);
@@ -265,10 +265,23 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:mesMutations.html.twig');
     }
 
-    public function monMyceliumAction()
+    public function monMyceliumAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
+
+      $mycelium = $repository->findMycelium($session->get('champignon'));
+
       //Générer la page monMycelium
-      return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig', array(
+        'mycelium' => $mycelium,
+      ));
     }
 
     public function productionAction()

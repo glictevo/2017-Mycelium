@@ -10,4 +10,25 @@ namespace Lictevel\MyceliumBundle\Repository;
  */
 class CasejeuRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function findMycelium($champignon){
+    $qb = $this->createQueryBuilder('a');
+
+    $abscisseSporophore = $champignon->getCaseSporophore()->getAbscisse();
+    $ordonneeSporophore = $champignon->getCaseSporophore()->getOrdonnee();
+
+    $qb->where('a.abscisse < :abscisseMax')
+          ->setParameter('abscisseMax', $abscisseSporophore + 10)
+       ->andWhere('a.abscisse > :abscisseMin')
+          ->setParameter('abscisseMin', $abscisseSporophore - 10)
+       ->andWhere('a.ordonnee < :ordonneeMax')
+          ->setParameter('ordonneeMax', $ordonneeSporophore + 10)
+       ->andWhere('a.ordonnee > :ordoneeMin')
+          ->setParameter('ordoneeMin', $ordonneeSporophore - 10)
+       ->andWhere('a.joueur = :joueur')
+          ->setParameter('joueur', $champignon->getJoueur())
+       ->orderBy('a.ordonnee', 'DESC')
+    ;
+
+    return $qb->getQuery()->getResult();
+  }
 }

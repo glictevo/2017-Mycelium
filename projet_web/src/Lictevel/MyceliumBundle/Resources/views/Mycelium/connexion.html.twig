@@ -9,10 +9,12 @@
 
 {% block body %}
 
+  <h1> Connexion </h1>
+
   {% for message in app.session.flashbag.get('notice') %}
     <p>Info : {{ message }} </p>
   {% endfor %}
 
   {{ form(form) }}
-  
+
 {% endblock %}

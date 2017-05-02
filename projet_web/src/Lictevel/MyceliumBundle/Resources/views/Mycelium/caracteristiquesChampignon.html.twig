@@ -9,15 +9,14 @@
 
 {% block body %}
 
+  <h1> Caractéristiques de champignon </h1>
+
   {% for message in app.session.flashbag.get('notice') %}
     <p> {{ message }} </p>
   {% endfor %}
 
-  ----------------------
-  caracteristiquesChampignon
-  ----------------------
-
   {% if champignon != null %}
+
     <p>
       {% if champignon.image != null %}
         <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">

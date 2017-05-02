@@ -9,6 +9,8 @@
 
 {% block body %}
 
+  <h1>Mon premier champignon </h1>
+
   {% for message in app.session.flashbag.get('notice') %}
     <p> {{ message }} </p>
   {% endfor %}

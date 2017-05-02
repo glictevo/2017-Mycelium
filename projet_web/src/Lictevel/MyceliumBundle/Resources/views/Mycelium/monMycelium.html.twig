@@ -9,8 +9,16 @@
 
 {% block body %}
 
-  ----------------------
-  Mon mycelium
-  ----------------------
+  <h1>Mon Mycelium</h1>
+
+  {% for case in mycelium %}
+    <div class="col-xs-3">
+      <ul>
+        <li>Abscisse : {{ case.abscisse }} </li>
+        <li>Ordonnee : {{ case.ordonnee }} </li>
+        <li>Type : {{ case.type }} </li>
+      </ul>
+    </div>
+  {% endfor %}
 
 {% endblock %}
