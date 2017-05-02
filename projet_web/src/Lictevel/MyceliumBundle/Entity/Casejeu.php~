@@ -470,4 +470,28 @@ class Casejeu
     {
         return $this->joueur;
     }
+
+    /**
+     * Set palier
+     *
+     * @param integer $palier
+     *
+     * @return Casejeu
+     */
+    public function setPalier($palier)
+    {
+        $this->palier = $palier;
+
+        return $this;
+    }
+
+    /**
+     * Get palier
+     *
+     * @return integer
+     */
+    public function getPalier()
+    {
+        return $this->palier;
+    }
 }

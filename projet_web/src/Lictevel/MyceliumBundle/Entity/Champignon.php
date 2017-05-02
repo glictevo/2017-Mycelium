@@ -45,44 +45,30 @@ class Champignon
     /**
      * @var int
      *
-     * @ORM\Column(name="prod_poison", type="integer", nullable=true)
+     * @ORM\Column(name="prod_poison", type="integer")
      */
     private $prodPoison;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="prod_enzymes", type="integer", nullable=true)
+     * @ORM\Column(name="prod_enzymes", type="integer")
      */
     private $prodEnzymes;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="prod_filaments_para", type="integer", nullable=true)
+     * @ORM\Column(name="prod_filaments_para", type="integer")
      */
     private $prodFilamentsPara;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="prod_filaments_sym", type="integer", nullable=true)
+     * @ORM\Column(name="prod_filaments_sym", type="integer")
      */
     private $prodFilamentsSym;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_PA_max", type="integer")
-     */
-    private $nbPAMax;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="prod_PA", type="integer")
-     */
-    private $prodPA;
 
     /**
      * @var int
@@ -90,13 +76,6 @@ class Champignon
      * @ORM\Column(name="taille_mycelium", type="integer")
      */
     private $tailleMycelium;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="stock_PA", type="integer")
-     */
-    private $stockPA;
 
     /**
      * @var int
@@ -115,28 +94,28 @@ class Champignon
     /**
      * @var int
      *
-     * @ORM\Column(name="stock_poison", type="integer", nullable=true)
+     * @ORM\Column(name="stock_poison", type="integer")
      */
     private $stockPoison;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="stock_enzymes", type="integer", nullable=true)
+     * @ORM\Column(name="stock_enzymes", type="integer")
      */
     private $stockEnzymes;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="stock_filaments_para", type="integer", nullable=true)
+     * @ORM\Column(name="stock_filaments_para", type="integer")
      */
     private $stockFilamentsPara;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="stock_filaments_sym", type="integer", nullable=true)
+     * @ORM\Column(name="stock_filaments_sym", type="integer")
      */
     private $stockFilamentsSym;
 
@@ -315,54 +294,6 @@ class Champignon
     public function getProdFilamentsSym()
     {
         return $this->prodFilamentsSym;
-    }
-
-    /**
-     * Set nbPAMax
-     *
-     * @param integer $nbPAMax
-     *
-     * @return Champignon
-     */
-    public function setNbPAMax($nbPAMax)
-    {
-        $this->nbPAMax = $nbPAMax;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPAMax
-     *
-     * @return int
-     */
-    public function getNbPAMax()
-    {
-        return $this->nbPAMax;
-    }
-
-    /**
-     * Set prodPA
-     *
-     * @param integer $prodPA
-     *
-     * @return Champignon
-     */
-    public function setProdPA($prodPA)
-    {
-        $this->prodPA = $prodPA;
-
-        return $this;
-    }
-
-    /**
-     * Get prodPA
-     *
-     * @return int
-     */
-    public function getProdPA()
-    {
-        return $this->prodPA;
     }
 
     /**
@@ -586,14 +517,21 @@ class Champignon
     public function __construct()
     {
         $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prodNutriments = 0;
-        $this->prodSpores = 0;
+        $this->prodNutriments = 1;
+        $this->prodSpores = 1;
+        $this->prodPoison = 0;
+        $this->prodEnzymes = 0;
+        $this->prodFilamentsSym = 0;
+        $this->prodFilamentsPara = 0;
         $this->nbPAMax = 100;
         $this->prodPA = 10;
         $this->tailleMycelium = 10;
-        $this->stockPA = 100;
-        $this->stockNutriments = 100;
+        $this->stockNutriments = 0;
         $this->stockSpores = 0;
+        $this->stockPoison = 0;
+        $this->stockEnzymes = 0;
+        $this->stockFilamentsSym = 0;
+        $this->stockFilamentsPara = 0;
     }
 
     /**

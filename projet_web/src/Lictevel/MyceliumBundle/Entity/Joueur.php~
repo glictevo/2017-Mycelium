@@ -60,6 +60,10 @@ class Joueur
       */
     private $dateInscription;
 
+    /**
+      * @ORM\Column(name="lastUpdate", type="datetime", unique=false)
+      */
+    private $lastUpdate;
 
     /**
      * Get id
@@ -99,7 +103,8 @@ class Joueur
      */
     public function __construct()
     {
-        $this->date = new \Datetime();
+        $this->dateInscription = new \Datetime();
+        $this->lastUpdate = new \Datetime();
         $this->amisAvecMoi = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mesAmis = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -242,5 +247,29 @@ class Joueur
     public function getDateInscription()
     {
         return $this->dateInscription;
+    }
+
+    /**
+     * Set lastUpdate
+     *
+     * @param \DateTime $lastUpdate
+     *
+     * @return Joueur
+     */
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdate
+     *
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->lastUpdate;
     }
 }

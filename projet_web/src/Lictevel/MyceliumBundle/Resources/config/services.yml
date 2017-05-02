@@ -2,3 +2,9 @@ services:
 #    lictevel_mycelium.example:
 #        class: Lictevel\MyceliumBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lictevel_mycelium.eventlistener.resources_update:
+        class: Lictevel\MyceliumBundle\EventListener\RessourcesUpdateListener
+        arguments:
+          - "@doctrine.orm.entity_manager"
+        tags:
+          - { name: kernel.event_listener, event: kernel.controller, method: processResourcesUpdate }
