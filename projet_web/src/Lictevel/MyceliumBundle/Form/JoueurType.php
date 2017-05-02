@@ -20,9 +20,9 @@ class JoueurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('pseudo',      TextType::class)
-          ->add('motdepasse',  PasswordType::class)
-          ->add('save',        SubmitType::class);
+          ->add('Pseudo',       TextType::class)
+          ->add('Mot_de_passe', PasswordType::class)
+          ->add('Valider',      SubmitType::class);
     }
 
     /**

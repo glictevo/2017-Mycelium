@@ -9,6 +9,15 @@
 
 {% block body %}
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  {{ form(form) }}
+
+  <p>Votre photo de profil : </p>
+  <img src="{{ asset('uploads/images/' ~ url) }}" alt="{{ alt }}">
+
   ----------------------
   Mon compte :
 

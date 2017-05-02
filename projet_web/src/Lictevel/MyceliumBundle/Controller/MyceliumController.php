@@ -8,7 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Lictevel\MyceliumBundle\Entity\Joueur;
+use Lictevel\MyceliumBundle\Entity\Image;
 use Lictevel\MyceliumBundle\Form\JoueurType;
+use Lictevel\MyceliumBundle\Form\ImageType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
 
 class MyceliumController extends Controller
 {
@@ -180,9 +184,51 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig');
     }
 
-    public function monCompteAction(){
+    public function monCompteAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $image = new Image();
+      $form = $this->get('form.factory')->create(ImageType::class, $image);
+      $repository = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Joueur');
+      ;
+      $joueur = $repository->findOneById($user_id);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $file = $image->getUrl();
+
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+        $file->move(
+          $this->getParameter('images_directory'),
+          $fileName
+        );
+
+        $image->setUrl($fileName);
+
+        $em = $this->getDoctrine()->getManager();
+        $image->setAlt($joueur->getPseudo().'Picture');
+
+        //On va supprimer la photo de profil précédente si elle existe
+        $toremove = $joueur->getImage();
+        $em->remove($toremove);
+
+        $joueur->setImage($image);
+        $em->persist($joueur);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', "Votre photo a été uploadée.");
+      }
+
       //Générer la page monCompte
-      return $this->render('LictevelMyceliumBundle:Mycelium:monCompte.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:monCompte.html.twig', array(
+        'form' => $form->createView(),
+        'url' => $joueur->getImage()->getUrl(),
+        'alt' => $joueur->getImage()->getAlt(),
+      ));
     }
 
     public function mesAmisAction(){
