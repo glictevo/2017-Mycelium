@@ -299,6 +299,12 @@ class MyceliumController extends Controller
     }
 
     public function caracteristiquesChampignonAction(Request $request, $id){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
       $champignon = $this->getDoctrine()->getManager()
         ->getRepository('LictevelMyceliumBundle:Champignon')
         ->findOneById($id)
@@ -312,6 +318,32 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:caracteristiquesChampignon.html.twig', array(
         'champignon' => $champignon,
       ));
+    }
+
+    public function changerChampignonAction(Request $request, $id){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $champignon = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findOneById($id)
+      ;
+
+      if ($champignon == null){
+        $request->getSession()->getFlashBag()->add('notice', "Ce champignon n'existe pas");
+      } else {
+        if ($champignon->getJoueur()->getId() == $user_id){
+          $session->set('champignon', $champignon);
+        } else {
+          $request->getSession()->getFlashBag()->add('notice', "Ce champignon ne vous appartient pas !");
+        }
+      }
+
+      //Générer la page MEs Champignons
+      return $this->redirectToroute('lictevel_mycelium_mes_champignons');
     }
 }
 

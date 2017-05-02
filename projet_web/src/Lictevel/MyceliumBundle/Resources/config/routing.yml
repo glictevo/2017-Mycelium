@@ -55,3 +55,7 @@ lictevel_mycelium_mes_amis:
 lictevel_mycelium_caracteristiques_champignon:
     path: /caracteristiques-champi/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:caracteristiquesChampignon }
+
+lictevel_mycelium_changer_champignon:
+    path: /changer-champignon/{id}
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:changerChampignon }
