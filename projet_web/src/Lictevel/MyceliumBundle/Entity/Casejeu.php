@@ -114,7 +114,7 @@ class Casejeu
 
     /**
      * @ORM\ManyToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Champignon", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $champignon;
 

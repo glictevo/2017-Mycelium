@@ -147,7 +147,7 @@ class Champignon
     private $joueur;
 
     /**
-     * @ORM\OneToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Casejeu")
+     * @ORM\OneToOne(targetEntity="Lictevel\MyceliumBundle\Entity\Casejeu", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $caseSporophore;
@@ -586,6 +586,14 @@ class Champignon
     public function __construct()
     {
         $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prodNutriments = 0;
+        $this->prodSpores = 0;
+        $this->nbPAMax = 100;
+        $this->prodPA = 10;
+        $this->tailleMycelium = 10;
+        $this->stockPA = 100;
+        $this->stockNutriments = 100;
+        $this->stockSpores = 0;
     }
 
     /**
@@ -668,5 +676,29 @@ class Champignon
     public function getMutations()
     {
         return $this->mutations;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Champignon
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

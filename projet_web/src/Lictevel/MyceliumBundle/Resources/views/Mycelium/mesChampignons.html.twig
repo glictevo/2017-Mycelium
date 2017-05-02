@@ -9,6 +9,17 @@
 
 {% block body %}
 
+  {% if listChampignons != null %}
+
+    {% for champignon in listChampignons %}
+      <p>Champignon : {{ champignon.name }}</p>
+    {% endfor %}
+
+  {% else %}
+    <p>Vous n'avez pas de champignons !</p>
+  {% endif %}
+
+  {{ form(form) }}
   ----------------------
   Mes champignons
   ----------------------

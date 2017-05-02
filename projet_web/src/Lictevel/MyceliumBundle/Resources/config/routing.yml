@@ -51,26 +51,3 @@ lictevel_mycelium_mon_compte:
 lictevel_mycelium_mes_amis:
     path: /mes-amis
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:mesAmis }
-
-
-
-lictevel_mycelium_view:
-    path: /mycelium/{id}
-    defaults: { _controller: LictevelMyceliumBundle:Mycelium:view }
-
-lictevel_mycelium_view_slug:
-    path: /{year}/{slug}.{format}
-    defaults:
-      _controller: LictevelMyceliumBundle:Mycelium:viewSlug
-      format: html
-    requirements:
-      year: \d{4}
-      format: html|xml
-
-lictevel_mycelium_add:
-    path: /add
-    defaults: { _controller: LictevelMyceliumBundle:Mycelium:add }
-
-lictevel_mycelium_admin:
-  path: /admin
-  defaults: { _controller: LictevelMyceliumBundle:Mycelium:admin}

@@ -22,6 +22,13 @@ class Champignon
     private $id;
 
     /**
+      * @var string
+      *
+      * @ORM\Column(name="pseudo", type="string", length=255, unique=false)
+      */
+    private $name;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="prod_nutriments", type="integer")
@@ -572,5 +579,120 @@ class Champignon
     public function getJoueur()
     {
         return $this->joueur;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prod_nutriments = 0;
+        $this->prod_spores = 0;
+    }
+
+    /**
+     * Set caseSporophore
+     *
+     * @param \Lictevel\MyceliumBundle\Entity\Casejeu $caseSporophore
+     *
+     * @return Champignon
+     */
+    public function setCaseSporophore(\Lictevel\MyceliumBundle\Entity\Casejeu $caseSporophore)
+    {
+        $this->caseSporophore = $caseSporophore;
+
+        return $this;
+    }
+
+    /**
+     * Get caseSporophore
+     *
+     * @return \Lictevel\MyceliumBundle\Entity\Casejeu
+     */
+    public function getCaseSporophore()
+    {
+        return $this->caseSporophore;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Lictevel\MyceliumBundle\Entity\Image $image
+     *
+     * @return Champignon
+     */
+    public function setImage(\Lictevel\MyceliumBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Lictevel\MyceliumBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add mutation
+     *
+     * @param \Lictevel\MyceliumBundle\Entity\Mutation $mutation
+     *
+     * @return Champignon
+     */
+    public function addMutation(\Lictevel\MyceliumBundle\Entity\Mutation $mutation)
+    {
+        $this->mutations[] = $mutation;
+
+        return $this;
+    }
+
+    /**
+     * Remove mutation
+     *
+     * @param \Lictevel\MyceliumBundle\Entity\Mutation $mutation
+     */
+    public function removeMutation(\Lictevel\MyceliumBundle\Entity\Mutation $mutation)
+    {
+        $this->mutations->removeElement($mutation);
+    }
+
+    /**
+     * Get mutations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMutations()
+    {
+        return $this->mutations;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Champignon
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

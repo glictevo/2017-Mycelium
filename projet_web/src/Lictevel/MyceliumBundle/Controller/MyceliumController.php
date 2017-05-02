@@ -9,8 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Lictevel\MyceliumBundle\Entity\Joueur;
 use Lictevel\MyceliumBundle\Entity\Image;
+use Lictevel\MyceliumBundle\Entity\Champignon;
+use Lictevel\MyceliumBundle\Entity\Casejeu;
 use Lictevel\MyceliumBundle\Form\JoueurType;
 use Lictevel\MyceliumBundle\Form\ImageType;
+use Lictevel\MyceliumBundle\Form\ChampignonType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -148,10 +151,55 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:aPropos.html.twig');
     }
 
-    public function mesChampignonsAction()
+    public function mesChampignonsAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em
+        ->getRepository('LictevelMyceliumBundle:Joueur');
+      ;
+      $joueur = $repository->findOneById($user_id);
+      $listChampignons = $em
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findBy(array('joueur' => $joueur))
+      ;
+
+      $champignon = new Champignon();
+      $form = $this->get('form.factory')->create(ChampignonType::class, $champignon);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $champignon->setJoueur($joueur);
+          $case = new Casejeu();
+          $case->setOrdonnee(0);
+          $case->setAbscisse(0);
+          $case->setType("test");
+          $case->setOccupee(true);
+          $case->setJoueur($joueur);
+          $case->setProdNutriments(10);
+          $case->setProdSpores(1);
+          $case->setProdFilamentsPara(1);
+          $case->setProdFilamentsSym(1);
+          $case->setChampignon($champignon);
+        $champignon->setCaseSporophore($case);
+
+        $em->persist($case);
+        $em->persist($champignon);
+
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Votre champignon a bien été créé !');
+        return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
+
+      }
       //Générer la page mesChampignons
-      return $this->render('LictevelMyceliumBundle:Mycelium:mesChampignons.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesChampignons.html.twig', array(
+        'form' => $form->createView(),
+        'listChampignons' => $listChampignons,
+      ));
     }
 
     public function mesMutationsAction()
@@ -244,38 +292,6 @@ class MyceliumController extends Controller
       //Générer la page mesAmis
       return $this->render('LictevelMyceliumBundle:Mycelium:mesAmis.html.twig');
     }
-
-
-
-
-
-    public function viewAction($id, Request $request)
-    {
-      $tag = $request
-        ->query
-        ->get('tag')
-      ;
-
-      return $this->render('LictevelMyceliumBundle:Mycelium:view.html.twig', array(
-        'id'  => $id,
-        'tag' => $tag,
-      ));
-    }
-
-    public function viewSlugAction($slug, $year, $format)
-    {
-        return new Response(
-            "On pourrait afficher l'annonce correspondant au
-            slug '".$slug."', créée en ".$year." et au format ".$format."."
-        );
-    }
-
-
-  public function adminAction()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
-
 }
 
 
