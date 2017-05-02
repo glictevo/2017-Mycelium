@@ -297,6 +297,22 @@ class MyceliumController extends Controller
       //Générer la page mesAmis
       return $this->render('LictevelMyceliumBundle:Mycelium:mesAmis.html.twig');
     }
+
+    public function caracteristiquesChampignonAction(Request $request, $id){
+      $champignon = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findOneById($id)
+      ;
+
+      if ($champignon == null){
+        $request->getSession()->getFlashBag()->add('notice', "Ce champignon n'existe pas");
+      }
+
+      //Générer la page de caracteristique d'un champignon
+      return $this->render('LictevelMyceliumBundle:Mycelium:caracteristiquesChampignon.html.twig', array(
+        'champignon' => $champignon,
+      ));
+    }
 }
 
 

@@ -1,0 +1,44 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/caracteristiquesChampignon.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Caracteristiques du champignon {% endblock %}
+
+
+{% block body %}
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  ----------------------
+  caracteristiquesChampignon
+  ----------------------
+
+  {% if champignon is defined %}
+    <p>
+      {% if champignon.image != null %}
+        <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">
+      {% else %}
+        <p> Photo manquante </p>
+      {% endif %}
+
+      Nom : {{ champignon.name }} <br>
+      Propriétaire : {{ champignon.joueur.pseudo }} <br>
+      Taille du mycélium : {{ champignon.tailleMycelium }} <br>
+      Nombre de PA maximum : {{ champignon.nbPAMax }} <br>
+      Production de PA : {{ champignon.prodPA }} <br>
+      Production de nutriments : {{ champignon.prodNutriments }} <br>
+      Production de spotes : {{ champignon.prodSpores }} <br>
+      Production de poison : {{ champignon.prodPoison }} <br>
+      Production d'enzyme : {{ champignon.prodEnzymes }} <br>
+      Production de filaments parasytiques : {{ champignon.prodFilamentsPara }} <br>
+      Production de filaments symbiotiques : {{ champignon.prodFilamentsSym }} <br>
+
+      Liste des mutations : affichage à venir
+    </p>
+  {% endif %}
+
+{% endblock %}

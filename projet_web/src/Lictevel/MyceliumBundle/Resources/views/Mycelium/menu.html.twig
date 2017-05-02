@@ -5,7 +5,7 @@
     {% if app.session.has('champignon') %}
       <p> Champignon actuel : </p>
       <p> {{ app.session.get('champignon').name }}</p>
-      <a href="#">
+      <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
         <img src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
       </a>
     {% endif %}
@@ -17,9 +17,9 @@
     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
   </div>
 
-  Ressources par 'temps' de tout les champis :
+  Ressources par 'temps' au total de tous les champis :
 
-  Ici afficher les quantités de ressources persistantes
+    Ici afficher les quantités de ressources persistantes
 {% else %}
 
 {% endif %}
