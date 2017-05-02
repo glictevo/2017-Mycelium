@@ -215,12 +215,21 @@ class MyceliumController extends Controller
 
         //On va supprimer la photo de profil précédente si elle existe
         $toremove = $joueur->getImage();
-        $em->remove($toremove);
+        if ($toremove != null){
+          $em->remove($toremove);
+        }
 
         $joueur->setImage($image);
         $em->persist($joueur);
         $em->flush();
         $request->getSession()->getFlashBag()->add('notice', "Votre photo a été uploadée.");
+      }
+
+      $image = $joueur->getImage();
+      if ($image === null){
+        return $this->render('LictevelMyceliumBundle:Mycelium:monCompte.html.twig', array(
+          'form' => $form->createView(),
+        ));
       }
 
       //Générer la page monCompte

@@ -15,8 +15,12 @@
 
   {{ form(form) }}
 
-  <p>Votre photo de profil : </p>
-  <img src="{{ asset('uploads/images/' ~ url) }}" alt="{{ alt }}">
+  {% if url is defined %}
+    <p>Votre photo de profil : </p>
+    <img src="{{ asset('uploads/images/' ~ url) }}" alt="{{ alt }}">
+  {% else %}
+    <p>Vous n'avez pas de photo de profil</p>
+  {% endif %}
 
   ----------------------
   Mon compte :
