@@ -198,6 +198,9 @@ class MyceliumController extends Controller
 
         $em->flush();
         $request->getSession()->getFlashBag()->add('notice', 'Votre champignon a bien été créé !');
+
+        $session->set('champignon', $champignon);
+
         return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
 
       }
