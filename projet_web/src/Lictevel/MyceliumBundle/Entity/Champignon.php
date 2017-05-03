@@ -521,6 +521,13 @@ class Champignon
     {
         $this->caseSporophore = $caseSporophore;
 
+        $this->prodNutriments += $caseSporophore->getProdNutriments();
+        $this->prodSpores += $caseSporophore->getProdSpores();
+        $this->prodPoison += $caseSporophore->getProdPoison();
+        $this->prodEnzymes += $caseSporophore->getProdEnzymes();
+        $this->prodFilamentsPara += $caseSporophore->getProdFilamentsPara();
+        $this->prodFilamentsSym += $caseSporophore->getProdFilamentsSym();
+
         return $this;
     }
 
