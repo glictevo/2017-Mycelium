@@ -501,8 +501,8 @@ class Champignon
         $this->prodEnzymes = 0;
         $this->prodFilamentsSym = 0;
         $this->prodFilamentsPara = 0;
-        $this->tailleMycelium = 10;
-        $this->stockNutriments = 0;
+        $this->tailleMycelium = 1;
+        $this->stockNutriments = 100;
         $this->stockSpores = 0;
         $this->stockPoison = 0;
         $this->stockEnzymes = 0;
@@ -614,5 +614,14 @@ class Champignon
     public function getName()
     {
         return $this->name;
+    }
+
+    public function ajouterCase($case){
+      $this->prodNutriments += $case->getProdNutriments();
+      $this->prodSpores += $case->getProdSpores();
+      $this->prodPoison += $case->getProdPoison();
+      $this->prodEnzymes += $case->getProdEnzymes();
+      $this->prodFilamentsPara += $case->getProdFilamentsPara();
+      $this->prodFilamentsSym += $case->getProdFilamentsSym();
     }
 }

@@ -14,6 +14,7 @@ use Lictevel\MyceliumBundle\Entity\Casejeu;
 use Lictevel\MyceliumBundle\Form\JoueurType;
 use Lictevel\MyceliumBundle\Form\ImageType;
 use Lictevel\MyceliumBundle\Form\ChampignonType;
+use Lictevel\MyceliumBundle\Form\CreerChampignonType;
 use Lictevel\MyceliumBundle\Form\CasejeuType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
@@ -215,6 +216,94 @@ class MyceliumController extends Controller
       ));
     }
 
+    public function creerChampignonAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null || $session->has('champignon') == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $champignonSession = $em->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findOneById($session->get('champignon')->getID())
+      ;
+
+      $champignon = new Champignon();
+      $caseSporophore = new Casejeu();
+      $champignon->setCaseSporophore($caseSporophore);
+      $form = $this->get('form.factory')->create(CreerChampignonType::class, $champignon);
+
+      $joueur = $em->getRepository('LictevelMyceliumBundle:Joueur')->findOneById($user_id);
+
+      $listChampignons = $em
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findBy(array('joueur' => $joueur))
+      ;
+      $coutNouveauChampi = pow(2, count($listChampignons))*10000;
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        //On regarde si le joueur a assez d'argent
+        if ($champignonSession->getStockSpores() < $coutNouveauChampi){
+          $request->getSession()->getFlashBag()->add('notice', "Vous n'avez pas assez de spores pour acheter un nouveau champignon.");
+          return $this->redirectToRoute('lictevel_mycelium_creer_champignon');
+        }
+
+        //On change les coordonées en int si il le faut
+        $caseSporophore->setAbscisse(intval($caseSporophore->getAbscisse()));
+        $caseSporophore->setOrdonnee(intval($caseSporophore->getOrdonnee()));
+
+        //On regarde si la distance au sporophore le plus proche est inférieur à 10
+        $appExtension = new appExtension();
+        $check = false;
+        foreach ($listChampignons as $champi){
+          $distance = $appExtension->palier($champi->getCaseSporophore()->getAbscisse(), $champi->getCaseSporophore()->getOrdonnee(), $caseSporophore->getAbscisse(), $caseSporophore->getOrdonnee());
+          if ($distance <= 20) {
+            $check = true;
+            break;
+          }
+        }
+
+        if ($check == false){
+          $request->getSession()->getFlashBag()->add('notice', "Cette case est trop éloignée d'un autre sporophore. Choississez une nouvelle case");
+          return $this->redirectToRoute('lictevel_mycelium_creer_champignon');
+        }
+
+        //On regarde si la case existe
+        $caseResult = $em->getRepository('LictevelMyceliumBundle:Casejeu')->findOneBy(array(
+          'abscisse' => $caseSporophore->getAbscisse(),
+          'ordonnee' => $caseSporophore->getOrdonnee(),
+          'joueur' => $user_id
+        ));
+
+        if ($caseResult != null){
+          $request->getSession()->getFlashBag()->add('notice', "Cette case n'est pas disponible. Choisissez-en une autre.");
+          return $this->redirectToRoute('lictevel_mycelium_creer_champignon');
+        }
+
+        //Si non, on créer la case
+        $champignon->setStockNutriments(1300);
+        $champignon->setJoueur($joueur);
+        $caseSporophore->setOccupee(true);
+        $caseSporophore->setJoueur($joueur);
+        $caseSporophore->setChampignon($champignon);
+
+        $em->persist($champignon);
+        $em->persist($caseSporophore);
+
+
+        $em->flush();
+
+        $caseSporophore->createAround();
+      }
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:creerChampignon.html.twig', array(
+        'form' => $form->createView(),
+        'cout' => $coutNouveauChampi,
+        'listChampignons' => $listChampignons,
+      ));
+
+    }
+
     public function monPremierChampignonAction(Request $request)
     {
       $session = $request->getSession();
@@ -314,7 +403,8 @@ class MyceliumController extends Controller
           'prodEnzymes' => $casejeu->getProdEnzymes(),
           'prodFilamentsPara' => $casejeu->getProdFilamentsPara(),
           'prodFilamentsSym' => $casejeu->getProdFilamentsSym(),
-          'occupee' => false
+          'occupee' => false,
+          'joueur' => $user_id
         ));
 
         if ($case == null){

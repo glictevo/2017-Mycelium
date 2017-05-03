@@ -1,0 +1,51 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/creerChampignon.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Créer un champignon{% endblock %}
+
+
+{% block body %}
+
+  <h1>Créer un champignon</h1>
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  <div class="col-xs-8 col-sm-10">
+    <br>
+    <p>Cout en spores d'un nouveau champignon : {{ cout }} </p>
+    {{ form_start(form) }}
+
+      {{ form_row(form.Name) }}
+
+      <p>
+        Coordonnées de la case pour le sporophore du nouveau champignon : <br>
+        Note : Cette case doit être à une distance maximum de 20 par rapport au sporophore le plus proche
+      </p>
+
+      {{ form_row(form.CaseSporophore.abscisse) }}
+
+      {{ form_row(form.CaseSporophore.ordonnee) }}
+
+      {{ form_row(form.valider) }}
+
+    {{ form_end(form) }}
+
+  </div>
+  <div class="col-xs-8 col-sm-10">
+    <p>Liste des coordonnéees des sporophores de vos champignons</p>
+
+    <ul>
+      {% for champignon in listChampignons %}
+       <li> {{ champignon.name }} : ({{ champignon.caseSporophore.abscisse }};{{ champignon.caseSporophore.ordonnee }}) </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+
+{% endblock %}

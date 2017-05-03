@@ -7,8 +7,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Lictevel\MyceliumBundle\Entity\Champignon;
+use Lictevel\MyceliumBundle\Form\CasejeuType;
 
-class ChampignonType extends AbstractType
+class CreerChampignonType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,6 +19,7 @@ class ChampignonType extends AbstractType
     {
         $builder
           ->add('Name',           TextType::class)
+          ->add('CaseSporophore', CasejeuCreerChampignonType::class)
           ->add('valider',        SubmitType::class)
         ;
     }

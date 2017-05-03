@@ -3,12 +3,15 @@
 namespace Lictevel\MyceliumBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ChampignonType extends AbstractType
+class CasejeuCreerChampignonType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,8 +19,8 @@ class ChampignonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('Name',           TextType::class)
-          ->add('valider',        SubmitType::class)
+          ->add('abscisse',         TextType::class)
+          ->add('ordonnee',         TextType::class)
         ;
     }
 
@@ -27,7 +30,7 @@ class ChampignonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lictevel\MyceliumBundle\Entity\Champignon'
+            'data_class' => 'Lictevel\MyceliumBundle\Entity\Casejeu'
         ));
     }
 
@@ -36,7 +39,7 @@ class ChampignonType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'lictevel_myceliumbundle_champignon';
+        return 'lictevel_myceliumbundle_casejeu';
     }
 
 
