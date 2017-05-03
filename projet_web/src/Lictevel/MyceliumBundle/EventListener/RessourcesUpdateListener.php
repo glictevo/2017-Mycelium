@@ -83,6 +83,7 @@ class RessourcesUpdateListener
             }
           }
           $this->em->flush();
+          $session->set('champignon', $this->em->getRepository('LictevelMyceliumBundle:Champignon')->findOneById($session->get('champignon')->getID()));
         }
       }
     }
