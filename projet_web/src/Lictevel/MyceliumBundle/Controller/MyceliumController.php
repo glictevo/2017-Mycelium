@@ -14,6 +14,7 @@ use Lictevel\MyceliumBundle\Entity\Casejeu;
 use Lictevel\MyceliumBundle\Form\JoueurType;
 use Lictevel\MyceliumBundle\Form\ImageType;
 use Lictevel\MyceliumBundle\Form\ChampignonType;
+use Lictevel\MyceliumBundle\Form\CasejeuType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -277,6 +278,7 @@ class MyceliumController extends Controller
       $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
 
       $mycelium = $repository->findMycelium($session->get('champignon'));
+
 
       //Générer la page monMycelium
       return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig', array(

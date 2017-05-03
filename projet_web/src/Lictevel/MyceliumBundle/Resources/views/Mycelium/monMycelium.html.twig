@@ -13,12 +13,23 @@
 
   {% for case in mycelium %}
     <div class="col-xs-3">
-      <ul>
-        <li>Abscisse : {{ case.abscisse }} </li>
-        <li>Ordonnee : {{ case.ordonnee }} </li>
-        <li>Type : {{ case.type }} </li>
-      </ul>
+      <form class="" action="{{ path('lictevel_mycelium_mon_mycelium') }}" method="post">
+        <label for="abscisse"> Abscisse : </label>
+        <input type="text" name="abscisse" value="{{ case.abscisse }}" disabled> <br>
+
+        <label for="ordonnee"> Ordonnee : </label>
+        <input type="text" name="ordonnee" value="{{ case.ordonnee }}" disabled> <br>
+
+        <label for="type"> Type : </label>
+        <input type="text" name="type" value="{{ case.type }}" disabled> <br>
+
+        <label for="occupee"> Occupée : </label>
+        <input type="text" name="occupee" value="{% if case.occupee %} Oui {% else %} Non {% endif %}" disabled> <br>
+
+        <input type="submit" name="type" value="Valider"> <br>
+      </form>
     </div>
   {% endfor %}
+
 
 {% endblock %}
