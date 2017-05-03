@@ -20,7 +20,6 @@ class CasejeuType extends AbstractType
     {
         $builder
           ->add('abscisse',         TextType::class)
-          ->add('palier',           TextType::class)
           ->add('ordonnee',         TextType::class)
           ->add('type',             TextType::class)
           ->add('prodNutriments',   TextType::class)

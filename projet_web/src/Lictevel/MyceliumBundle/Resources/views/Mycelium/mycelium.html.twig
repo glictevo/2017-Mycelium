@@ -1,7 +1,9 @@
 <p> Type : <strong id="type">{{ case.type }}</strong></p>
+{% set palier = palier(sporophore.caseSporophore.abscisse, sporophore.caseSporophore.ordonnee, case.abscisse, case.ordonnee) %}
+<p> Palier : <strong id="palier">{{ palier }}</strong></p>
+<p> Cout en nutriments : <strong id="cout">{% if not case.occupee %} {{ cout(palier) }} {% else %} Indisponible {% endif %}</strong></p>
 <p> Abscisse : <strong id="abscisse">{{ case.abscisse }}</strong></p>
 <p> Ordonnee : <strong id="ordonnee">{{ case.ordonnee }}</strong></p>
-<p> Palier : <strong id="palier">{{ case.palier }}</strong></p>
 <p> Occupee : <strong id="occupee">{% if case.occupee %} Oui {% else %} Non {% endif %}</strong></p>
 <p> Production de nutriments : <strong id="prodNutriments">{{ case.prodNutriments }}</strong></p>
 <p> Production de spores : <strong id="prodSpores">{{ case.prodSpores }}</strong></p>

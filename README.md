@@ -10,3 +10,9 @@
 Pour créer la base de données :
   bin/console doctrine:database:create
   bin/console doctrine:schema:update --force
+
+
+Les caractéristiques de base d'un champis sont écrits dans :
+  Entity/Champignon.php (dans la function construct())
+
+Il faudra voir comment on créé les champis, toussa

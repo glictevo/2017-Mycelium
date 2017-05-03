@@ -249,7 +249,7 @@ class MyceliumController extends Controller
         $request->getSession()->getFlashBag()->add('notice', 'Votre champignon a bien été créé !');
 
         $session->set('champignon', $champignon);
-        $case->createAround($em);
+        $case->createAround($em, $champignon);
 
         return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
 
@@ -282,6 +282,7 @@ class MyceliumController extends Controller
       //Générer la page monMycelium
       return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig', array(
         'mycelium' => $mycelium,
+        'sporophore' => $session->get('champignon'),
       ));
     }
 
@@ -304,7 +305,6 @@ class MyceliumController extends Controller
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         /*
         $request->getSession()->getFlashBag()->add('notice', 'Type :'.($casejeu->getType()));
-        $request->getSession()->getFlashBag()->add('notice', 'Palier :'.($casejeu->getPalier()));
         $request->getSession()->getFlashBag()->add('notice', 'abscisse :'.($casejeu->getAbscisse()));
         $request->getSession()->getFlashBag()->add('notice', 'ordonnee :'.($casejeu->getOrdonnee()));
         $request->getSession()->getFlashBag()->add('notice', 'prod nutriments :'.($casejeu->getProdNutriments()));
@@ -319,7 +319,6 @@ class MyceliumController extends Controller
           'abscisse' => $casejeu->getAbscisse(),
           'ordonnee' => $casejeu->getOrdonnee(),
           'type' => $casejeu->getType(),
-          'palier' => $casejeu->getPalier(),
           'prodNutriments' => $casejeu->getProdNutriments(),
           'prodSpores' => $casejeu->getProdSpores(),
           'prodEnzymes' => $casejeu->getProdEnzymes(),
@@ -347,6 +346,7 @@ class MyceliumController extends Controller
       //Générer la page monMycelium
       return $this->render('LictevelMyceliumBundle:Mycelium:choisirEmplacementMycelium.html.twig', array(
         'mycelium' => $mycelium,
+        'sporophore' => $session->get('champignon'),
         'form' => $form->createView(),
       ));
     }

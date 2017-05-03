@@ -22,9 +22,6 @@
     {{ form_label(form.type, null, { 'label': 'Type de terrain', 'label_attr': {'readonly': 'readonly'}}) }}
     {{ form_widget(form.type, { 'attr': {'readonly': ''} }) }}
 
-    {{ form_label(form.palier, null, { 'label': 'Palier', 'label_attr': {'class': ''}}) }}
-    {{ form_widget(form.palier, { 'attr': {'readonly': ''} }) }}
-
     {{ form_label(form.abscisse, null, { 'label': 'Abscisse', 'label_attr': {'class': ''}}) }}
     {{ form_widget(form.abscisse, { 'attr': {'readonly': ''} }) }}
 
@@ -74,7 +71,6 @@
       $('#lictevel_myceliumbundle_casejeu_type').attr("value", $(event.target).parent().find("#type").html());
       $('#lictevel_myceliumbundle_casejeu_abscisse').attr("value", $(event.target).parent().find("#abscisse").html());
       $('#lictevel_myceliumbundle_casejeu_ordonnee').attr("value", $(event.target).parent().find("#ordonnee").html());
-      $('#lictevel_myceliumbundle_casejeu_palier').attr("value", $(event.target).parent().find("#palier").html());
       $('#lictevel_myceliumbundle_casejeu_prodNutriments').attr("value", $(event.target).parent().find("#prodNutriments").html());
       $('#lictevel_myceliumbundle_casejeu_prodSpores').attr("value", $(event.target).parent().find("#prodSpores").html());
       $('#lictevel_myceliumbundle_casejeu_prodPoison').attr("value", $(event.target).parent().find("#prodPoison").html());

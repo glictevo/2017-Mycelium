@@ -40,13 +40,6 @@ class Casejeu
     private $abscisse;
 
     /**
-      * @var int
-      *
-      * @ORM\Column(name="palier", type="integer")
-      */
-    private $palier;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="ordonnee", type="integer")
@@ -476,35 +469,10 @@ class Casejeu
     }
 
     /**
-     * Set palier
-     *
-     * @param integer $palier
-     *
-     * @return Casejeu
-     */
-    public function setPalier($palier)
-    {
-        $this->palier = $palier;
-
-        return $this;
-    }
-
-    /**
-     * Get palier
-     *
-     * @return integer
-     */
-    public function getPalier()
-    {
-        return $this->palier;
-    }
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->palier = 1;
         $this->abscisse = 0;
         $this->ordonnee = 0;
         $this->type = 'terrain normal';
@@ -587,35 +555,11 @@ class Casejeu
 
         $newCase->setAbscisse($this->abscisse + $i);
         $newCase->setOrdonnee($this->ordonnee + $j);
-        $newCase->setPalier($this->determinerPalier($newCase->getAbscisse(), $newCase->getOrdonnee(), $em));
+
         $newCase->setJoueur($this->joueur);
 
         $em->persist($newCase);
         $em->flush();
       }
-    }
-
-    //Renvoie la palier de la case l'index indiqué
-    public function determinerPalier($i, $j, EntityManager $em){
-      //On réucpère tous les champignons du joueur
-      $listChampignons = $em->getRepository('LictevelMyceliumBundle:Champignon')
-        ->findByJoueur($this->joueur)
-      ;
-
-      $distanceMin = 9999;
-      //Puis on regarde pour chacun la distance case-sporophore
-      foreach ($listChampignons as $champignon){
-        $caseSporophore = $champignon->getCaseSporophore();
-        $abscisse = $caseSporophore->getAbscisse();
-        $ordonnee = $caseSporophore->getOrdonnee();
-
-        $distance = intval(sqrt(pow($i - $abscisse, 2) + pow($j - $ordonnee, 2)));
-
-        if ($distance < $distanceMin){
-          $distanceMin = $distance;
-        }
-      }
-
-      return $distanceMin;
     }
 }

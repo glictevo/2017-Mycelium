@@ -32,8 +32,24 @@
 
 -Ajouter un champ mot de passe à Joueur
   -Protéger ce mot de passe
--ajouter date inscription à Joueur
 
+-Ajouter les conditions des mutations dans l'ajout des productions à chaque génération de page
+-Faire une page sur laquelle le joueur est amené quand il créé un
+  nouveau champignon, et qui lui propose une case où mettre son
+  champi (tout ça est un formulaire après)
+
+-Lors de la création d'un nouveau champignon :
+  -trouver quoi faire c:
+
+Là en gros ce que j'ai en tête qu'il reste à faire :
+  - Afficher le mycélium (enfin du moins envoyer les infos au template)
+  - Quand l'utilisateur achète un nouveau champi, ça le mène vers une page où il
+   peut sélectionner sur quel case du mycélium il veut le mettre-une barre de
+   recherche avec un champ texte et cocher soit Champi soit Utilisateur qui mène
+   vers une page avec le résultat-faire une page avec l'intégralité des
+   champi/des utilisateurs, possibilité d'ajout en ami (limite faudrait essayer
+   d'envoyer une notif, enfin je verrai ça quand j'essayerai de faire les
+   messages)
 
 
 
