@@ -77,20 +77,6 @@ class Casejeu
     /**
      * @var int
      *
-     * @ORM\Column(name="bonus_prod_nutriments", type="integer", nullable=true)
-     */
-    private $bonusProdNutriments;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="bonus_prod_spores", type="integer", nullable=true)
-     */
-    private $bonusProdSpores;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="prod_poison", type="integer", nullable=true)
      */
     private $prodPoison;
@@ -277,54 +263,6 @@ class Casejeu
     }
 
     /**
-     * Set bonusProdNutriments
-     *
-     * @param integer $bonusProdNutriments
-     *
-     * @return Casejeu
-     */
-    public function setBonusProdNutriments($bonusProdNutriments)
-    {
-        $this->bonusProdNutriments = $bonusProdNutriments;
-
-        return $this;
-    }
-
-    /**
-     * Get bonusProdNutriments
-     *
-     * @return int
-     */
-    public function getBonusProdNutriments()
-    {
-        return $this->bonusProdNutriments;
-    }
-
-    /**
-     * Set bonusProdSpores
-     *
-     * @param integer $bonusProdSpores
-     *
-     * @return Casejeu
-     */
-    public function setBonusProdSpores($bonusProdSpores)
-    {
-        $this->bonusProdSpores = $bonusProdSpores;
-
-        return $this;
-    }
-
-    /**
-     * Get bonusProdSpores
-     *
-     * @return int
-     */
-    public function getBonusProdSpores()
-    {
-        return $this->bonusProdSpores;
-    }
-
-    /**
      * Set prodPoison
      *
      * @param integer $prodPoison
@@ -485,16 +423,14 @@ class Casejeu
         $this->prodFilamentsPara = random_int(1,2);
         $this->prodFilamentsSym = random_int(1,2);
         $this->occupee = false;
-        $this->bonusProdSpores = 0;
-        $this->bonusProdNutriments = 0;
     }
 
     public function createAround(EntityManager $em){
       //On va regarder si les cases autour de cette case sont créés, si non, on les créé
-      $this->check($em, 1, 1);
-      $this->check($em, 1, -1);
-      $this->check($em, -1, 1);
-      $this->check($em, -1, -1);
+      $this->check($em, 0, 1);
+      $this->check($em, 0, -1);
+      $this->check($em, 1, 0);
+      $this->check($em, -1, 0);
     }
 
     public function check(EntityManager $em, $i, $j){
