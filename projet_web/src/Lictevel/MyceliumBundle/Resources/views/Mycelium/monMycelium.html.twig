@@ -9,27 +9,30 @@
 
 {% block body %}
 
-  <h1>Mon Mycelium</h1>
-
-  {% for case in mycelium %}
-    <div class="col-xs-3">
-      <form class="" action="{{ path('lictevel_mycelium_mon_mycelium') }}" method="post">
-        <label for="abscisse"> Abscisse : </label>
-        <input type="text" name="abscisse" value="{{ case.abscisse }}" disabled> <br>
-
-        <label for="ordonnee"> Ordonnee : </label>
-        <input type="text" name="ordonnee" value="{{ case.ordonnee }}" disabled> <br>
-
-        <label for="type"> Type : </label>
-        <input type="text" name="type" value="{{ case.type }}" disabled> <br>
-
-        <label for="occupee"> Occupée : </label>
-        <input type="text" name="occupee" value="{% if case.occupee %} Oui {% else %} Non {% endif %}" disabled> <br>
-
-        <input type="submit" name="type" value="Valider"> <br>
-      </form>
-    </div>
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
   {% endfor %}
 
+  <div class="col-xs-8 col-sm-10">
+    <h1>Mon Mycelium</h1>
+
+    <a class="btn btn-default" href="{{ path('lictevel_mycelium_choisir_emplacement_mycelium') }}">Ajouter un mycelium</a>
+  </div>
+
+  {% for case in mycelium %}
+    <div class="well col-xs-3">
+      <p> Type : <strong id="type">{{ case.type }}</strong></p>
+      <p> Abscisse : <strong id="abscisse">{{ case.abscisse }}</strong></p>
+      <p> Ordonnee : <strong id="ordonnee">{{ case.ordonnee }}</strong></p>
+      <p> Palier : <strong id="palier">{{ case.palier }}</strong></p>
+      <p> Occupee : <strong id="occupee">{% if case.occupee %} Oui {% else %} Non {% endif %}</strong></p>
+      <p> Production de nutriments : <strong id="prodNutriments">{{ case.prodNutriments }}</strong></p>
+      <p> Production de spores : <strong id="prodSpores">{{ case.prodSpores }}</strong></p>
+      <p> Production de poison : <strong id="prodPoison">{{ case.prodPoison }}</strong></p>
+      <p> Production d'enzymes : <strong id="prodEnzymes">{{ case.prodEnzymes }}</strong></p>
+      <p> Production de filaments parasitiques : <strong id="prodFilamentsPara">{{ case.prodFilamentsPara }}</strong></p>
+      <p> Production de filaments symbiotiques : <strong id="prodFilamentsSym">{{ case.prodFilamentsSym }}</strong></p>
+    </div>
+  {% endfor %}
 
 {% endblock %}

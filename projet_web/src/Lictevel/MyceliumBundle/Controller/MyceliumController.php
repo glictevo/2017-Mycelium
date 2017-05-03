@@ -279,10 +279,75 @@ class MyceliumController extends Controller
 
       $mycelium = $repository->findMycelium($session->get('champignon'));
 
-
       //Générer la page monMycelium
       return $this->render('LictevelMyceliumBundle:Mycelium:monMycelium.html.twig', array(
         'mycelium' => $mycelium,
+      ));
+    }
+
+    public function choisirEmplacementMyceliumAction(Request $request)
+    {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
+
+      $mycelium = $repository->findMycelium($session->get('champignon'));
+
+      $casejeu = new Casejeu();
+      $form = $this->get('form.factory')->create(CaseJeuType::class, $casejeu);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        /*
+        $request->getSession()->getFlashBag()->add('notice', 'Type :'.($casejeu->getType()));
+        $request->getSession()->getFlashBag()->add('notice', 'Palier :'.($casejeu->getPalier()));
+        $request->getSession()->getFlashBag()->add('notice', 'abscisse :'.($casejeu->getAbscisse()));
+        $request->getSession()->getFlashBag()->add('notice', 'ordonnee :'.($casejeu->getOrdonnee()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod nutriments :'.($casejeu->getProdNutriments()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod spores :'.($casejeu->getProdSpores()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod poison :'.($casejeu->getProdPoison()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod enzymes :'.($casejeu->getProdEnzymes()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod fila para :'.($casejeu->getProdFilamentsPara()));
+        $request->getSession()->getFlashBag()->add('notice', 'prod file sym :'.($casejeu->getProdFilamentsSym()));
+        */
+        //On vérifie que ce qu'on reçoit existe vraiment (l'utilisateur peut modifier le formulaire comme il veut)
+        $result = $repository->findOneBy(array(
+          'abscisse' => $casejeu->getAbscisse(),
+          'ordonnee' => $casejeu->getOrdonnee(),
+          'type' => $casejeu->getType(),
+          'palier' => $casejeu->getPalier(),
+          'prodNutriments' => $casejeu->getProdNutriments(),
+          'prodSpores' => $casejeu->getProdSpores(),
+          'prodEnzymes' => $casejeu->getProdEnzymes(),
+          'prodFilamentsPara' => $casejeu->getProdFilamentsPara(),
+          'prodFilamentsSym' => $casejeu->getProdFilamentsSym(),
+          'occupee' => false
+        ));
+
+        if ($result == null){
+          $request->getSession()->getFlashBag()->add('notice', "Cette case n'existe pas ou est déjà occupée");
+        } else {
+          $request->getSession()->getFlashBag()->add('notice', 'PASS');
+        }
+        //$em->persist($case);
+        //$em->persist($champignon);
+
+        //$em->flush();
+
+        //$session->set('champignon', $champignon);
+        //$case->createAround($em);
+
+        return $this->redirectToRoute('lictevel_mycelium_mon_mycelium');
+      }
+
+      //Générer la page monMycelium
+      return $this->render('LictevelMyceliumBundle:Mycelium:choisirEmplacementMycelium.html.twig', array(
+        'mycelium' => $mycelium,
+        'form' => $form->createView(),
       ));
     }
 

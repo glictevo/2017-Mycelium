@@ -63,3 +63,7 @@ lictevel_mycelium_caracteristiques_champignon:
 lictevel_mycelium_changer_champignon:
     path: /changer-champignon/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:changerChampignon }
+
+lictevel_mycelium_choisir_emplacement_mycelium:
+    path: /choisir-emplacement-mycelium
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:choisirEmplacementMycelium }

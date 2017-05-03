@@ -1,0 +1,96 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/monMycelium.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Mon mycelium {% endblock %}
+
+
+{% block body %}
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  <h1>Mon Mycelium</h1>
+
+  <div class="col-xs-3">
+
+    {{ form_start(form) }}
+
+    {{ form_label(form.type, null, { 'label': 'Type de terrain', 'label_attr': {'readonly': 'readonly'}}) }}
+    {{ form_widget(form.type, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.palier, null, { 'label': 'Palier', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.palier, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.abscisse, null, { 'label': 'Abscisse', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.abscisse, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.ordonnee, null, { 'label': 'Ordonnée', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.ordonnee, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodNutriments, null, { 'label': 'Production de nutriments', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodNutriments, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodSpores, null, { 'label': 'Production de spores', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodSpores, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodPoison, null, { 'label': 'Production de poison', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodPoison, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodEnzymes, null, { 'label': "Production d'enzymes", 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodEnzymes, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodFilamentsPara, null, { 'label': 'Production de filaments parasitiques', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodFilamentsPara, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_label(form.prodFilamentsSym, null, { 'label': 'Production de filaments symbiotiques', 'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.prodFilamentsSym, { 'attr': {'readonly': ''} }) }}
+
+    {{ form_end(form) }}
+
+  </div>
+
+  {% for case in mycelium %}
+    <div class="well col-xs-3">
+      <p> Type : <strong id="type">{{ case.type }}</strong></p>
+      <p> Abscisse : <strong id="abscisse">{{ case.abscisse }}</strong></p>
+      <p> Ordonnee : <strong id="ordonnee">{{ case.ordonnee }}</strong></p>
+      <p> Palier : <strong id="palier">{{ case.palier }}</strong></p>
+      <p> Occupee : <strong id="occupee">{% if case.occupee %} Oui {% else %} Non {% endif %}</strong></p>
+      <p> Production de nutriments : <strong id="prodNutriments">{{ case.prodNutriments }}</strong></p>
+      <p> Production de spores : <strong id="prodSpores">{{ case.prodSpores }}</strong></p>
+      <p> Production de poison : <strong id="prodPoison">{{ case.prodPoison }}</strong></p>
+      <p> Production d'enzymes : <strong id="prodEnzymes">{{ case.prodEnzymes }}</strong></p>
+      <p> Production de filaments parasitiques : <strong id="prodFilamentsPara">{{ case.prodFilamentsPara }}</strong></p>
+      <p> Production de filaments symbiotiques : <strong id="prodFilamentsSym">{{ case.prodFilamentsSym }}</strong></p>
+
+      {% if case.occupee == false %}
+        <button class="btn btn-success" id="valider" type="button" name="button ">Choisir</button> <br>
+      {% else %}
+        <button class="btn btn-warning" id="" type="button" name="button disabled">Occupée</button> <br>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    $(document).on('click', "#valider",function(event) {
+      console.log("Clic sur un valider");
+      $('#lictevel_myceliumbundle_casejeu_type').attr("value", $(event.target).parent().find("#type").html());
+      $('#lictevel_myceliumbundle_casejeu_abscisse').attr("value", $(event.target).parent().find("#abscisse").html());
+      $('#lictevel_myceliumbundle_casejeu_ordonnee').attr("value", $(event.target).parent().find("#ordonnee").html());
+      $('#lictevel_myceliumbundle_casejeu_palier').attr("value", $(event.target).parent().find("#palier").html());
+      $('#lictevel_myceliumbundle_casejeu_prodNutriments').attr("value", $(event.target).parent().find("#prodNutriments").html());
+      $('#lictevel_myceliumbundle_casejeu_prodSpores').attr("value", $(event.target).parent().find("#prodSpores").html());
+      $('#lictevel_myceliumbundle_casejeu_prodPoison').attr("value", $(event.target).parent().find("#prodPoison").html());
+      $('#lictevel_myceliumbundle_casejeu_prodEnzymes').attr("value", $(event.target).parent().find("#prodEnzymes").html());
+      $('#lictevel_myceliumbundle_casejeu_prodFilamentsPara').attr("value", $(event.target).parent().find("#prodFilamentsPara").html());
+      $('#lictevel_myceliumbundle_casejeu_prodFilamentsSym').attr("value", $(event.target).parent().find("#prodFilamentsSym").html());
+    });
+  </script>
+{% endblock %}
