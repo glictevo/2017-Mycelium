@@ -18,7 +18,9 @@
     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
   </div>
 
-  {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': champignon} ) }}
+  {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
+    {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': app.session.get('champignon')} ) }}
+  {% endif %}
 
 {% else %}
 

@@ -34,14 +34,7 @@ class MyceliumController extends Controller
     {
       $session = $request->getSession();
 
-      $champignon = $this->getDoctrine()->getManager()
-        ->getRepository('LictevelMyceliumBundle:Champignon')
-        ->findOneById($session->get('champignon')->getID())
-      ;
-
-      return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
-        'champignon' => $champignon
-      ));
+      return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig');
     }
 
     public function navigationAction()
@@ -287,13 +280,18 @@ class MyceliumController extends Controller
         $caseSporophore->setJoueur($joueur);
         $caseSporophore->setChampignon($champignon);
 
-        $em->persist($champignon);
-        $em->persist($caseSporophore);
+        $champignonSession->setStockSpores($champignonSession->getStockSpores() - $coutNouveauChampi);
 
+        $em->persist($caseSporophore);
+        $em->persist($champignon);
+
+        $em->persist($champignonSession);
 
         $em->flush();
 
-        $caseSporophore->createAround();
+        $caseSporophore->createAround($em);
+
+        return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
       }
 
       return $this->render('LictevelMyceliumBundle:Mycelium:creerChampignon.html.twig', array(

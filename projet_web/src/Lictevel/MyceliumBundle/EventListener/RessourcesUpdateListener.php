@@ -43,7 +43,6 @@ class RessourcesUpdateListener
         if ($minutes > 0){
           //$this->ressourcesUpdater.processResourcesUpdate($joueur, $this->em, $listChampignons, $minutes);
 
-
           $joueur->setLastUpdate(new \Datetime());
           $this->em->persist($joueur);
 
@@ -83,6 +82,8 @@ class RessourcesUpdateListener
             }
           }
           $this->em->flush();
+        }
+        if ($session->has('champignon') && $session->get('champignon') != null){
           $session->set('champignon', $this->em->getRepository('LictevelMyceliumBundle:Champignon')->findOneById($session->get('champignon')->getID()));
         }
       }
