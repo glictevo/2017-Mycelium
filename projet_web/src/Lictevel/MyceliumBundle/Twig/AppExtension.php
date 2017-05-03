@@ -13,7 +13,7 @@ class AppExtension extends \Twig_extension
 
   public function palier($abscisseSporophore, $ordonneeSporophore, $abscisseCase, $ordonneeCase)
   {
-    $palier = intval(sqrt(pow($abscisseCase - $abscisseSporophore, 2) + pow($ordonneeCase - $ordonneeSporophore, 2)));
+    $palier = ceil(sqrt(pow($abscisseCase - $abscisseSporophore, 2) + pow($ordonneeCase - $ordonneeSporophore, 2)));
 
     return $palier;
   }
