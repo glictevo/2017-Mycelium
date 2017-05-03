@@ -11,4 +11,29 @@
 
   <h1>Mes productions</h1>
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  {% if champignon != null %}
+
+    <p>
+      {% if champignon.image != null %}
+        <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">
+      {% else %}
+        <p> Photo manquante </p>
+      {% endif %}
+
+      Nom : {{ champignon.name }} <br>
+      <br>
+      Taille du mycélium : {{ champignon.tailleMycelium }} <br>
+
+      {{ include('LictevelMyceliumBundle:Mycelium:prod.html.twig', { 'champignon': champignon} ) }}
+
+      {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': champignon} ) }}
+
+
+    </p>
+  {% endif %}
+
 {% endblock %}

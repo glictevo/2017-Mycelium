@@ -304,18 +304,6 @@ class MyceliumController extends Controller
       $form = $this->get('form.factory')->create(CaseJeuType::class, $casejeu);
 
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-        /*
-        $request->getSession()->getFlashBag()->add('notice', 'Type :'.($casejeu->getType()));
-        $request->getSession()->getFlashBag()->add('notice', 'abscisse :'.($casejeu->getAbscisse()));
-        $request->getSession()->getFlashBag()->add('notice', 'ordonnee :'.($casejeu->getOrdonnee()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod nutriments :'.($casejeu->getProdNutriments()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod spores :'.($casejeu->getProdSpores()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod poison :'.($casejeu->getProdPoison()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod enzymes :'.($casejeu->getProdEnzymes()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod fila para :'.($casejeu->getProdFilamentsPara()));
-        $request->getSession()->getFlashBag()->add('notice', 'prod file sym :'.($casejeu->getProdFilamentsSym()));
-        */
-
         //On vérifie que ce qu'on reçoit existe vraiment (l'utilisateur peut modifier le formulaire comme il veut)
         $case = $repository->findOneBy(array(
           'abscisse' => $casejeu->getAbscisse(),
@@ -372,10 +360,23 @@ class MyceliumController extends Controller
       ));
     }
 
-    public function productionAction()
+    public function productionAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $champignon = $em->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findOneById($session->get('champignon')->getID())
+      ;
+
       //Générer la page production
-      return $this->render('LictevelMyceliumBundle:Mycelium:production.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:production.html.twig', array(
+        'champignon' => $champignon,
+      ));
     }
 
     public function mesDefensesAction()
