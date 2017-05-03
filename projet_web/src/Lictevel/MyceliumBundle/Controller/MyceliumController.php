@@ -29,17 +29,17 @@ class MyceliumController extends Controller
 
     }
 
-    public function menuAction()
+    public function menuAction(Request $request)
     {
-      // On fixe en dur une liste ici, bien entendu par la suite
-      // on la récupérera depuis la BDD !
+      $session = $request->getSession();
 
-      //J'garde ce message juste pour l'exemple
-      //A supprimer ou améliorer
-      $message = "";
+      $champignon = $this->getDoctrine()->getManager()
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->findOneById($session->get('champignon')->getID())
+      ;
 
       return $this->render('LictevelMyceliumBundle:Mycelium:menu.html.twig', array(
-        'message' => $message
+        'champignon' => $champignon
       ));
     }
 

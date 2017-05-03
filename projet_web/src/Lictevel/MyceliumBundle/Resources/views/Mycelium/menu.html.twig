@@ -1,5 +1,3 @@
-<p> {{ message }} </p>
-
 {% if app.session.has('pseudo') %}
   <div class="list-group">
     {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
@@ -20,11 +18,8 @@
     <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
   </div>
 
-  Ressources par 'temps' au total du champi actuel :
+  {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': champignon} ) }}
 
-    Ici afficher les quantités de ressources persistantes
-
-  Afficher la production totale du champi actuellement
 {% else %}
 
 {% endif %}
