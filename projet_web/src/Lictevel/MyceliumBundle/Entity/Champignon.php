@@ -521,8 +521,6 @@ class Champignon
     {
         $this->caseSporophore = $caseSporophore;
 
-        $this->ajouterCase($caseSporophore);
-
         return $this;
     }
 
