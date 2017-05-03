@@ -17,6 +17,7 @@ use Lictevel\MyceliumBundle\Form\ChampignonType;
 use Lictevel\MyceliumBundle\Form\CasejeuType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
+use Lictevel\MyceliumBundle\Twig\AppExtension;
 
 class MyceliumController extends Controller
 {
@@ -314,8 +315,9 @@ class MyceliumController extends Controller
         $request->getSession()->getFlashBag()->add('notice', 'prod fila para :'.($casejeu->getProdFilamentsPara()));
         $request->getSession()->getFlashBag()->add('notice', 'prod file sym :'.($casejeu->getProdFilamentsSym()));
         */
+
         //On vérifie que ce qu'on reçoit existe vraiment (l'utilisateur peut modifier le formulaire comme il veut)
-        $result = $repository->findOneBy(array(
+        $case = $repository->findOneBy(array(
           'abscisse' => $casejeu->getAbscisse(),
           'ordonnee' => $casejeu->getOrdonnee(),
           'type' => $casejeu->getType(),
@@ -327,18 +329,36 @@ class MyceliumController extends Controller
           'occupee' => false
         ));
 
-        if ($result == null){
+        if ($case == null){
           $request->getSession()->getFlashBag()->add('notice', "Cette case n'existe pas ou est déjà occupée");
-        } else {
-          $request->getSession()->getFlashBag()->add('notice', 'PASS');
+          return $this->redirectToRoute('lictevel_mycelium_mon_mycelium');
         }
-        //$em->persist($case);
-        //$em->persist($champignon);
 
-        //$em->flush();
+        //Vérifier le prix
+        $champignon = $em->getRepository('LictevelMyceliumBundle:Champignon')
+          ->findOneById($session->get('champignon')->getID())
+        ;
+        $appExtension = new AppExtension();
+        $prix = $appExtension->cout($appExtension->palier($champignon->getCaseSporophore()->getAbscisse(), $champignon->getCaseSporophore()->getOrdonnee(), $case->getAbscisse(), $case->getOrdonnee()));
 
-        //$session->set('champignon', $champignon);
-        //$case->createAround($em);
+        if ($prix > $champignon->getStockNutriments()){
+          $request->getSession()->getFlashBag()->add('notice', "Vous n'avez pas assez de nutriments pour pouvoir acheter cette case.");
+
+          return $this->redirectToroute('lictevel_mycelium_mon_mycelium');
+        }
+
+        $champignon->setStockNutriments($champignon->getStockNutriments() - $prix);
+        $case->setChampignon($champignon);
+        $case->setOccupee(true);
+
+        $em->persist($case);
+        $em->persist($champignon);
+
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', "Achat réussi.");
+
+        $case->createAround($em);
 
         return $this->redirectToRoute('lictevel_mycelium_mon_mycelium');
       }
