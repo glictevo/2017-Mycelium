@@ -348,6 +348,7 @@ class MyceliumController extends Controller
         }
 
         $champignon->setStockNutriments($champignon->getStockNutriments() - $prix);
+        $champignon->setTailleMycelium($champignon->getTailleMycelium() + 1);
         $case->setChampignon($champignon);
         $case->setOccupee(true);
 
