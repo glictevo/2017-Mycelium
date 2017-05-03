@@ -431,6 +431,8 @@ class Casejeu
     {
         $this->champignon = $champignon;
 
+        $champignon->ajouterCase($this);
+
         return $this;
     }
 

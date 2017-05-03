@@ -521,12 +521,7 @@ class Champignon
     {
         $this->caseSporophore = $caseSporophore;
 
-        $this->prodNutriments += $caseSporophore->getProdNutriments();
-        $this->prodSpores += $caseSporophore->getProdSpores();
-        $this->prodPoison += $caseSporophore->getProdPoison();
-        $this->prodEnzymes += $caseSporophore->getProdEnzymes();
-        $this->prodFilamentsPara += $caseSporophore->getProdFilamentsPara();
-        $this->prodFilamentsSym += $caseSporophore->getProdFilamentsSym();
+        $this->ajouterCase($caseSporophore);
 
         return $this;
     }
@@ -621,5 +616,14 @@ class Champignon
     public function getName()
     {
         return $this->name;
+    }
+
+    public function ajouterCase($case){
+      $this->prodNutriments += $case->getProdNutriments();
+      $this->prodSpores += $case->getProdSpores();
+      $this->prodPoison += $case->getProdPoison();
+      $this->prodEnzymes += $case->getProdEnzymes();
+      $this->prodFilamentsPara += $case->getProdFilamentsPara();
+      $this->prodFilamentsSym += $case->getProdFilamentsSym();
     }
 }
