@@ -1,26 +1,28 @@
 {% if app.session.has('pseudo') %}
-  <div class="list-group">
-    {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
-      <p> Champignon actuel : </p>
-      <p> {{ app.session.get('champignon').name }}</p>
-      <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
-        <img class="img-responsive" src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
-      </a>
-    {% else %}
-      <p class="bg-warning" >Vous n'avez pas encore de champignon</p>
-      <a class="bg-warning" href="{{ path('lictevel_mycelium_mon_premier_champignon') }}">Créer votre premier champignon</a>
-    {% endif %}
-    <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
-    <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
-    <a href="{{ path('lictevel_mycelium_mon_mycelium') }}" class="list-group-item">Mon mycélium</a>
-    <a href="{{ path('lictevel_mycelium_production') }}" class="list-group-item">Production</a>
-    <a href="{{ path('lictevel_mycelium_mes_defenses') }}" class="list-group-item">Mes défenses</a>
-    <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
-  </div>
+  <div id="menu" class="well">
+    <div class="list-group">
+      {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
+        <p> Champignon actuel : </p>
+        <p> {{ app.session.get('champignon').name }}</p>
+        <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
+          <img class="img-responsive" src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
+        </a>
+      {% else %}
+        <p class="bg-warning" >Vous n'avez pas encore de champignon</p>
+        <a class="bg-warning" href="{{ path('lictevel_mycelium_mon_premier_champignon') }}">Créer votre premier champignon</a>
+      {% endif %}
+      <a href="{{ path('lictevel_mycelium_mes_champignons') }}" class="list-group-item">Mes champignons</a>
+      <a href="{{ path('lictevel_mycelium_mes_mutations') }}" class="list-group-item">Mes mutations</a>
+      <a href="{{ path('lictevel_mycelium_mon_mycelium') }}" class="list-group-item">Mon mycélium</a>
+      <a href="{{ path('lictevel_mycelium_production') }}" class="list-group-item">Production</a>
+      <a href="{{ path('lictevel_mycelium_mes_defenses') }}" class="list-group-item">Mes défenses</a>
+      <a href="{{ path('lictevel_mycelium_statistiques') }}" class="list-group-item">Statistiques</a>
+    </div>
 
-  {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
-    {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': app.session.get('champignon')} ) }}
-  {% endif %}
+    {% if (app.session.has('champignon')) and (app.session.get('champignon') != null) %}
+      {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': app.session.get('champignon')} ) }}
+    {% endif %}
+  </div>
 
 {% else %}
 
