@@ -627,7 +627,7 @@ class MyceliumController extends Controller
       return $this->redirectToroute('lictevel_mycelium_mes_champignons');
     }
 
-    public function joueursAction(Request $request){
+    public function joueursAction(Request $request, $page){
       $session = $request->getSession();
       $user_id = $session->get('user_id');
       if ($user_id == null){
@@ -642,6 +642,8 @@ class MyceliumController extends Controller
           ->where('p.id != :id')
             ->setParameter('id', $user_id)
           ->orderBy('p.lastUpdate', 'DESC')
+          ->setFirstResult($page * 8)
+          ->setMaxResults(8)
         ->getQuery()
         ->getResult()
       ;
@@ -651,7 +653,7 @@ class MyceliumController extends Controller
       ));
     }
 
-    public function champignonsAction(Request $request){
+    public function champignonsAction(Request $request, $page){
       $session = $request->getSession();
       $user_id = $session->get('user_id');
       if ($user_id == null){
@@ -666,6 +668,8 @@ class MyceliumController extends Controller
           ->where('p.joueur != :joueur')
             ->setParameter('joueur', $user_id)
           ->orderBy('p.name', 'ASC')
+          ->setFirstResult($page * 8)
+          ->setMaxResults(8)
         ->getQuery()
         ->getResult()
       ;
