@@ -481,10 +481,29 @@ class MyceliumController extends Controller
       return $this->render('LictevelMyceliumBundle:Mycelium:mesDefenses.html.twig');
     }
 
-    public function statistiquesAction()
+    public function statistiquesAction(Request $request)
     {
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $joueur = $em->getRepository('LictevelMyceliumBundle:Joueur')->findOneById($user_id);
+      $champignon = $em->getRepository('LictevelMyceliumBundle:champignon')->findOneById($session->get('champignon')->getID());
+      $joueursInscrits = $joueur->nombreJoueursInscrits($em);
+      $joueursEnLigne = $joueur->nombreJoueursConnectes($em);
+      $nombreDeChampignons = $champignon->nombreDeChampignons($em);
+      $nombreDeChampignonsPerso = $champignon->nombreDeChampignonsPerso($em);
+
       //Générer la page statistiques
-      return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig', array(
+        'joueursEnLigne' => $joueursEnLigne,
+        'joueursInscrits' => $joueursInscrits,
+        'nombreDeChampignons' => $nombreDeChampignons,
+        'nombreDeChampignonsPerso' => $nombreDeChampignonsPerso
+      ));
     }
 
     public function monCompteAction(Request $request){

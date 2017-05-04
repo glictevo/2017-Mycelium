@@ -3,6 +3,7 @@
 namespace Lictevel\MyceliumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Champignon
@@ -623,5 +624,17 @@ class Champignon
       $this->prodEnzymes += $case->getProdEnzymes();
       $this->prodFilamentsPara += $case->getProdFilamentsPara();
       $this->prodFilamentsSym += $case->getProdFilamentsSym();
+    }
+
+    public function nombreDeChampignons(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findAll();
+      return count($result);
+    }
+
+    public function nombreDeChampignonsPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
+      return count($result);
     }
 }
