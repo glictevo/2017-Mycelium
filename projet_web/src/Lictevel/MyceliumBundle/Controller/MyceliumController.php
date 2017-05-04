@@ -678,6 +678,34 @@ class MyceliumController extends Controller
         'champignons' => $champignons
       ));
     }
+
+    public function ajouterAmiAction(Request $request, $id){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      if ($id == $user_id){
+        $request->getSession()->getFlashBag()->add('notice', "Vous ne pouvez pas vous ajouter en ami !");
+        return $this->redirectToroute('lictevel_mycelium_mes_amis');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Joueur');
+      $joueur = $repository->findOneById($user_id)
+      ;
+
+      $ami = $repository->findOneById($id);
+      $joueur->addMesAmi($ami);
+
+      $em->persist($joueur);
+      $em->flush();
+
+      $request->getSession()->getFlashBag()->add('notice', "Vous avez bien ajouté ".$ami->getPseudo()." en ami !");
+
+      return $this->redirectToroute('lictevel_mycelium_mes_amis');
+    }
 }
 
 

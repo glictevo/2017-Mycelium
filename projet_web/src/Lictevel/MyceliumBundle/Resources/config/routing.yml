@@ -91,3 +91,9 @@ lictevel_mycelium_champignons:
        page: 0
    requirements:
        page: \d
+
+lictevel_mycelium_ajouter_ami:
+    path: /ajouter-ami/{id}
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:ajouterAmi }
+    requirements:
+        id: \d

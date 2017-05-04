@@ -11,9 +11,15 @@
 
   <h1>Mes Amis</h1>
 
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
   {% if amis is not empty %}
     {% for ami in amis %}
-      <p>{{ ami.pseudo }}</p>
+      <div class="well col-xs-3">
+        <p>{{ ami.pseudo }}</p>
+      </div>
     {% endfor %}
   {% else %}
     <p>Vous n'avez pas d'amis</p>
