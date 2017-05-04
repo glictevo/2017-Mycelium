@@ -22,7 +22,7 @@
     </div>
 
     {% for champignon in listChampignons %}
-      <div class="col-xs-3">
+      <div class="well col-xs-3">
         <p>Champignon : {{ champignon.name }}</p>
         <a class="btn btn-default" href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Choisir ce champignon pour jouer</a>
       </div>

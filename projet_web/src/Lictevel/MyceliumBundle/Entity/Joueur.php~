@@ -3,6 +3,10 @@
 namespace Lictevel\MyceliumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Doctrine\ORM\EntityManager;
+use Lictevel\MyceliumBundle\Entity\Champignon;
+use Lictevel\MyceliumBundle\Entity\Casejeu;
 
 /**
  * Joueur
@@ -271,5 +275,27 @@ class Joueur
     public function getLastUpdate()
     {
         return $this->lastUpdate;
+    }
+
+    public function nombreJoueursConnectes(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Joueur');
+      $result = $repository->findAll();
+      $joueursEnLigne = 0;
+      foreach ($result as $joueur){
+        $lastdate = $joueur->getLastUpdate();
+        $minutes = (new \Datetime())->diff($lastdate)->i;
+        if ($minutes < 5){
+          $joueursEnLigne++;
+        }
+      }
+
+      return $joueursEnLigne;
+    }
+
+    public function nombreJoueursInscrits(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Joueur');
+      $result = $repository->findAll();
+      $joueursInscrits = count($result);
+      return $joueursInscrits;
     }
 }

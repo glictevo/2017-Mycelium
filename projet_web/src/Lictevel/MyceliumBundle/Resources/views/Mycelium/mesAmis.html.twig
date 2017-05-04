@@ -11,4 +11,12 @@
 
   <h1>Mes Amis</h1>
 
+  {% if amis is not empty %}
+    {% for ami in amis %}
+      <p>{{ ami.pseudo }}</p>
+    {% endfor %}
+  {% else %}
+    <p>Vous n'avez pas d'amis</p>
+  {% endif %}
+
 {% endblock %}

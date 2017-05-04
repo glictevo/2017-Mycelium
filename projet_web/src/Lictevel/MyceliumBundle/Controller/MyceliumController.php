@@ -562,9 +562,21 @@ class MyceliumController extends Controller
       ));
     }
 
-    public function mesAmisAction(){
+    public function mesAmisAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $repository = $this->getDoctrine()->getManager()->getRepository('LictevelMyceliumBundle:Joueur');
+      $joueur = $repository->findOneById($user_id);
+      $amis = $joueur->getMesAmis();
+
       //Générer la page mesAmis
-      return $this->render('LictevelMyceliumBundle:Mycelium:mesAmis.html.twig');
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesAmis.html.twig', array(
+        'amis' => $amis
+      ));
     }
 
     public function caracteristiquesChampignonAction(Request $request, $id){
