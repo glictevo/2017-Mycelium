@@ -22,6 +22,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         {% if app.session.has('pseudo') %}
+          <li><a href="{{ path('lictevel_mycelium_joueurs') }}"><span class="glyphicon glyphicon-search"></span> Trouver un joueur</a></li>
+          <li><a href="{{ path('lictevel_mycelium_champignons') }}"><span class="glyphicon glyphicon-search"></span> Trouver un champignon</a></li>
           <li><a href="{{ path('lictevel_mycelium_deconnexion') }}"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
         {% else %}
           <li><a href="{{ path('lictevel_mycelium_inscription') }}"><span class="glyphicon glyphicon-user"></span> Inscription</a></li>
