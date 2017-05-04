@@ -18,8 +18,16 @@
         <a class="btn btn-default" href="{{ path('lictevel_mycelium_ajouter_ami', {'id': joueur.id }) }}">Ajouter en ami</a>
       </div>
     {% endfor %}
+
+    <ul class="pager col-xs-12">
+      {% if page != 0 %}
+        <li><a href="{{ path('lictevel_mycelium_joueurs', { 'page': page - 1}) }}">Précedent</a></li>
+      {% endif %}
+      <li><a href="{{ path('lictevel_mycelium_joueurs', { 'page': page + 1}) }}">Suivant</a></li>
+    </ul>
   {% else %}
     <p>Il n'y a pas de joueurs pour cette page !</p>
+    <a class="btn btn-default" href="{{ path('lictevel_mycelium_joueurs') }}">Revenir à la liste des joueurs</a>
   {% endif %}
 
 {% endblock %}

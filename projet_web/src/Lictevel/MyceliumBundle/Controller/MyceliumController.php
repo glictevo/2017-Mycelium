@@ -649,7 +649,8 @@ class MyceliumController extends Controller
       ;
 
       return $this->render('LictevelMyceliumBundle:Mycelium:joueurs.html.twig', array(
-        'joueurs' => $joueurs
+        'joueurs' => $joueurs,
+        'page' => $page
       ));
     }
 
@@ -675,7 +676,8 @@ class MyceliumController extends Controller
       ;
 
       return $this->render('LictevelMyceliumBundle:Mycelium:champignons.html.twig', array(
-        'champignons' => $champignons
+        'champignons' => $champignons,
+        'page' => $page
       ));
     }
 

@@ -20,8 +20,17 @@
         </p>
       </div>
     {% endfor %}
+
+    <ul class="pager col-xs-12">
+      {% if page != 0 %}
+        <li><a href="{{ path('lictevel_mycelium_champignons', { 'page': page - 1}) }}">Précedent</a></li>
+      {% endif %}
+      <li><a href="{{ path('lictevel_mycelium_champignons', { 'page': page + 1}) }}">Suivant</a></li>
+    </ul>
+
   {% else %}
     <p>Il n'y a pas d'autres champignons que les votre</p>
+    <a class="btn btn-default" href="{{ path('lictevel_mycelium_champignons') }}">Revenir à la liste des champignons</a>
   {% endif %}
 
 {% endblock %}
