@@ -145,9 +145,17 @@ class MyceliumController extends Controller
       ));
     }
 
-    public function footerAction()
+    public function footerAction(Request $request)
     {
-      return $this->render('LictevelMyceliumBundle:Mycelium:footer.html.twig');
+      $em = $this->getDoctrine()->getManager();
+      $joueur = new Joueur();
+      $joueursInscrits = $joueur->nombreJoueursInscrits($em);
+      $joueursEnLigne = $joueur->nombreJoueursConnectes($em);
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:footer.html.twig', array(
+        'joueursEnLigne' => $joueursEnLigne,
+        'joueursInscrits' => $joueursInscrits
+      ));
     }
 
     public function aProposAction()
