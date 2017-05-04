@@ -1,0 +1,24 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/joueurs.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Joueurs{% endblock %}
+
+
+{% block body %}
+
+  <h1>Liste des joueurs : </h1>
+
+  {% if joueurs is not empty %}
+    {% for joueur in joueurs %}
+      <div class="well col-xs-3">
+        <p>{{ joueur.pseudo }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Vous êtes le seul joueur</p>
+  {% endif %}
+
+{% endblock %}

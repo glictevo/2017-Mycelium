@@ -71,3 +71,11 @@ lictevel_mycelium_choisir_emplacement_mycelium:
 lictevel_mycelium_creer_champignon:
     path: /creer-champignon
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:creerChampignon }
+
+lictevel_mycelium_joueurs:
+    path: /joueurs
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:joueurs }
+
+lictevel_mycelium_champignons:
+   path: /champignons
+   defaults: { _controller: LictevelMyceliumBundle:Mycelium:champignons }

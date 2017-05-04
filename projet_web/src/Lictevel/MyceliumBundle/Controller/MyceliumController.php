@@ -623,8 +623,56 @@ class MyceliumController extends Controller
         }
       }
 
-      //Générer la page MEs Champignons
+      //Générer la page Mes Champignons
       return $this->redirectToroute('lictevel_mycelium_mes_champignons');
+    }
+
+    public function joueursAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $joueurs = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('LictevelMyceliumBundle:Joueur')
+        ->createQueryBuilder('p')
+          ->where('p.id != :id')
+            ->setParameter('id', $user_id)
+          ->orderBy('p.lastUpdate', 'DESC')
+        ->getQuery()
+        ->getResult()
+      ;
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:joueurs.html.twig', array(
+        'joueurs' => $joueurs
+      ));
+    }
+
+    public function champignonsAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $champignons = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('LictevelMyceliumBundle:Champignon')
+        ->createQueryBuilder('p')
+          ->where('p.joueur != :joueur')
+            ->setParameter('joueur', $user_id)
+          ->orderBy('p.name', 'ASC')
+        ->getQuery()
+        ->getResult()
+      ;
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:champignons.html.twig', array(
+        'champignons' => $champignons
+      ));
     }
 }
 
