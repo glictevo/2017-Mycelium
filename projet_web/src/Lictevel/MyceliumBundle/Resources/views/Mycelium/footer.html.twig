@@ -1,13 +1,20 @@
 <div class="container">
 
+  <div class="col-xs-6">
     <p>
       Nombre de joueurs inscrits : {{ joueursInscrits }} <br>
       Nombre de joueurs connectés : {{ joueursEnLigne }}
     </p>
+  </div>
 
-    -----------------
-    Ici on mettra un petit copyright Mycelium 2017
-    On mettra aussi un lien vers A propos
-    ----------------
+  <div class="col-xs-6">
+    <p>
+      2017 - Mycelium <br>
+      Créé par Timon de Morel et Guillaume Lictevout <br>
+      <a href="{{ path('lictevel_mycelium_a_propos') }}">A propos</a>
+    </p>
+  </div>
+
+
 
 </div>
