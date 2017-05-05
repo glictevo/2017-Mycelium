@@ -1,8 +1,8 @@
 <div class="well col-xs-6 col-sm-3">
   <p>
-    Nom : {{ champignon.name }}
+    Nom : {{ champignon.name }} <br>
     Propriétaire : {{ champignon.joueur.pseudo }} <br>
     <a href="{{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': champignon.id }) }}">Caractéristiques</a> <br>
-
+    Taille du mycelium : {{ champignon.tailleMycelium }} <br>
   </p>
 </div>

@@ -144,6 +144,49 @@ class Champignon
     private $mutations;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_nutriments", type="integer")
+     */
+    private $TotalProdNutriments;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_spores", type="integer")
+     */
+    private $TotalProdSpores;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_poison", type="integer")
+     */
+    private $TotalProdPoison;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_enzymes", type="integer")
+     */
+    private $TotalProdEnzymes;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_filaments_para", type="integer")
+     */
+    private $TotalProdFilamentsPara;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_filaments_sym", type="integer")
+     */
+    private $TotalProdFilamentsSym;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -496,19 +539,29 @@ class Champignon
     public function __construct()
     {
         $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
+
         $this->prodNutriments = 20;
         $this->prodSpores = 2;
         $this->prodPoison = 0;
         $this->prodEnzymes = 0;
         $this->prodFilamentsSym = 0;
         $this->prodFilamentsPara = 0;
+
         $this->tailleMycelium = 1;
+
         $this->stockNutriments = 100;
         $this->stockSpores = 0;
         $this->stockPoison = 0;
         $this->stockEnzymes = 0;
         $this->stockFilamentsSym = 0;
         $this->stockFilamentsPara = 0;
+
+        $this->TotalProdNutriments = 0;
+        $this->TotalProdSpores = 0;
+        $this->TotalProdPoison = 0;
+        $this->TotalProdEnzymes = 0;
+        $this->TotalProdFilamentsPara = 0;
+        $this->TotalProdFilamentsSym = 0;
     }
 
     /**
@@ -636,5 +689,149 @@ class Champignon
       $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
       $result = $repository->findByJoueur($this->getJoueur());
       return count($result);
+    }
+
+    /**
+     * Set totalProdNutriments
+     *
+     * @param integer $totalProdNutriments
+     *
+     * @return Champignon
+     */
+    public function setTotalProdNutriments($totalProdNutriments)
+    {
+        $this->TotalProdNutriments = $totalProdNutriments;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdNutriments
+     *
+     * @return integer
+     */
+    public function getTotalProdNutriments()
+    {
+        return $this->TotalProdNutriments;
+    }
+
+    /**
+     * Set totalProdSpores
+     *
+     * @param integer $totalProdSpores
+     *
+     * @return Champignon
+     */
+    public function setTotalProdSpores($totalProdSpores)
+    {
+        $this->TotalProdSpores = $totalProdSpores;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdSpores
+     *
+     * @return integer
+     */
+    public function getTotalProdSpores()
+    {
+        return $this->TotalProdSpores;
+    }
+
+    /**
+     * Set totalProdPoison
+     *
+     * @param integer $totalProdPoison
+     *
+     * @return Champignon
+     */
+    public function setTotalProdPoison($totalProdPoison)
+    {
+        $this->TotalProdPoison = $totalProdPoison;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdPoison
+     *
+     * @return integer
+     */
+    public function getTotalProdPoison()
+    {
+        return $this->TotalProdPoison;
+    }
+
+    /**
+     * Set totalProdEnzymes
+     *
+     * @param integer $totalProdEnzymes
+     *
+     * @return Champignon
+     */
+    public function setTotalProdEnzymes($totalProdEnzymes)
+    {
+        $this->TotalProdEnzymes = $totalProdEnzymes;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdEnzymes
+     *
+     * @return integer
+     */
+    public function getTotalProdEnzymes()
+    {
+        return $this->TotalProdEnzymes;
+    }
+
+    /**
+     * Set totalProdFilamentsPara
+     *
+     * @param integer $totalProdFilamentsPara
+     *
+     * @return Champignon
+     */
+    public function setTotalProdFilamentsPara($totalProdFilamentsPara)
+    {
+        $this->TotalProdFilamentsPara = $totalProdFilamentsPara;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdFilamentsPara
+     *
+     * @return integer
+     */
+    public function getTotalProdFilamentsPara()
+    {
+        return $this->TotalProdFilamentsPara;
+    }
+
+    /**
+     * Set totalProdFilamentsSym
+     *
+     * @param integer $totalProdFilamentsSym
+     *
+     * @return Champignon
+     */
+    public function setTotalProdFilamentsSym($totalProdFilamentsSym)
+    {
+        $this->TotalProdFilamentsSym = $totalProdFilamentsSym;
+
+        return $this;
+    }
+
+    /**
+     * Get totalProdFilamentsSym
+     *
+     * @return integer
+     */
+    public function getTotalProdFilamentsSym()
+    {
+        return $this->TotalProdFilamentsSym;
     }
 }

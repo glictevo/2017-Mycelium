@@ -49,27 +49,22 @@ class RessourcesUpdateListener
           if ($listChampignons != null) {
             foreach ($listChampignons as $champignon){
               //Faudra faire attention s'il y a des maximums
-              $stockNutriments = $champignon->getStockNutriments() + ($champignon->getProdNutriments() * $minutes);
-              $stockSpores = $champignon->getStockSpores() + ($champignon->getProdSpores() * $minutes);
-              $stockPoison = $champignon->getStockPoison() + ($champignon->getProdPoison() * $minutes);
-              $stockEnzymes = $champignon->getStockEnzymes() + ($champignon->getProdEnzymes() * $minutes);
-              $stockFilamentsPara = $champignon->getStockFilamentsPara() + ($champignon->getProdFilamentsPara() * $minutes);
-              $stockFilamentsSym = $champignon->getStockFilamentsSym() + ($champignon->getProdFilamentsSym() * $minutes);
+              $prodNutriments = $champignon->getProdNutriments() * $minutes;
+              $prodSpores = $champignon->getProdSpores() * $minutes;
+              $prodPoison = $champignon->getProdPoison() * $minutes;
+              $prodEnzymes = $champignon->getProdEnzymes() * $minutes;
+              $prodFilamentsPara = $champignon->getProdFilamentsPara() * $minutes;
+              $prodFilamentsSym = $champignon->getProdFilamentsSym() * $minutes;
 
-              //On charge la liste des cases reliées au champignon
+              $stockNutriments = $champignon->getStockNutriments() + $prodNutriments;
+              $stockSpores = $champignon->getStockSpores() + $prodSpores;
+              $stockPoison = $champignon->getStockPoison() + $prodPoison;
+              $stockEnzymes = $champignon->getStockEnzymes() + $prodEnzymes;
+              $stockFilamentsPara = $champignon->getStockFilamentsPara() + $prodFilamentsPara;
+              $stockFilamentsSym = $champignon->getStockFilamentsSym() + $prodFilamentsSym;
+
               //TODO : faire les conditions par rapport aux mutations
                 //Genre que ça n'augmente pas le poison alors qu'il n'y a pas la mutation sur le champi
-              $cases = $this->em->getRepository('LictevelMyceliumBundle:Casejeu')->findByChampignon($champignon);
-              if ($cases != null){
-                foreach ($cases as $case){
-                  $stockNutriments += $case->getProdNutriments();
-                  $stockSpores += $case->getProdSpores();
-                  $stockPoison += $case->getProdPoison();
-                  $stockEnzymes += $case->getProdEnzymes();
-                  $stockFilamentsPara += $case->getProdFilamentsPara();
-                  $stockFilamentsSym += $case->getProdFilamentsSym();
-                }
-              }
 
               $champignon->setStockNutriments($stockNutriments);
               $champignon->setStockSpores($stockSpores);
@@ -77,6 +72,13 @@ class RessourcesUpdateListener
               $champignon->setStockEnzymes($stockEnzymes);
               $champignon->setStockFilamentsPara($stockFilamentsPara);
               $champignon->setStockFilamentsSym($stockFilamentsSym);
+
+              $champignon->setTotalProdNutriments($champignon->getTotalProdNutriments() + $prodNutriments);
+              $champignon->setTotalProdSpores($champignon->getTotalProdSpores() + $prodSpores);
+              $champignon->setTotalProdPoison($champignon->getTotalProdPoison() + $prodPoison);
+              $champignon->setTotalProdEnzymes($champignon->getTotalProdEnzymes() + $prodEnzymes);
+              $champignon->setTotalProdFilamentsPara($champignon->getTotalProdFilamentsPara() + $prodFilamentsPara);
+              $champignon->setTotalProdFilamentsSym($champignon->getTotalProdFilamentsSym() + $prodFilamentsSym);
 
               $this->em->persist($champignon);
             }

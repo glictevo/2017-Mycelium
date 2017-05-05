@@ -3,6 +3,7 @@
 namespace Lictevel\MyceliumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Champignon
@@ -141,6 +142,49 @@ class Champignon
      * @ORM\ManyToMany(targetEntity="Lictevel\MyceliumBundle\Entity\Mutation", cascade={"persist"})
      */
     private $mutations;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_nutriments", type="integer")
+     */
+    private $TotalProdNutriments;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_spores", type="integer")
+     */
+    private $TotalProdSpores;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_poison", type="integer")
+     */
+    private $TotalProdPoison;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_enzymes", type="integer")
+     */
+    private $TotalProdEnzymes;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_filaments_para", type="integer")
+     */
+    private $TotalProdFilamentsPara;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_prod_filaments_sym", type="integer")
+     */
+    private $TotalProdFilamentsSym;
+
 
     /**
      * Get id
@@ -495,19 +539,29 @@ class Champignon
     public function __construct()
     {
         $this->mutations = new \Doctrine\Common\Collections\ArrayCollection();
+
         $this->prodNutriments = 20;
         $this->prodSpores = 2;
         $this->prodPoison = 0;
         $this->prodEnzymes = 0;
         $this->prodFilamentsSym = 0;
         $this->prodFilamentsPara = 0;
+
         $this->tailleMycelium = 1;
+
         $this->stockNutriments = 100;
         $this->stockSpores = 0;
         $this->stockPoison = 0;
         $this->stockEnzymes = 0;
         $this->stockFilamentsSym = 0;
         $this->stockFilamentsPara = 0;
+
+        $this->TotalProdNutriments = 0;
+        $this->TotalProdSpores = 0;
+        $this->TotalProdPoison = 0;
+        $this->TotalProdEnzymes = 0;
+        $this->TotalProdFilamentsPara = 0;
+        $this->TotalProdFilamentsSym = 0;
     }
 
     /**
@@ -623,5 +677,17 @@ class Champignon
       $this->prodEnzymes += $case->getProdEnzymes();
       $this->prodFilamentsPara += $case->getProdFilamentsPara();
       $this->prodFilamentsSym += $case->getProdFilamentsSym();
+    }
+
+    public function nombreDeChampignons(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findAll();
+      return count($result);
+    }
+
+    public function nombreDeChampignonsPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
+      return count($result);
     }
 }
