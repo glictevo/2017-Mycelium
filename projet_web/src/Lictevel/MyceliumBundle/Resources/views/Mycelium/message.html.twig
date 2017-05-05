@@ -1,0 +1,38 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/message.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Message{% endblock %}
+
+
+{% block body %}
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  <div class="well col-xs-12">
+    <div class="well col-xs-6">
+      <p>Expéditeur : {{ message.expediteur.pseudo }}</p>
+    </div>
+    <div class="well col-xs-6">
+      <p>Destinataire : {{ message.destinataire.pseudo }}</p>
+    </div>
+    <div class="well col-xs-12">
+      <p>Objet : {{ message.objet }}</p>
+    </div>
+    <div class="well col-xs-12">
+        <p>
+          Message : <br>
+          {{ message.message }}
+        </p>
+    </div>
+    {% if app.session.get('user_id') == message.expediteur.id %}
+      <a class="btn btn-default" href="{{ path('lictevel_mycelium_ecrire_message', {'pseudo': message.destinataire.pseudo}) }}">Renvoyer un message</a>
+    {% else %}
+      <a class="btn btn-default" href="{{ path('lictevel_mycelium_ecrire_message', {'pseudo': message.expediteur.pseudo}) }}">Répondre</a>
+    {% endif %}
+  </div>
+{% endblock %}

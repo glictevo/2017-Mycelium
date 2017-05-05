@@ -107,8 +107,10 @@ lictevel_mycelium_mes_messages:
         page: \d*
 
 lictevel_mycelium_ecrire_message:
-    path: /ecrire-message
-    defaults: { _controller: LictevelMyceliumBundle:Mycelium:ecrireMessage }
+    path: /ecrire-message/{pseudo}
+    defaults:
+      _controller: LictevelMyceliumBundle:Mycelium:ecrireMessage
+      pseudo:
 
 lictevel_mycelium_autocompletion_joueur:
    path: /autocompletion-joueur
@@ -117,3 +119,9 @@ lictevel_mycelium_autocompletion_joueur:
 lictevel_mycelium_autocompletion_champignon:
     path: /autocompletion-champignon
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:autocompletionChampignon }
+
+lictevel_mycelium_lire_message:
+    path: /lire-message/{id}
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:lireMessage }
+    requirements:
+        page: \d*

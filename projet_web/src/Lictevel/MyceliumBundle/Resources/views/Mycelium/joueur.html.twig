@@ -6,5 +6,6 @@
     <p>(Pas de photo de profil)</p>
   {% endif %}
   <p>{{ joueur.pseudo }}</p> <br>
-  <a class="btn btn-default" href="{{ path('lictevel_mycelium_ajouter_ami', {'id': joueur.id }) }}">Ajouter en ami</a>
+  <a class="btn btn-default" href="{{ path('lictevel_mycelium_ajouter_ami', {'id': joueur.id }) }}">Ajouter en ami</a> <br>
+  <a class="btn btn-default" href="{{ path('lictevel_mycelium_ecrire_message', { 'pseudo': joueur.pseudo }) }}">Envoyer un message</a>
 </div>

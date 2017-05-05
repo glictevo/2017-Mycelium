@@ -855,7 +855,7 @@ class MyceliumController extends Controller
       ));
     }
 
-    public function ecrireMessageAction(Request $request){
+    public function ecrireMessageAction(Request $request, $pseudo){
       $session = $request->getSession();
       $user_id = $session->get('user_id');
       if ($user_id == null){
@@ -863,10 +863,16 @@ class MyceliumController extends Controller
       }
 
       $message = new Message();
-      $form = $this->get('form.factory')->create(MessageType::class, $message);
       $em = $this->getDoctrine()->getManager();
       $repository = $em->getRepository('LictevelMyceliumBundle:Message');
       $repositoryJoueur = $em->getRepository('LictevelMyceliumBundle:Joueur');
+
+      $joueur = $repositoryJoueur->findOneByPseudo($pseudo);
+      if ($joueur != null){
+        $message->setDestinataire($joueur);
+      }
+
+      $form = $this->get('form.factory')->create(MessageType::class, $message);
 
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
@@ -984,6 +990,33 @@ class MyceliumController extends Controller
 
       return $this->render('LictevelMyceliumBundle:Mycelium:autocompletionChampignon.html.twig', array(
         'champignons' => $champignons
+      ));
+    }
+
+    public function lireMessageAction(Request $request, $id){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Message');
+
+      $message = $repository->findOneById($id);
+
+      if ($message == null){
+        $request->getSession()->getFlashBag()->add('notice', "Ce message n'existe pas.");
+        return $this->redirectToroute('lictevel_mycelium_mes_messages');
+      }
+
+      if ($message->getExpediteur()->getId() != $user_id && $message->getDestinataire()->getId() != $user_id){
+        $request->getSession()->getFlashBag()->add('notice', "Ce message ne vous concerne pas.");
+        return $this->redirectToroute('lictevel_mycelium_mes_messages');
+      }
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:message.html.twig', array(
+        'message' => $message
       ));
     }
 }

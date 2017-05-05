@@ -19,6 +19,7 @@
     {% for ami in amis %}
       <div class="well col-xs-6 col-sm-3">
         <p>{{ ami.pseudo }}</p>
+        <a class="btn btn-default" href="{{ path('lictevel_mycelium_ecrire_message', {'pseudo': ami.pseudo}) }}">Envoyer un message</a>
       </div>
     {% endfor %}
   {% else %}

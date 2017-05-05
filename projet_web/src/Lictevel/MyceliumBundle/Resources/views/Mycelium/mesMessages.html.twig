@@ -25,6 +25,7 @@
             <th>Message de : </th>
             <th>Objet : </th>
             <th>Reçu le : </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
               <td>{{ message.expediteur.pseudo }}</td>
               <td>{{ message.objet }}</td>
               <td>{{ message.date|date("m/d/Y à H:i:s") }}</td>
+              <td><a class="btn btn-default" href="{{ path('lictevel_mycelium_lire_message', {'id': message.id}) }}">Lire</a></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -50,6 +52,7 @@
             <th>Message pour : </th>
             <th>Objet : </th>
             <th>Envoyé le : </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +61,7 @@
               <td>{{ message.destinataire.pseudo }}</td>
               <td>{{ message.objet }}</td>
               <td>{{ message.date|date("m/d/Y à H:i:s") }}</td>
+              <td><a class="btn btn-default" href="{{ path('lictevel_mycelium_lire_message', {'id': message.id}) }}">Lire</a></td>
             </tr>
           {% endfor %}
         </tbody>
