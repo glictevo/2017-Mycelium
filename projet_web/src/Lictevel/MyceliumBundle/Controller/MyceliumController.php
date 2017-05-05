@@ -871,7 +871,14 @@ class MyceliumController extends Controller
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
         $message->setDate(new \Datetime());
-        $message->setDestinataire($repositoryJoueur->findOneByPseudo($message->getDestinataire()->getPseudo()));
+
+        $destinataire = $repositoryJoueur->findOneByPseudo($message->getDestinataire()->getPseudo());
+        if ($destinataire == null){
+          $request->getSession()->getFlashBag()->add('notice', "Ce destinataire n'existe pas");
+          return $this->redirectToroute('lictevel_mycelium_ecrire_message');
+        }
+
+        $message->setDestinataire($destinataire);
         $message->setExpediteur($repositoryJoueur->findOneById($user_id));
 
         if ($message->getDestinataire()->getId() == $user_id){
@@ -918,6 +925,19 @@ class MyceliumController extends Controller
         }
       }
 
+      //Si il y a moins de 5 possibilités, on étend aux noms contenant $search
+      if ($count < 5){
+        foreach ($result as $joueur){
+          if (strpos(strtolower($joueur->getPseudo()), strtolower($search))){
+            array_push($joueurs, $joueur);
+            $count++;
+            if($count == 5){
+              break;
+            }
+          }
+        }
+      }
+
       return $this->render('LictevelMyceliumBundle:Mycelium:autocompletionJoueur.html.twig', array(
         'joueurs' => $joueurs
       ));
@@ -945,6 +965,19 @@ class MyceliumController extends Controller
           $count++;
           if($count == 5){
             break;
+          }
+        }
+      }
+
+      //Si il y a moins de 5 possibilités, on étend aux noms contenant $search
+      if ($count < 5){
+        foreach ($result as $champignon){
+          if (strpos(strtolower($champignon->getName()), strtolower($search))){
+            array_push($champignons, $champignon);
+            $count++;
+            if($count == 5){
+              break;
+            }
           }
         }
       }

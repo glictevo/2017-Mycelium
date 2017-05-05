@@ -16,7 +16,7 @@
   {% endfor %}
 
   {{ form_start(form) }}
-    {{ form_row(form.destinataire.Pseudo) }}
+    {{ form_row(form.destinataire.Pseudo, {'attr': { 'autocomplete': 'off'}}) }}
 
     {{ form_row(form.destinataire) }}
     <div id="results" class="col-xs-12">

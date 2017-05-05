@@ -13,7 +13,7 @@
 
   <div class="col-xs-12">
     {{ form_start(form) }}
-      {{ form_row(form.Name, { 'label': 'Rechercher un champignon' }) }}
+      {{ form_row(form.Name, { 'label': 'Rechercher un champignon', 'attr': { 'autocomplete': 'off'}}) }}
       <div id="results" class="col-xs-12">
 
       </div>
