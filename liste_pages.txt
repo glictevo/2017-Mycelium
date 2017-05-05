@@ -1,9 +1,0 @@
--barre de navigation
--footer
-
--page d'inscription/connexion
--page création/utilisation de personnages
--page des ressources d'un personnage
--page modification de profil (ajout avatar entre autre)
-
--page de stat
