@@ -11,12 +11,14 @@ use Lictevel\MyceliumBundle\Entity\Joueur;
 use Lictevel\MyceliumBundle\Entity\Image;
 use Lictevel\MyceliumBundle\Entity\Champignon;
 use Lictevel\MyceliumBundle\Entity\Casejeu;
+use Lictevel\MyceliumBundle\Entity\Message;
 use Lictevel\MyceliumBundle\Form\JoueurType;
 use Lictevel\MyceliumBundle\Form\SearchJoueurType;
 use Lictevel\MyceliumBundle\Form\ImageType;
 use Lictevel\MyceliumBundle\Form\ChampignonType;
 use Lictevel\MyceliumBundle\Form\CreerChampignonType;
 use Lictevel\MyceliumBundle\Form\CasejeuType;
+use Lictevel\MyceliumBundle\Form\MessageType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
 use Lictevel\MyceliumBundle\Twig\AppExtension;
@@ -814,6 +816,142 @@ class MyceliumController extends Controller
       $request->getSession()->getFlashBag()->add('notice', "Vous avez bien ajouté ".$ami->getPseudo()." en ami !");
 
       return $this->redirectToroute('lictevel_mycelium_mes_amis');
+    }
+
+    public function mesMessagesAction(Request $request, $page){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Message');
+
+      $messagesRecus = $repository->createQueryBuilder('p')
+        ->where('p.destinataire = :id')
+          ->setParameter('id', $user_id)
+        ->orderBy('p.date', 'DESC')
+        ->setFirstResult($page * 20)
+        ->setMaxResults(20)
+        ->getQuery()
+        ->getResult()
+      ;
+
+      $messagesEnvoyes = $repository->createQueryBuilder('p')
+        ->where('p.expediteur = :id')
+          ->setParameter('id', $user_id)
+        ->orderBy('p.date', 'DESC')
+        ->setFirstResult($page * 20)
+        ->setMaxResults(20)
+        ->getQuery()
+        ->getResult()
+      ;
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:mesMessages.html.twig', array(
+        'messagesRecus' => $messagesRecus,
+        'messagesEnvoyes' => $messagesEnvoyes,
+        'page' => $page
+      ));
+    }
+
+    public function ecrireMessageAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $message = new Message();
+      $form = $this->get('form.factory')->create(MessageType::class, $message);
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Message');
+      $repositoryJoueur = $em->getRepository('LictevelMyceliumBundle:Joueur');
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+        $message->setDate(new \Datetime());
+        $message->setDestinataire($repositoryJoueur->findOneByPseudo($message->getDestinataire()->getPseudo()));
+        $message->setExpediteur($repositoryJoueur->findOneById($user_id));
+
+        if ($message->getDestinataire()->getId() == $user_id){
+          $request->getSession()->getFlashBag()->add('notice', "Vous ne pouvez pas vous envoyer un message à vous-même.");
+          return $this->redirectToroute('lictevel_mycelium_ecrire_message');
+        }
+
+        $em->persist($message);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', "Votre message a été envoyé !");
+
+        return $this->redirectToroute('lictevel_mycelium_mes_messages');
+      }
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:ecrireMessage.html.twig', array(
+        'form' => $form->createView()
+      ));
+    }
+
+    public function autocompletionJoueurAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $search = $request->query->get('search');
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Joueur');
+      $result = $repository->findAll();
+
+      $count = 0;
+
+      $joueurs = array();
+      foreach ($result as $joueur){
+        if (strcmp(substr(strtolower($joueur->getPseudo()), 0, strlen($search)), strtolower($search)) == 0){
+          array_push($joueurs, $joueur);
+          $count++;
+          if($count == 5){
+            break;
+          }
+        }
+      }
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:autocompletionJoueur.html.twig', array(
+        'joueurs' => $joueurs
+      ));
+    }
+
+    public function autocompletionChampignonAction(Request $request){
+      $session = $request->getSession();
+      $user_id = $session->get('user_id');
+      if ($user_id == null){
+        return $this->redirectToroute('lictevel_mycelium_home');
+      }
+
+      $search = $request->query->get('search');
+
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findAll();
+
+      $count = 0;
+
+      $champignons = array();
+      foreach ($result as $champignon){
+        if (strcmp(substr(strtolower($champignon->getName()), 0, strlen($search)), strtolower($search)) == 0){
+          array_push($champignons, $champignon);
+          $count++;
+          if($count == 5){
+            break;
+          }
+        }
+      }
+
+      return $this->render('LictevelMyceliumBundle:Mycelium:autocompletionChampignon.html.twig', array(
+        'champignons' => $champignons
+      ));
     }
 }
 

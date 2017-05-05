@@ -97,3 +97,23 @@ lictevel_mycelium_ajouter_ami:
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:ajouterAmi }
     requirements:
         id: \d*
+
+lictevel_mycelium_mes_messages:
+    path: /mes-messages/{page}
+    defaults:
+        _controller: LictevelMyceliumBundle:Mycelium:mesMessages
+        page: 0
+    requirements:
+        page: \d*
+
+lictevel_mycelium_ecrire_message:
+    path: /ecrire-message
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:ecrireMessage }
+
+lictevel_mycelium_autocompletion_joueur:
+   path: /autocompletion-joueur
+   defaults: { _controller: LictevelMyceliumBundle:Mycelium:autocompletionJoueur }
+
+lictevel_mycelium_autocompletion_champignon:
+    path: /autocompletion-champignon
+    defaults: { _controller: LictevelMyceliumBundle:Mycelium:autocompletionChampignon }

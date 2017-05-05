@@ -14,6 +14,7 @@
         {% if app.session.has('pseudo') %}
           <li><a class="active" href="{{ path('lictevel_mycelium_mon_compte') }}">{{ app.session.get('pseudo') }}</a></li>
           <li><a href="{{ path('lictevel_mycelium_mes_amis') }}">Mes amis</a></li>
+          <li><a href="{{ path('lictevel_mycelium_mes_messages') }}">Mes Messages</a></li>
         {% else %}
           <li><a href="#">Un lien quelconque si on veut en mettre un</a></li>
         {% endif %}

@@ -1,0 +1,55 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/ecrireMessage.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Ecrire un message{% endblock %}
+
+
+{% block body %}
+
+  <h1>Ecrire un message</h1>
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  {{ form_start(form) }}
+    {{ form_row(form.destinataire.Pseudo) }}
+
+    {{ form_row(form.destinataire) }}
+    <div id="results" class="col-xs-12">
+
+    </div>
+
+
+    {{ form_row(form.objet) }}
+
+    {{ form_row(form.message) }}
+
+    {{ form_row(form.valider) }}
+
+  {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascript %}
+
+  <script type="text/javascript">
+
+  $("#lictevel_myceliumbundle_message_destinataire_Pseudo").on('input', function() {
+    console.log("input fonctionne");
+    var parameters = { search: $('#lictevel_myceliumbundle_message_destinataire_Pseudo').val(), input: 's1' };
+    $.get('/mycelium/autocompletion-joueur', parameters, function(data){
+      $("#results").html(data);
+    });
+  });
+
+  $(document).on('click', '#autocomp',function(event){
+        $("#lictevel_myceliumbundle_message_destinataire_Pseudo").val($(event.target).text());
+        $('#results').hide();
+      });
+  </script>
+
+  {% endblock %}

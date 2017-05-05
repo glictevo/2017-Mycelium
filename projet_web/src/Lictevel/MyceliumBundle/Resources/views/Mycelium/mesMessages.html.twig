@@ -1,0 +1,79 @@
+{# src/Lictevel/MyceliumBundle/Resources/views/Mycelium/mesMessages.html.twig #}
+
+
+{% extends "LictevelMyceliumBundle::layout.html.twig" %}
+
+
+{% block title %}{{ parent() }} - Mes Messages{% endblock %}
+
+
+{% block body %}
+
+  <h1>Mes messages</h1>
+
+  {% for message in app.session.flashbag.get('notice') %}
+    <p> {{ message }} </p>
+  {% endfor %}
+
+  <a class="btn btn-default col-xs-12" href="{{ path('lictevel_mycelium_ecrire_message') }}">Ecrire un nouveau message</a>
+
+  <div id="messagesRecus" class="well col-xs-6">
+    {% if messagesRecus is not empty %}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Message de : </th>
+            <th>Objet : </th>
+            <th>Reçu le : </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messagesRecus %}
+            <tr>
+              <td>{{ message.expediteur.pseudo }}</td>
+              <td>{{ message.objet }}</td>
+              <td>{{ message.date|date("m/d/Y à H:i:s") }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Vous n'avez pas de messages</p>
+    {% endif %}
+  </div>
+
+  <div id="messagesEnvoyes" class="well col-xs-6">
+    {% if messagesEnvoyes is not empty %}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Message pour : </th>
+            <th>Objet : </th>
+            <th>Envoyé le : </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messagesEnvoyes %}
+            <tr>
+              <td>{{ message.destinataire.pseudo }}</td>
+              <td>{{ message.objet }}</td>
+              <td>{{ message.date|date("m/d/Y à H:i:s") }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Vous n'avez pas envoyé de messages</p>
+    {% endif %}
+  </div>
+
+  {% if (messagesRecus is not empty) and (messagesEnvoyes is not empty) %}
+  <ul class="pager col-xs-12">
+    {% if page != 0 %}
+      <li><a href="{{ path('lictevel_mycelium_mes_messages', { 'page': page - 1}) }}">Précedent</a></li>
+    {% endif %}
+    <li><a href="{{ path('lictevel_mycelium_mes_messages', { 'page': page + 1}) }}">Suivant</a></li>
+  </ul>
+  {% endif %}
+
+{% endblock %}
