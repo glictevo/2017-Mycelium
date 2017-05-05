@@ -511,19 +511,37 @@ class MyceliumController extends Controller
       }
 
       $em = $this->getDoctrine()->getManager();
-      $joueur = $em->getRepository('LictevelMyceliumBundle:Joueur')->findOneById($user_id);
-      $champignon = $em->getRepository('LictevelMyceliumBundle:champignon')->findOneById($session->get('champignon')->getID());
+      $joueur = new Joueur();
+      $champignon = new Champignon();
+      $casejeu = new Casejeu();
+
       $joueursInscrits = $joueur->nombreJoueursInscrits($em);
       $joueursEnLigne = $joueur->nombreJoueursConnectes($em);
       $nombreDeChampignons = $champignon->nombreDeChampignons($em);
       $nombreDeChampignonsPerso = $champignon->nombreDeChampignonsPerso($em);
+      $nombreDeCasesCreees = $casejeu->nombreDeCasesCreees($em);
+      $nombreDeCasesOccupees = $casejeu->nombreDeCasesOccupees($em);
+      $productionTotaleNutriments = $champignon->productionTotaleNutriments($em);
+      $productionTotaleSpores = $champignon->productionTotaleSpores($em);
+      $productionTotalePoison = $champignon->productionTotalePoison($em);
+      $productionTotaleEnzymes = $champignon->productionTotaleEnzymes($em);
+      $productionTotaleFilamentsPara = $champignon->productionTotaleFilamentsPara($em);
+      $productionTotaleFilamentsSym = $champignon->productionTotaleFilamentsSym($em);
 
       //Générer la page statistiques
       return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig', array(
         'joueursEnLigne' => $joueursEnLigne,
         'joueursInscrits' => $joueursInscrits,
         'nombreDeChampignons' => $nombreDeChampignons,
-        'nombreDeChampignonsPerso' => $nombreDeChampignonsPerso
+        'nombreDeChampignonsPerso' => $nombreDeChampignonsPerso,
+        'nombreDeCasesCreees' => $nombreDeCasesCreees,
+        'nombreDeCasesOccupees' => $nombreDeCasesOccupees,
+        'productionTotaleNutriments' => $productionTotaleNutriments,
+        'productionTotaleSpores' => $productionTotaleSpores,
+        'productionTotalePoison' => $productionTotalePoison,
+        'productionTotaleEnzymes' => $productionTotaleEnzymes,
+        'productionTotaleFilamentsPara' => $productionTotaleFilamentsPara,
+        'productionTotaleFilamentsSym' => $productionTotaleFilamentsSym
       ));
     }
 
