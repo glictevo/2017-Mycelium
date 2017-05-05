@@ -1,4 +1,10 @@
 <div class="well col-xs-6 col-sm-3">
+
+  {% if joueur.image != null %}
+    <img class="img-responsive" src="{{ asset('uploads/images/' ~ joueur.image.url) }}" alt="{{ joueur.image.alt }}">
+  {% else %}
+    <p>(Pas de photo de profil)</p>
+  {% endif %}
   <p>{{ joueur.pseudo }}</p> <br>
   <a class="btn btn-default" href="{{ path('lictevel_mycelium_ajouter_ami', {'id': joueur.id }) }}">Ajouter en ami</a>
 </div>
