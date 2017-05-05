@@ -5,7 +5,7 @@
         <p> Champignon actuel : </p>
         <p> {{ app.session.get('champignon').name }}</p>
         <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
-          <img class="img-responsive" src="" alt="Ici la photo du champi (qui est un lien, faire lien vers stats du champi en question ?)">
+          <img class="img-responsive" src="" alt="Ici la photo du champi">
         </a>
       {% else %}
         <p class="bg-warning" >Vous n'avez pas encore de champignon</p>
