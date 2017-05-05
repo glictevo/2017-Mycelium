@@ -847,9 +847,33 @@ class Champignon
       return $prod;
     }
 
+    public function productionTotaleNutrimentsPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdNutriments();
+      }
+
+      return $prod;
+    }
+
     public function productionTotaleSpores(EntityManager $em){
       $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
       $result = $repository->findAll();
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdSpores();
+      }
+
+      return $prod;
+    }
+
+    public function productionTotaleSporesPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
       $prod = 0;
 
       foreach ($result as $champignon){
@@ -871,9 +895,33 @@ class Champignon
       return $prod;
     }
 
+    public function productionTotalePoisonPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdPoison();
+      }
+
+      return $prod;
+    }
+
     public function productionTotaleEnzymes(EntityManager $em){
       $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
       $result = $repository->findAll();
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdEnzymes();
+      }
+
+      return $prod;
+    }
+
+    public function productionTotaleEnzymesPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
       $prod = 0;
 
       foreach ($result as $champignon){
@@ -895,9 +943,33 @@ class Champignon
       return $prod;
     }
 
+    public function productionTotaleFilamentsParaPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdFilamentsPara();
+      }
+
+      return $prod;
+    }
+
     public function productionTotaleFilamentsSym(EntityManager $em){
       $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
       $result = $repository->findAll();
+      $prod = 0;
+
+      foreach ($result as $champignon){
+        $prod += $champignon->getTotalProdFilamentsSym();
+      }
+
+      return $prod;
+    }
+
+    public function productionTotaleFilamentsSymPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+      $result = $repository->findByJoueur($this->getJoueur());
       $prod = 0;
 
       foreach ($result as $champignon){

@@ -515,18 +515,30 @@ class MyceliumController extends Controller
       $champignon = new Champignon();
       $casejeu = new Casejeu();
 
+      $joueurPerso = $em->getRepository('LictevelMyceliumBundle:Joueur')->findOneById($user_id);
+      $champignonPerso = $em->getRepository('LictevelMyceliumBundle:Champignon')->findOneByJoueur($joueurPerso);
+      $casejeuPerso = $em->getRepository('LictevelMyceliumBundle:Casejeu')->findOneByJoueur($joueurPerso);
+
       $joueursInscrits = $joueur->nombreJoueursInscrits($em);
       $joueursEnLigne = $joueur->nombreJoueursConnectes($em);
       $nombreDeChampignons = $champignon->nombreDeChampignons($em);
-      $nombreDeChampignonsPerso = $champignon->nombreDeChampignonsPerso($em);
+      $nombreDeChampignonsPerso = $champignonPerso->nombreDeChampignonsPerso($em);
       $nombreDeCasesCreees = $casejeu->nombreDeCasesCreees($em);
+      $nombreDeCasesCreeesPerso = $casejeuPerso->nombreDeCasesCreeesPerso($em);
       $nombreDeCasesOccupees = $casejeu->nombreDeCasesOccupees($em);
+      $nombreDeCasesOccupeesPerso = $casejeuPerso->nombreDeCasesOccupeesPerso($em);
       $productionTotaleNutriments = $champignon->productionTotaleNutriments($em);
+      $productionTotaleNutrimentsPerso = $champignonPerso->productionTotaleNutrimentsPerso($em);
       $productionTotaleSpores = $champignon->productionTotaleSpores($em);
+      $productionTotaleSporesPerso = $champignonPerso->productionTotaleSporesPerso($em);
       $productionTotalePoison = $champignon->productionTotalePoison($em);
+      $productionTotalePoisonPerso = $champignonPerso->productionTotalePoisonPerso($em);
       $productionTotaleEnzymes = $champignon->productionTotaleEnzymes($em);
+      $productionTotaleEnzymesPerso = $champignonPerso->productionTotaleEnzymesPerso($em);
       $productionTotaleFilamentsPara = $champignon->productionTotaleFilamentsPara($em);
+      $productionTotaleFilamentsParaPerso = $champignonPerso->productionTotaleFilamentsParaPerso($em);
       $productionTotaleFilamentsSym = $champignon->productionTotaleFilamentsSym($em);
+      $productionTotaleFilamentsSymPerso = $champignonPerso->productionTotaleFilamentsSymPerso($em);
 
       //Générer la page statistiques
       return $this->render('LictevelMyceliumBundle:Mycelium:statistiques.html.twig', array(
@@ -535,13 +547,21 @@ class MyceliumController extends Controller
         'nombreDeChampignons' => $nombreDeChampignons,
         'nombreDeChampignonsPerso' => $nombreDeChampignonsPerso,
         'nombreDeCasesCreees' => $nombreDeCasesCreees,
+        'nombreDeCasesCreeesPerso' => $nombreDeCasesCreeesPerso,
         'nombreDeCasesOccupees' => $nombreDeCasesOccupees,
+        'nombreDeCasesOccupeesPerso' => $nombreDeCasesOccupeesPerso,
         'productionTotaleNutriments' => $productionTotaleNutriments,
+        'productionTotaleNutrimentsPerso' => $productionTotaleNutrimentsPerso,
         'productionTotaleSpores' => $productionTotaleSpores,
+        'productionTotaleSporesPerso' => $productionTotaleSporesPerso,
         'productionTotalePoison' => $productionTotalePoison,
+        'productionTotalePoisonPerso' => $productionTotalePoisonPerso,
         'productionTotaleEnzymes' => $productionTotaleEnzymes,
+        'productionTotaleEnzymesPerso' => $productionTotaleEnzymesPerso,
         'productionTotaleFilamentsPara' => $productionTotaleFilamentsPara,
-        'productionTotaleFilamentsSym' => $productionTotaleFilamentsSym
+        'productionTotaleFilamentsParaPerso' => $productionTotaleFilamentsParaPerso,
+        'productionTotaleFilamentsSym' => $productionTotaleFilamentsSym,
+        'productionTotaleFilamentsSymPerso' => $productionTotaleFilamentsSymPerso
       ));
     }
 

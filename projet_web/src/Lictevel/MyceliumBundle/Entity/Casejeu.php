@@ -507,9 +507,26 @@ class Casejeu
       return count($repository->findAll());
     }
 
+    public function nombreDeCasesCreeesPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
+      $result = $repository->findByJoueur($this->getJoueur());
+
+      return count($result);
+    }
+
     public function nombreDeCasesOccupees(EntityManager $em){
       $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
 
       return count($repository->findByOccupee(true));
     }
+
+    public function nombreDeCasesOccupeesPerso(EntityManager $em){
+      $repository = $em->getRepository('LictevelMyceliumBundle:Casejeu');
+      $result = $repository->findBy(array(
+        'joueur' => $this->getJoueur(), 'occupee' => true)
+      );
+
+      return count($result);
+    }
+
 }
