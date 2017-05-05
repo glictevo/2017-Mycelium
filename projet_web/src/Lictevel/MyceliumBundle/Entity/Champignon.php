@@ -4,6 +4,7 @@ namespace Lictevel\MyceliumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityManager;
+use Lictevel\MyceliumBundle\Entity\Image;
 
 /**
  * Champignon
@@ -562,6 +563,12 @@ class Champignon
         $this->TotalProdEnzymes = 0;
         $this->TotalProdFilamentsPara = 0;
         $this->TotalProdFilamentsSym = 0;
+
+        $image = new Image();
+        $random = random_int(1,8);
+        $image->setUrl("images/champignons/champ".$random.".png");
+        $image->setAlt("image champignon ".$random);
+        $this->setImage($image);
     }
 
     /**

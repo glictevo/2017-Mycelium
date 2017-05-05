@@ -19,27 +19,28 @@
 
     <p>
       {% if champignon.image != null %}
-        <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">
+        <div class="col-xs-3 col-sm-2">
+          <img class="img-responsive" src="{{ asset(champignon.image.url) }}" alt="{{ champignon.image.alt }}">
+        </div>
       {% else %}
         <p> Photo manquante </p>
       {% endif %}
 
-      Nom : {{ champignon.name }} <br>
-      <br>
-      Propriétaire : {{ champignon.joueur.pseudo }} <br>
-      <br>
-      Taille du mycélium : {{ champignon.tailleMycelium }} <br>
-
-      <br>
-      {{ include('LictevelMyceliumBundle:Mycelium:prod.html.twig', { 'champignon': champignon} ) }}
-
-      {% if champignon.joueur.id == app.session.get('user_id') %}
+      <div class="col-xs-12">
+        Nom : {{ champignon.name }} <br>
         <br>
-        {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': champignon} ) }}
-      {% endif %}
+        Propriétaire : {{ champignon.joueur.pseudo }} <br>
+        <br>
+        Taille du mycélium : {{ champignon.tailleMycelium }} <br>
 
-      <br>
-      Liste des mutations : affichage à venir
+        <br>
+        {{ include('LictevelMyceliumBundle:Mycelium:prod.html.twig', { 'champignon': champignon} ) }}
+
+        {% if champignon.joueur.id == app.session.get('user_id') %}
+          <br>
+          {{ include('LictevelMyceliumBundle:Mycelium:stocks.html.twig', { 'champignon': champignon} ) }}
+        {% endif %}
+      </div>
     </p>
   {% endif %}
 
