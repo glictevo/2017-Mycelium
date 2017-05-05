@@ -17,14 +17,14 @@
       <p> {{ message }} </p>
     {% endfor %}
 
-    <div class="col-xs-8 col-sm-10">
+    <div class="col-xs-12">
       <a class="btn btn-default" href="{{ path('lictevel_mycelium_creer_champignon') }}">Créer un nouveau champignon</a> <br>
     </div>
 
     {% for champignon in listChampignons %}
-      <div class="well col-xs-3">
+      <div class="well col-xs-6 col-sm-3">
         <p>Champignon : {{ champignon.name }}</p>
-        <a class="btn btn-default" href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Choisir ce champignon pour jouer</a>
+        <a class="btn btn-default" href="{{ path('lictevel_mycelium_changer_champignon', { 'id': champignon.id}) }}">Jouer avec</a>
       </div>
     {% endfor %}
 

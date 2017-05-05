@@ -11,14 +11,15 @@
 
   <h1>Liste des champignons : </h1>
 
-  {% if champignons is not empty %}
+  <div class="col-xs-12">
+    {{ form_start(form) }}
+      {{ form_row(form.Name, { 'label': 'Rechercher un champignon' }) }}
+    {{ form_end(form) }}
+  </div>
+
+  {% if (champignons is defined) and (champignons is not empty) %}
     {% for champignon in champignons %}
-      <div class="well col-xs-3">
-        <p>
-          Nom : {{ champignon.name }}
-          Propriétaire : {{ champignon.joueur.pseudo }}
-        </p>
-      </div>
+      {{ include('LictevelMyceliumBundle:Mycelium:champignon.html.twig', { 'champignon': champignon} ) }}
     {% endfor %}
 
     <ul class="pager col-xs-12">
@@ -29,8 +30,16 @@
     </ul>
 
   {% else %}
-    <p>Il n'y a pas d'autres champignons que les votre</p>
-    <a class="btn btn-default" href="{{ path('lictevel_mycelium_champignons') }}">Revenir à la liste des champignons</a>
+    {% if (result is defined) and (result is not empty) %}
+      {% for champignon in result %}
+        {{ include('LictevelMyceliumBundle:Mycelium:champignon.html.twig', { 'champignon': champignon} ) }}
+      {% endfor %}
+    {% elseif (result is defined) and (result is empty) %}
+      <p>Il n'y a pas de résultats pour votre recherche</p>
+    {% else %}
+      <p>Il n'y a pas d'autres champignons que les votre</p>
+      <a class="btn btn-default" href="{{ path('lictevel_mycelium_champignons') }}">Revenir à la liste des champignons</a>
+    {% endif %}
   {% endif %}
 
 {% endblock %}

@@ -60,13 +60,13 @@ lictevel_mycelium_caracteristiques_champignon:
     path: /caracteristiques-champi/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:caracteristiquesChampignon }
     requirements:
-        id: \d
+        id: \d*
 
 lictevel_mycelium_changer_champignon:
     path: /changer-champignon/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:changerChampignon }
     requirements:
-        id: \d
+        id: \d*
 
 lictevel_mycelium_choisir_emplacement_mycelium:
     path: /choisir-emplacement-mycelium
@@ -82,7 +82,7 @@ lictevel_mycelium_joueurs:
         _controller: LictevelMyceliumBundle:Mycelium:joueurs
         page: 0
     requirements:
-        page: \d
+        page: \d*
 
 lictevel_mycelium_champignons:
    path: /champignons/{page}
@@ -90,10 +90,10 @@ lictevel_mycelium_champignons:
        _controller: LictevelMyceliumBundle:Mycelium:champignons
        page: 0
    requirements:
-       page: \d
+       page: \d*
 
 lictevel_mycelium_ajouter_ami:
     path: /ajouter-ami/{id}
     defaults: { _controller: LictevelMyceliumBundle:Mycelium:ajouterAmi }
     requirements:
-        id: \d
+        id: \d*

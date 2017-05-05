@@ -9,14 +9,17 @@
 
 {% block body %}
 
-  <h1>Liste des joueurs : </h1>
+    <h1>Liste des joueurs : </h1>
 
-  {% if joueurs is not empty %}
+  <div class="col-xs-12">
+    {{ form_start(form) }}
+      {{ form_row(form.Pseudo, { 'label': 'Rechercher un joueur' }) }}
+    {{ form_end(form) }}
+  </div>
+
+  {% if (joueurs is defined) and (joueurs is not empty) %}
     {% for joueur in joueurs %}
-      <div class="well col-xs-3">
-        <p>{{ joueur.pseudo }}</p> <br>
-        <a class="btn btn-default" href="{{ path('lictevel_mycelium_ajouter_ami', {'id': joueur.id }) }}">Ajouter en ami</a>
-      </div>
+      {{ include('LictevelMyceliumBundle:Mycelium:joueur.html.twig', { 'joueur': joueur} ) }}
     {% endfor %}
 
     <ul class="pager col-xs-12">
@@ -26,8 +29,16 @@
       <li><a href="{{ path('lictevel_mycelium_joueurs', { 'page': page + 1}) }}">Suivant</a></li>
     </ul>
   {% else %}
-    <p>Il n'y a pas de joueurs pour cette page !</p>
-    <a class="btn btn-default" href="{{ path('lictevel_mycelium_joueurs') }}">Revenir à la liste des joueurs</a>
+    {% if (result is defined) and (result is not empty)  %}
+      {% for joueur in result %}
+        {{ include('LictevelMyceliumBundle:Mycelium:joueur.html.twig', { 'joueur': joueur} ) }}
+      {% endfor %}
+    {% elseif (result is defined) and (result is empty) %}
+      <p>Il n'y a pas de résultats pour votre recherche</p>
+    {% else %}
+      <p>Il n'y a pas de joueurs pour cette page !</p>
+      <a class="btn btn-default" href="{{ path('lictevel_mycelium_joueurs') }}">Revenir à la liste des joueurs</a>
+    {% endif %}
   {% endif %}
 
 {% endblock %}

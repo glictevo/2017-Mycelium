@@ -12,6 +12,7 @@ use Lictevel\MyceliumBundle\Entity\Image;
 use Lictevel\MyceliumBundle\Entity\Champignon;
 use Lictevel\MyceliumBundle\Entity\Casejeu;
 use Lictevel\MyceliumBundle\Form\JoueurType;
+use Lictevel\MyceliumBundle\Form\SearchJoueurType;
 use Lictevel\MyceliumBundle\Form\ImageType;
 use Lictevel\MyceliumBundle\Form\ChampignonType;
 use Lictevel\MyceliumBundle\Form\CreerChampignonType;
@@ -277,8 +278,28 @@ class MyceliumController extends Controller
         ));
 
         if ($caseResult != null){
-          $request->getSession()->getFlashBag()->add('notice', "Cette case n'est pas disponible. Choisissez-en une autre.");
-          return $this->redirectToRoute('lictevel_mycelium_creer_champignon');
+          if ($caseResult->getOccupee() == true){
+            $request->getSession()->getFlashBag()->add('notice', "Cette case n'est pas disponible. Choisissez-en une autre.");
+            return $this->redirectToRoute('lictevel_mycelium_creer_champignon');
+          }
+
+          $champignon->setStockNutriments(1300);
+          $champignon->setJoueur($joueur);
+          $champignon->setCaseSporophore($caseResult);
+          $caseResult->setOccupee(true);
+          $caseResult->setChampignon($champignon);
+
+          $champignonSession->setStockSpores($champignonSession->getStockSpores() - $coutNouveauChampi);
+
+          $em->persist($caseResult);
+          $em->persist($champignon);
+          $em->persist($champignonSession);
+
+          $em->flush();
+
+          $caseResult->createAround($em);
+
+          return $this->redirectToRoute('lictevel_mycelium_mes_champignons');
         }
 
         //Si non, on créer la case
@@ -648,9 +669,33 @@ class MyceliumController extends Controller
         ->getResult()
       ;
 
+      $joueur = new Joueur();
+      $form = $this->get('form.factory')->create(SearchJoueurType::class, $joueur);
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Joueur');
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+        $resultJoueurs = $repository
+          ->createQueryBuilder('p')
+          ->where('p.pseudo = :pseudo')
+            ->setParameter('pseudo', $joueur->getPseudo())
+          ->andWhere('p.id != :id')
+            ->setParameter('id', $user_id)
+          ->getQuery()
+          ->getResult()
+        ;
+
+        return $this->render('LictevelMyceliumBundle:Mycelium:joueurs.html.twig', array(
+          'result' => $resultJoueurs,
+          'form' => $form->createView()
+        ));
+      }
+
       return $this->render('LictevelMyceliumBundle:Mycelium:joueurs.html.twig', array(
         'joueurs' => $joueurs,
-        'page' => $page
+        'page' => $page,
+        'form' => $form->createView()
       ));
     }
 
@@ -675,9 +720,33 @@ class MyceliumController extends Controller
         ->getResult()
       ;
 
+      $champignon = new Champignon();
+      $form = $this->get('form.factory')->create(ChampignonType::class, $champignon);
+      $em = $this->getDoctrine()->getManager();
+      $repository = $em->getRepository('LictevelMyceliumBundle:Champignon');
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+        $resultChampignons = $repository
+          ->createQueryBuilder('p')
+          ->where('p.name = :name')
+            ->setParameter('name', $champignon->getName())
+          ->andWhere('p.joueur != :id')
+            ->setParameter('id', $em->getRepository('LictevelMyceliumBundle:Joueur')->findOneById($user_id))
+          ->getQuery()
+          ->getResult()
+        ;
+
+        return $this->render('LictevelMyceliumBundle:Mycelium:champignons.html.twig', array(
+          'result' => $resultChampignons,
+          'form' => $form->createView()
+        ));
+      }
+
       return $this->render('LictevelMyceliumBundle:Mycelium:champignons.html.twig', array(
         'champignons' => $champignons,
-        'page' => $page
+        'page' => $page,
+        'form' => $form->createView()
       ));
     }
 
