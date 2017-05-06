@@ -18,12 +18,6 @@
   {% if champignon != null %}
 
     <p>
-      {% if champignon.image != null %}
-        <img src="{{ champignon.image.url }}" alt="{{ champignon.image.alt }}">
-      {% else %}
-        <p> Photo manquante </p>
-      {% endif %}
-
       Nom : {{ champignon.name }} <br>
       <br>
       Taille du mycélium : {{ champignon.tailleMycelium }} <br>
