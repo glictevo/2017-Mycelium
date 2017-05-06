@@ -5,7 +5,9 @@
         <p> Champignon actuel : </p>
         <a href=" {{ path('lictevel_mycelium_caracteristiques_champignon', { 'id': app.session.get('champignon').id }) }}">
           <p> {{ app.session.get('champignon').name }}</p>
-          <img class="img-responsive" src="{{ asset(app.session.get('champignon').image.url) }}" alt="{{ app.session.get('champignon').image.alt }}">
+          {% if app.session.get('champignon').image != null %}
+            <img class="img-responsive" src="{{ asset(app.session.get('champignon').image.url) }}" alt="{{ app.session.get('champignon').image.alt }}">
+          {% endif %}
         </a>
       {% else %}
         <p class="bg-warning" >Vous n'avez pas encore de champignon</p>
