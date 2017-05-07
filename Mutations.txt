@@ -1,0 +1,8 @@
+Mutations
+
+-- Description --
+
+Les mutations permettent au champignon d'améliorer ses capacités de production, d'effectuer de nouvelles actions et de faire face aux situations les plus extrêmes.
+Elles sont classées par paliers, déterminés par le nombre de conditions requises par une mutation pour être débloquée. Il a un total de 5 paliers.
+
+Pour plus d'informations, voir le tableau des mutations.

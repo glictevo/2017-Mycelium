@@ -20,7 +20,7 @@
   </div>
 
   {% for case in mycelium %}
-    <div class="well col-xs-6 col-sm-3">
+    <div id="caseMyc" class="well col-xs-6 col-sm-3">
       {{ include('LictevelMyceliumBundle:Mycelium:mycelium.html.twig', { 'case': case, 'sporophore': sporophore})}}
     </div>
   {% endfor %}
