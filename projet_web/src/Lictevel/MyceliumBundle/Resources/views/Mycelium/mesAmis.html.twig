@@ -18,6 +18,11 @@
   {% if amis is not empty %}
     {% for ami in amis %}
       <div class="well col-xs-6 col-sm-3">
+        {% if ami.image != null %}
+          <img class="img-responsive" src="{{ asset('uploads/images/' ~ ami.image.url) }}" alt="{{ ami.image.alt }}">
+        {% else %}
+          <p>(Pas de photo de profil)</p>
+        {% endif %}
         <p>{{ ami.pseudo }}</p>
         <a class="btn btn-default" href="{{ path('lictevel_mycelium_ecrire_message', {'pseudo': ami.pseudo}) }}">Envoyer un message</a>
       </div>
