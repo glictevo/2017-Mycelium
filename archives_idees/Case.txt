@@ -1,0 +1,38 @@
+Les cases sont un aspect central du jeu.
+
+-- Carac de base --
+
+De base, une case possède les stats suivantes :
+
+	Prod. nutriments : + [1 à 3]
+	Prod. spores :	+ [1 à 2]
+
+	Prod. poison : + [1 à 2] (Si la mutation "Poison" est achetée)
+	Prod. enzymes :	+ [1 à 2] (Si la mutation "Digestion" est achetée)
+	Prod. filaments para. : + [1 à 2] (Si la mutation "Parasitisme" est achetée)
+	Prod. filaments sym. : + [1 à 2] (Si la mutation "Symbiose" est achetée)
+
+La production de base est déterminée aléatoirement, dans le domaine des valeurs
+ci dessus.
+
+-- Carac secondaires --
+
+La case peut également se voir doter d'une caractéristique secondaire parmi les
+suivantes :
+	1 - Grand organisme (possibilité de parastitisme ou symbiose)
+	2 - Petit organisme (possibilité de digestion par enzyme)
+	3 - Terrain fertile (+1 pour la prod. de ressources)
+	4 - Maladie (nécessite la mutation "Système immunitaire", la production de
+		ressources de la case est bloquée sinon)
+	5 - Terrain désert (-1 pour la production de ressources, à moins d'avoir la
+		mutation "Champicactus")
+	6 - Champignonnière abandonnée (double la production de spores sur la case)
+
+La méthode de sélection de telles caractéristiques est la suivante :
+	Ces effets spéciaux sont stockés dans une table de taille fixée (20 pour le
+	moment, on pourra l'augementer si on veut rajouter de nouveaux effets). Chaque
+	effet est présent une fois, et les cases inoccupées de la table sont par
+	définition vides. Elles représentent l'absence d'effet sur le terrain. Une
+	fonction aléatoire "choisit" un nombre entre 0 et 19 (ou 1 et 20, je me
+	rappelle plus des tableaux en php xptdr), sélectionnant ainsi l'effet (ou le
+	non effet) à attribuer à la case).

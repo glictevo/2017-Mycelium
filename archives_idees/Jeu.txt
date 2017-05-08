@@ -1,0 +1,103 @@
+-- Mécnaiques du jeu --
+
+
+-- 1 - Introduction --
+
+	Lorsque le joueur commence le jeu, il doit pouvoir effectuer au moins une fois
+	chaque action disponible en jeu, à savoir : créer un champignon, acheter une
+	case, acheter une mutation.
+	Chaque action requièrt une ressource spécifique : pour créer un champignon
+	supplémentaire, il faut des spores, pour acheter une case il faut des
+	nutriments, et pour acheter une mutation, des nutriments et satisfaire des
+	conditions.
+
+	Tuto : le joueur arrive sur son compte fraichement créé : il crée un
+	champignon (c'est la seule action possible). Ensuite, il démarre avec une
+	quantité de PA et de nutriments suffisante pour acheter une case, puis acheter
+	une première mutation dont la condition requise est la possession d'au moins
+	une case.
+
+	Courbe de progression : le temps nécessaire pour effectuer une action doit
+	croître de façon linéaire. il faut donc faire grandir la quantité de
+	ressources nécessaires en prenant en compte l'augmentation de la production
+	desdites (piaf) ressources.
+
+	Notons que les ressources sont consommées lors d'une action !
+
+-- 2 - Ressources de base --
+
+	Production de nutriments : 20/min
+	Production de spores : 2/min
+
+	Nutriments nécessaires pour acheter une case :
+		| Palier | Nutriments |
+		|    1   |     100    |
+		|    2   |     400    |
+		|    3   |     1200   |
+		|    4   |     14400  |
+		|    5   |     30000  |
+		|    6   |     60000  |
+		|    7   |     90000  |
+		|    8   |     90000  |
+		|    9   |     90000  |
+		|   10   |     90000  |
+
+	Paliers : le prix d'une case est définie par son palier, qui correspond à
+	l'éloignement de la case par rapport à son sporophore. Les 4 cases adjacentes
+	au sporophore sont de palier 1, les cases suivantes 2, etc.. Jusqu'à une
+	limite de 10. Le joueur peut voir les cases de "palier 11" mais ne peut pas
+	les acheter, à moins de placer un champi à proximité. Si une case se trouve
+	dans la zone d'influence de deux champis, son palier est le min entre son
+	éloignement au champi 1 et son éloignement au champi 2.
+
+	Nutriments nécessaires pour acheter une mutation :
+		| Palier | Nutriments |
+		|    1   |     1200   |
+		|    2   |     12000  |
+		|    3   |     30000  |
+		|    4   |     90000  |
+		|    5   |     200000 |
+
+	Paliers : les paliers des mutations sont fonction du nombre de conditions
+	(hors prix) à remplir pour débloquer une mutation. Un mutation nécessitant 2
+	conditions pour être achetée est donc de palier 2, par exemple.
+
+-- 3 - Ressources secondaires --
+
+	Production de poison :
+	Production d'enzymes :
+	Production de filaments parasitiques :
+	Production de filaments symbiotiques :
+
+-- 4 - Parasitisme --
+
+Lorsque le joueur achète une case sur laquelle est présente un organisme vivant
+de grande taille (on pourra donner un code couleur aux éléments), il peut
+choisir de le parasiter : la case apportera un surplus de ressource temporaire,
+puis "mourra" un bout d'un certain laps de temps.
+
+Il faut au champignon la même quantité de filaments parasitiques que la quantité
+de nutriments nécessaires pour acheter la case, s'il veut parasiter l'organisme
+présent. Il peut décider de le parasiter à tout moment, pas forcément dès
+l'achat de la case. En revanche, une fois le parasitage lancé, il n'y a pas de
+retour en arrière possible.
+
+Le parasitisme multiplie par 5 la production de ressources sur la case pendant 2
+jours. Ensuite, la case de produira plus qu'un 1 nutriment par minute, et 0
+spores.
+
+-- 5 - Symbiose --
+
+Même fonctionnement que pour le parasitisme, seul l'effet diffère : lorsque le
+joueur choisit de développer une symbiose avec l'organisme de la case, il
+choisit une ressource à sacrifier. La production des autres ressources sur la
+case est doublée, indéfiniment.
+
+-- 6 - Digestion enzymatique --
+
+Si un petit organisme est présent sur la case, que le champi possède la mutation
+"Digestion" et la quantité d'enzymes nécessaire ( = au prix de la case en
+nutriments), le joueur peut choisir de digérer l'organisme. Dans ce cas, au bout
+d'une journée, le champignon recevra instantanément la moitié du prix de cases
+en nutriments. L'organisme disparait ensuite de la case. Vu qu'il est mort. Du
+coup.
