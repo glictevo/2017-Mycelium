@@ -2,6 +2,10 @@
 
 ![](projet_web/web/images/Titre.png)
 
+Projet réalisé par : Timon De Morel et Guillaume Lictevout.
+
+Dans le cadre du cours de programmation web de notre 3ème année de licence informatique à Paris 7 Diderot.
+
 ## Instructions
 
 * Assurez-vous d'avoir MySQL installé
