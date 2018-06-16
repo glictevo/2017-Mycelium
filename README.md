@@ -1,5 +1,7 @@
 # 2017-Mycelium
 
+![](projet_web/web/images/Titre.png)
+
 ## Instructions
 
 * Assurez-vous d'avoir MySQL installé
@@ -23,6 +25,8 @@ Si vous voulez des stocks de nutriments ou de spores en plus pour pouvoir tester
 * UPDATE champignon SET stock_nutriments = <valeur> WHERE id = <id de votre champignon>;
 
 * UPDATE champignon SET stock_spores = <valeur> WHERE id = <id de votre champignon>;
+
+![](projet_web/web/images/champignons/champ1.png)
 
 ## Implémentations obligatoires
 
@@ -59,6 +63,8 @@ Si vous voulez des stocks de nutriments ou de spores en plus pour pouvoir tester
 
     * On peut uploader une photo depuis la page "Mon Compte", disponible en cliquant sur son pseudo dans la barre de navigation en haut à gauche.
 
+![](projet_web/web/images/champignons/champ2.png)
+
 ## Implémentations supplémentaires
 
 * Affichage des personnages :
@@ -81,6 +87,8 @@ Si vous voulez des stocks de nutriments ou de spores en plus pour pouvoir tester
 
     * Il existe plusieurs pages sur le site où on a accès à la page d'écriture de message directement avec le nom du destinataire pré-rempli.
 
+![](projet_web/web/images/champignons/champ4.png)
+
 ## Quelques mots en plus sur le site
 
 * Vous pouvez trouver les idées générales du jeu dans le fichier Idée.txt
@@ -96,6 +104,8 @@ Si vous voulez des stocks de nutriments ou de spores en plus pour pouvoir tester
     * Les défenses auraient pu servir pour le multijoueur et pour des événements en général.
 
     * Vous pouvez trouver la liste des mutations que nous voulions faire dans le fichier archive_idees/Mutation.ods
+
+![](projet_web/web/images/champignons/champ5.png)
 
 ## Idées pour l'implémentation du jeu
 
@@ -148,3 +158,19 @@ Si vous voulez des stocks de nutriments ou de spores en plus pour pouvoir tester
     * La symbiose (non implémenté)
 
     * La digestion enzymatique (non implémenté)
+
+* Dessins et captures d'écrans : voir le dossier Images
+
+![](projet_web/web/images/champignons/champ6.png)
+
+![](projet_web/web/images/champignons/champ7.png)
+
+![](projet_web/web/images/champignons/champ8.png)
+
+![](images/screens/Mycelium_main_page.png)
+
+![](images/screens/Connexion.png)
+
+![](images/screens/Caracteristiques.png)
+
+![](images/screens/Ajout_Mycelium1.png)
